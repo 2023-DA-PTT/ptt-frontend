@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ptt-frontend-ingress
+spec:
+  rules:
+    - host: "perftest.tech"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: ptt-frontend-service
+                port:
+                  number: 80
