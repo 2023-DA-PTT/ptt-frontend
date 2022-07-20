@@ -86,3 +86,4 @@ jobs:
           strategy: basic
           manifests: k8s/
           pull-images: false
+          namespace: ptt
