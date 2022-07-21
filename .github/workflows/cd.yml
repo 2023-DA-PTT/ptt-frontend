@@ -80,10 +80,5 @@ jobs:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
           context: default
-      - uses: Azure/k8s-deploy@v3.1
-        with:
-          action: deploy
-          strategy: basic
-          manifests: k8s/
-          pull-images: false
-          namespace: ptt
+      - name: Rollout Restart Deployment
+        run: kubectl rollout restart deployment ptt-frontend --namespace=ptt
