@@ -1,8 +1,19 @@
 import { Card } from "flowbite-react";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import { PlanDto, PlanResourceService, StepDto, StepResourceService } from "../../../openapi";
-import TestPlan from "../ListAll/ListAllTestplans";
+
+
+import ReactFlow, {
+    addEdge,
+    applyEdgeChanges,
+    applyNodeChanges,
+    Connection,
+    Edge,
+    EdgeChange,
+    Node,
+    NodeChange
+} from "react-flow-renderer";
 
 export interface IValues {
     [key: string]: any;
@@ -16,6 +27,9 @@ export interface IFormState {
 export const SingleTestPlan: React.FC = () => {
     const [testPlan, setTestPlan] = useState<PlanDto>({});
     const [steps, setSteps] = useState<StepDto[]>([]);
+    const [nodes, setNodes] = useState<Node[]>([]);
+    const [edges, setEdges] = useState<Edge[]>([]);
+
     const params = useParams();
     let testPlanId: undefined|number;
 
@@ -25,6 +39,61 @@ export const SingleTestPlan: React.FC = () => {
         }
         }, []
     );
+
+    const onNodesChange = useCallback(
+        (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)),
+        [setNodes]
+    );
+    const onEdgesChange = useCallback(
+        (changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+        [setEdges]
+    );
+    const onConnect = useCallback(
+        (connection: Connection) => setEdges((eds) => addEdge(connection, eds)),
+        [setEdges]
+    );
+
+    const getNodesOfSteps = (steps: StepDto[]): Node[] => {
+        const actNodes: Node[] = [];
+
+        let maxId = 0;
+
+        steps.forEach((step, index) => {
+            let stepId = step.id == undefined ? -1 : step.id;
+
+            if(step.id == undefined)
+                return;
+
+            maxId = Math.max(maxId, stepId);
+
+            actNodes.push({
+                id: stepId.toString(),
+                data: {
+                        label: step.name
+                    },
+                position: {
+                    x: 200 + (index*200),
+                    y: 25
+                }
+            });
+        });
+
+        actNodes.push({
+            id: (++maxId).toString(),
+            type: 'input',
+            data: { label: 'Test Start' },
+            position: { x: 0, y: 25 },
+        });
+
+        actNodes.push({
+            id: (++maxId).toString(),
+            type: 'output',
+            data: { label: 'Test End' },
+            position: { x: (steps.length * 200)+200, y: 25 },
+        });
+
+        return actNodes;
+    }
 
     if(params.id == undefined || isNaN(parseInt(params.id))) {
         return <p>404</p>;
@@ -39,6 +108,7 @@ export const SingleTestPlan: React.FC = () => {
 
         StepResourceService.getApiPlanStep(actId).then(steps => {
             setSteps(steps);
+            setNodes(getNodesOfSteps(steps));
         });
     }
 
@@ -51,20 +121,16 @@ export const SingleTestPlan: React.FC = () => {
                     <div className="text-xl mt-4">{testPlan.description}</div>
                 </div>
             </div>
-            { steps && steps.map(step =>
-                <Link key={step.id} to={`/test-plan/${testPlan.id}/step/${step.id}`} >
-                    <Card>
-                        <h5 className="text-2xl font-bold tracking-tight
-                                           text-gray-900 dark:text-white">
-                            {step.name}
-                        </h5>
-                        <p className="font-normal text-gray-700 dark:text-gray-400">
-                            {step.description}
-                        </p>
-                    </Card>
-                </Link>
-            )
-            }
+            <div className="h-96 w-full">
+                { nodes && <ReactFlow
+                    nodes={nodes}
+                    edges={edges}
+                    onNodesChange={onNodesChange}
+                    onEdgesChange={onEdgesChange}
+                    onConnect={onConnect}
+                    fitView
+                />}
+            </div>
         </>
     );
 
