@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import TestPlan from './pages/TestPlan/ListAll/ListAllTestplans';
-import SingleTestPlan from './pages/TestPlan/SingleTestPlan/SingleTestPlan';
+import {SingleTestPlan} from './pages/TestPlan/SingleTestPlan/SingleTestPlan';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
