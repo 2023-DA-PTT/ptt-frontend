@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import TestPlan from './pages/TestPlan/ListAll/ListAllTestplans';
 import {SingleTestPlan} from './pages/TestPlan/SingleTestPlan/SingleTestPlan';
+import FlumeTestPlan from './pages/TestPlan/SingleTestPlan/FlumeTestPlan.js';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,7 +19,7 @@ root.render(
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path='test-plans' element={<TestPlan />} />
-          <Route path="test-plan/:id" element={<SingleTestPlan />} />
+          <Route path="test-plan/:id" element={<FlumeTestPlan />} />
 
         </Route>
       </Routes>
