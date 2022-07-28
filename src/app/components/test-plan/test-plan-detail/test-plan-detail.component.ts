@@ -51,7 +51,16 @@ export class TestPlanDetailComponent implements OnInit {
   }
 
   saveStep(step: StepDto): void {
+    console.log(step);
+    console.log(this.plan);
     if (step.id == 0) {
+      if(this.plan && this.plan.id) {
+        console.log("SERVAS");
+        this.stepService.apiPlanPlanIdStepPost(this.plan.id, step).subscribe({
+          next: d=> {},
+          error: e=>console.log(e)
+        });
+      }
       this.steps.push(step);
     } else if (this.currentStep) {
       var idx = this.steps.indexOf(this.currentStep);
