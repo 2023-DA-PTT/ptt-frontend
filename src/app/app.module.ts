@@ -12,6 +12,8 @@ import { environment } from 'src/environments/environment';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { StepDetailComponent } from './components/test-plan/test-plan-detail/step-detail/step-detail.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     TestPlanListComponent,
     TestPlanDetailComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    StepDetailComponent
   ],
   imports: [
+    FormsModule,
     ApiModule,
     HttpClientModule,
     BrowserModule,
