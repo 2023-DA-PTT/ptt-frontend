@@ -203,6 +203,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InputArgumentDto'
+    delete:
+      tags:
+      - Input Argument Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputArgumentDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InputArgumentDto'
   /api/plan/{planId}/step/{stepId}/inputArgument/{inArgId}:
     get:
       tags:

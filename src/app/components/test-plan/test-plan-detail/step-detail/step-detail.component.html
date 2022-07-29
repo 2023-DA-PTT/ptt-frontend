@@ -71,21 +71,30 @@
                     <div class="flex mb-6">
                         <div class="w-1/2 mr-1">
                             <label for="inputs"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Inputs</label>
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Inputs
+                                <button (click)="addInputArgument()" class="ml-1 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">+</button>
+                              </label>
                             <div id="inputs">
-                                <input id="input" *ngFor="let i of inputs"
-                                    class="mb-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    [value]="i.name">
-                            </div>
+                              <div class="flex" *ngFor="let i of inputs">
+                                <input id="input"
+                                class="mb-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                [(ngModel)]="i.name">
+                                <button (click)="removeInputArgument(i)" class="ml-1 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">-</button>
+                              </div>
+                          </div>
                         </div>
-
                         <div class="w-1/2 ml-1">
                             <label for="outputs"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Outputs</label>
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Outputs
+                                <button (click)="addOutputArgument()" class="ml-1 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">+</button>
+                              </label>
                             <div id="outputs">
-                                <input id="output" *ngFor="let i of outputs"
-                                    class="mb-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    [value]="i.name">
+                              <div class="flex" *ngFor="let i of outputs">
+                                <input id="output"
+                                class="mb-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                [(ngModel)]="i.name">
+                                <button (click)="removeOutputArgument(i)" class="ml-1 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">-</button>
+                              </div>
                             </div>
                         </div>
                     </div>

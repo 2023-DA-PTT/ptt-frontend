@@ -1,3 +1,4 @@
+import { StepResourceService } from './../../../../services/api/stepResource.service';
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { InputArgumentDto, InputArgumentResourceService, OutputArgumentDto, OutputArgumentResourceService, StepDto } from 'src/app/services';
@@ -26,6 +27,7 @@ export class StepDetailComponent implements OnInit {
   @Output() cancelStep = new EventEmitter<void>();
 
   constructor(
+    private stepService: StepResourceService,
     private inputService: InputArgumentResourceService,
     private outputService: OutputArgumentResourceService,
     private toastr: ToastrService) { }
@@ -63,6 +65,36 @@ export class StepDetailComponent implements OnInit {
     }
   }
 
+  addInputArgument(): void {
+    this.inputs.push({
+      id:0,
+      name: '',
+      stepId: this.step.id
+    })
+  }
+
+  removeInputArgument(inputArgDto: InputArgumentDto):void {
+    var idx = this.inputs.indexOf(inputArgDto);
+    if(idx >= 0) {
+      this.inputs.splice(idx,1);
+    }
+  }
+
+  addOutputArgument(): void {
+    this.outputs.push({
+      id:0,
+      name: '',
+      stepId: this.step.id,
+      jsonLocation: ''
+    })
+  }
+
+  removeOutputArgument(outputArgDto: OutputArgumentDto):void {
+    var idx = this.outputs.indexOf(outputArgDto);
+    if(idx >= 0) {
+      this.outputs.splice(idx,1);
+    }
+  }
 
   cancel(): void {
     this.cancelStep.emit();

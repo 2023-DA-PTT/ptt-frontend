@@ -6,7 +6,7 @@
 
 npm install @openapitools/openapi-generator-cli -g
 
-npx @openapitools/openapi-generator-cli generate -i openapi.yaml -g typescript -o src/app/services
+npx @openapitools/openapi-generator-cli generate -i openapi.yaml -g typescript-angular -o src/app/services
 ```
 
 ## @
