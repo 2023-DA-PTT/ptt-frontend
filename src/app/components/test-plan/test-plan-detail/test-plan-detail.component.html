@@ -19,6 +19,6 @@
     </div>
 </a>
 
-<app-step-detail *ngIf="currentStep" [isNewStep]="currentStep.id == 0" [step]="currentStep" (saveStep)="saveStep($event)"
+<app-step-detail *ngIf="currentStep" [planId]="plan!.id!" [isNewStep]="currentStep.id == 0" [step]="currentStep" (saveStep)="saveStep($event)"
     (cancelStep)="cancelStep()" class="w-50 h-50 fixed p-0 m-0">
 </app-step-detail>

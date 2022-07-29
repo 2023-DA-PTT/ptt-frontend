@@ -1,5 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { StepDto } from 'src/app/services';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { InputArgumentDto, InputArgumentResourceService, OutputArgumentDto, OutputArgumentResourceService, StepDto } from 'src/app/services';
 
 @Component({
   selector: 'app-step-detail',
@@ -14,12 +15,20 @@ export class StepDetailComponent implements OnInit {
   @Input()
   step!: StepDto;
 
+  @Input()
+  planId!: number;
+
   currentStep!: StepDto;
+  public inputs: InputArgumentDto[] = []
+  public outputs: OutputArgumentDto[] = []
 
   @Output() saveStep = new EventEmitter<StepDto>();
   @Output() cancelStep = new EventEmitter<void>();
 
-  constructor() { }
+  constructor(
+    private inputService: InputArgumentResourceService,
+    private outputService: OutputArgumentResourceService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.currentStep = {
@@ -30,11 +39,26 @@ export class StepDetailComponent implements OnInit {
       url: this.step.url,
       body: this.step.body
     };
+
+    this.inputService.apiPlanPlanIdStepStepIdInputArgumentGet(this.planId, this.step.id!).subscribe({
+      next: inputs => {
+        this.inputs = inputs;
+      }, error: err => {
+        this.toastr.error("Could not load inputs for Step!", "Error");
+      }
+    })
+    this.outputService.apiPlanPlanIdStepStepIdOutputArgumentGet(this.planId, this.step.id!).subscribe({
+      next: outputs => {
+        this.outputs = outputs;
+      }, error: err => {
+        this.toastr.error("Could not load inputs for Step!", "Error");
+      }
+    })
   }
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    if (event.key=="Escape") {
+    if (event.key == "Escape") {
       this.cancel();
     }
   }
