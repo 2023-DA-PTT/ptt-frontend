@@ -52,6 +52,10 @@ export class TestPlanDetailComponent implements OnInit {
     };
   }
 
+  cancelStep(): void {
+    this.currentStep = undefined;
+  }
+
   saveStep(step: StepDto): void {
     if (step.id == 0) {
       this.stepService.apiPlanPlanIdStepPost(this.plan!.id!, step).subscribe({
@@ -67,12 +71,12 @@ export class TestPlanDetailComponent implements OnInit {
     } else if (this.currentStep) {
       var tmp = this.currentStep!;
       this.stepService.apiPlanPlanIdStepStepIdPost(this.plan!.id!, tmp.id!, step).subscribe({
-        next: d=>{
+        next: d => {
           var idx = this.steps.indexOf(tmp);
           if (idx >= 0) this.steps.splice(idx, 1, step);
           this.toastr.success("Updated Step!", "Success")
         },
-        error: e=> {
+        error: e => {
           this.toastr.error("Could not update Step!", "Error")
         }
       })

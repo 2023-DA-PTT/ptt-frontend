@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { StepDto } from 'src/app/services';
 
 @Component({
@@ -30,6 +30,13 @@ export class StepDetailComponent implements OnInit {
       url: this.step.url,
       body: this.step.body
     };
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.key=="Escape") {
+      this.cancel();
+    }
   }
 
 
