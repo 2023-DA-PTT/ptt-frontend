@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlanResourceService, StepResourceService } from 'src/app/services';
 import { PlanDto, StepDto } from 'src/app/services/model/models';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-test-plan-detail',
@@ -16,7 +17,8 @@ export class TestPlanDetailComponent implements OnInit {
 
   constructor(private planService: PlanResourceService,
     private stepService: StepResourceService,
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -51,20 +53,29 @@ export class TestPlanDetailComponent implements OnInit {
   }
 
   saveStep(step: StepDto): void {
-    console.log(step);
-    console.log(this.plan);
     if (step.id == 0) {
-      if(this.plan && this.plan.id) {
-        console.log("SERVAS");
-        this.stepService.apiPlanPlanIdStepPost(this.plan.id, step).subscribe({
-          next: d=> {},
-          error: e=>console.log(e)
-        });
-      }
-      this.steps.push(step);
+      this.stepService.apiPlanPlanIdStepPost(this.plan!.id!, step).subscribe({
+        next: d => {
+          this.toastr.success("Created Step!", "Success")
+          this.steps.push(step);
+        },
+        error: e => {
+          this.toastr.error("Could not create Step!", "Error")
+          console.log(e)
+        }
+      });
     } else if (this.currentStep) {
-      var idx = this.steps.indexOf(this.currentStep);
-      if (idx >= 0) this.steps.splice(idx, 1, step);
+      var tmp = this.currentStep!;
+      this.stepService.apiPlanPlanIdStepStepIdPost(this.plan!.id!, tmp.id!, step).subscribe({
+        next: d=>{
+          var idx = this.steps.indexOf(tmp);
+          if (idx >= 0) this.steps.splice(idx, 1, step);
+          this.toastr.success("Updated Step!", "Success")
+        },
+        error: e=> {
+          this.toastr.error("Could not update Step!", "Error")
+        }
+      })
     }
     this.currentStep = undefined;
   }

@@ -14,6 +14,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StepDetailComponent } from './components/test-plan/test-plan-detail/step-detail/step-detail.component';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { FormsModule } from '@angular/forms';
     ApiModule,
     HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}],
   bootstrap: [AppComponent]

@@ -1,5 +1,14 @@
 # Ptt
 
+## Generate API from spec-sheet
+
+```bash
+
+npm install @openapitools/openapi-generator-cli -g
+
+npx @openapitools/openapi-generator-cli generate -i openapi.yaml -g typescript -o src/app/services
+```
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
 
 ## Development server

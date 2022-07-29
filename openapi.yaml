@@ -1,0 +1,487 @@
+---
+openapi: 3.0.3
+info:
+  title: ptt-backend API
+  version: 1.0.0-SNAPSHOT
+paths:
+  /api/plan:
+    get:
+      tags:
+      - Plan Resource
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlanDto'
+  /api/plan/user/{userId}:
+    get:
+      tags:
+      - Plan Resource
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlanDto'
+  /api/plan/{id}:
+    get:
+      tags:
+      - Plan Resource
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanDto'
+  /api/plan/{planId}/step:
+    get:
+      tags:
+      - Step Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StepDto'
+    post:
+      tags:
+      - Step Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StepDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepDto'
+  /api/plan/{planId}/step/{stepId}:
+    get:
+      tags:
+      - Step Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepDto'
+    post:
+      tags:
+      - Step Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StepDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepDto'
+  /api/plan/{planId}/step/{stepId}/inputArgument:
+    get:
+      tags:
+      - Input Argument Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InputArgumentDto'
+    post:
+      tags:
+      - Input Argument Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputArgumentDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InputArgumentDto'
+  /api/plan/{planId}/step/{stepId}/inputArgument/{inArgId}:
+    get:
+      tags:
+      - Input Argument Resource
+      parameters:
+      - name: inArgId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InputArgumentDto'
+  /api/plan/{planId}/step/{stepId}/outputArgument:
+    get:
+      tags:
+      - Output Argument Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OutputArgumentDto'
+    post:
+      tags:
+      - Output Argument Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OutputArgumentDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutputArgumentDto'
+  /api/plan/{planId}/step/{stepId}/outputArgument/{outArgId}:
+    get:
+      tags:
+      - Output Argument Resource
+      parameters:
+      - name: outArgId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutputArgumentDto'
+  /api/plan/{planId}/step/{stepId}/parameterRelation:
+    post:
+      tags:
+      - Step Parameter Relation Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StepParameterRelationDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepParameterRelationDto'
+  /api/plan/{planId}/step/{stepId}/parameterRelation/from:
+    get:
+      tags:
+      - Step Parameter Relation Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StepParameterRelationDto'
+  /api/plan/{planId}/step/{stepId}/parameterRelation/to:
+    get:
+      tags:
+      - Step Parameter Relation Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StepParameterRelationDto'
+  /api/plan/{userId}:
+    post:
+      tags:
+      - Plan Resource
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanDto'
+components:
+  schemas:
+    InputArgumentDto:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        stepId:
+          format: int64
+          type: integer
+    OutputArgumentDto:
+      type: object
+      properties:
+        stepId:
+          format: int64
+          type: integer
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        jsonLocation:
+          type: string
+    PlanDto:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        startId:
+          format: int64
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+    StepDto:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        method:
+          type: string
+        url:
+          type: string
+        body:
+          type: string
+    StepParameterRelationDto:
+      type: object
+      properties:
+        fromId:
+          format: int64
+          type: integer
+        toId:
+          format: int64
+          type: integer
