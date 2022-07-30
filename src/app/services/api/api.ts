@@ -1,0 +1,11 @@
+export * from './inputArgumentResource.service';
+import { InputArgumentResourceService } from './inputArgumentResource.service';
+export * from './outputArgumentResource.service';
+import { OutputArgumentResourceService } from './outputArgumentResource.service';
+export * from './planResource.service';
+import { PlanResourceService } from './planResource.service';
+export * from './stepParameterRelationResource.service';
+import { StepParameterRelationResourceService } from './stepParameterRelationResource.service';
+export * from './stepResource.service';
+import { StepResourceService } from './stepResource.service';
+export const APIS = [InputArgumentResourceService, OutputArgumentResourceService, PlanResourceService, StepParameterRelationResourceService, StepResourceService];
