@@ -54,6 +54,14 @@
               ],
               "outputHashing": "all"
             },
+            "skaffold": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.skaffold.ts"
+                }
+              ]
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
