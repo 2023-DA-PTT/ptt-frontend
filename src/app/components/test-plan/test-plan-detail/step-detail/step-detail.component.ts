@@ -10,49 +10,36 @@ import { InputArgumentDto, InputArgumentResourceService, OutputArgumentDto, Outp
 })
 export class StepDetailComponent implements OnInit {
 
-  @Input()
-  isNewStep: boolean = true;
+  @Input() isNewStep: boolean = true;
+  @Input() step: StepDto = {};
+  @Output() stepChange = new EventEmitter<StepDto>();
+  @Input() planId!: number;
+  @Input() open: boolean = false;
+  @Output() openChange = new EventEmitter<boolean>();
 
-  @Input()
-  step!: StepDto;
+  @Input() steps: StepDto[] = [];
 
-  @Input()
-  planId!: number;
-
-  currentStep!: StepDto;
   public inputs: InputArgumentDto[] = []
   public outputs: OutputArgumentDto[] = []
 
-  @Output() saveStep = new EventEmitter<StepDto>();
-  @Output() cancelStep = new EventEmitter<void>();
-
   constructor(
     private stepService: StepResourceService,
-    private inputService: InputArgumentResourceService,
-    private outputService: OutputArgumentResourceService,
+    private inputArgService: InputArgumentResourceService,
+    private outputArgService: OutputArgumentResourceService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.currentStep = {
-      id: this.step.id,
-      name: this.step.name,
-      description: this.step.description,
-      method: this.step.method,
-      url: this.step.url,
-      body: this.step.body
-    };
-
-    this.inputService.apiPlanPlanIdStepStepIdInputArgumentGet(this.planId, this.step.id!).subscribe({
+    this.inputArgService.apiPlanPlanIdStepStepIdInputArgumentGet(this.planId, this.step.id!).subscribe({
       next: inputs => {
         this.inputs = inputs;
       }, error: err => {
         this.toastr.error("Could not load inputs for Step!", "Error");
       }
     })
-    this.outputService.apiPlanPlanIdStepStepIdOutputArgumentGet(this.planId, this.step.id!).subscribe({
+    this.outputArgService.apiPlanPlanIdStepStepIdOutputArgumentGet(this.planId, this.step.id!).subscribe({
       next: outputs => {
         this.outputs = outputs;
-      }, error: err => {
+      }, error: () => {
         this.toastr.error("Could not load inputs for Step!", "Error");
       }
     })
@@ -61,7 +48,7 @@ export class StepDetailComponent implements OnInit {
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
     if (event.key == "Escape") {
-      this.cancel();
+      this.close();
     }
   }
 
@@ -96,12 +83,66 @@ export class StepDetailComponent implements OnInit {
     }
   }
 
-  cancel(): void {
-    this.cancelStep.emit();
+  close(): void {
+    this.open = false;
+    this.openChange.emit(this.open);
   }
 
   save(): void {
-    this.saveStep.emit(this.currentStep);
+    if (this.isNewStep) {
+      this.stepService.apiPlanPlanIdStepPost(this.planId, this.step).subscribe({
+        next: s => {
+          this.toastr.success("Created Step!", "Success")
+
+          this.inputs.forEach(inputParam => {
+            console.log(inputParam);
+
+            this.inputArgService.apiPlanPlanIdStepStepIdInputArgumentPost(
+              this.planId,
+              s.id!,
+              {id: -1, stepId: s.id!, name: inputParam.name}).subscribe({
+              error: () => this.toastr.error("Could not save input argument " + inputParam.name, "Error")
+            })
+          });
+
+          this.outputs.forEach(outputParam => {
+            this.outputArgService.apiPlanPlanIdStepStepIdOutputArgumentPost(
+              this.planId,
+              s.id!,
+              {id: -1, stepId: s.id!, name: outputParam.name}).subscribe({
+              error: () => this.toastr.error("Could not save output argument " + outputParam.name, "Error")
+            })
+          });
+
+
+          this.step = s;
+          this.stepChange.emit(s);
+          this.steps.push(s);
+        },
+        error: e => {
+          this.toastr.error("Could not create Step!", "Error")
+          console.log(e)
+        }
+      });
+
+    } else if (this.step.id != -1) {
+      /*var tmp = this.currentStep!;
+      this.stepService.apiPlanPlanIdStepStepIdPost(this.plan!.id!, tmp.id!, step).subscribe({
+        next: d => {
+          var idx = this.steps.indexOf(tmp);
+          if (idx >= 0) this.steps.splice(idx, 1, step);
+          this.toastr.success("Updated Step!", "Success")
+        },
+        error: e => {
+          this.toastr.error("Could not update Step!", "Error")
+        }
+      })*/
+      throw new Error("Update Not implemented!");
+    }
+
+    console.log(this.step);
+
+    this.close();
   }
 
 }

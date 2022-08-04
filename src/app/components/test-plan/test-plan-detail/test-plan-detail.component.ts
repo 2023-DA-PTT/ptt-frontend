@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { PlanResourceService, StepResourceService } from 'src/app/services';
+import {Component, Input, OnInit} from '@angular/core';
+import {
+  InputArgumentDto,
+  InputArgumentResourceService,
+  OutputArgumentDto, OutputArgumentResourceService,
+  PlanResourceService,
+  StepResourceService
+} from 'src/app/services';
 import { PlanDto, StepDto } from 'src/app/services/model/models';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,12 +19,12 @@ export class TestPlanDetailComponent implements OnInit {
 
   plan: undefined | PlanDto;
   steps: StepDto[] = [];
-  currentStep: StepDto | undefined = undefined;
+  currentStep: StepDto = {id:-1};
+  createStep: boolean = false;
 
   constructor(private planService: PlanResourceService,
     private stepService: StepResourceService,
-    private route: ActivatedRoute,
-    private toastr: ToastrService) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -38,49 +44,11 @@ export class TestPlanDetailComponent implements OnInit {
 
   modifyStep(step: StepDto): void {
     this.currentStep = step;
-    console.log(this.currentStep)
+    this.createStep = true;
   }
 
   addStep(): void {
-    this.currentStep = {
-      id: 0,
-      name: '',
-      description: '',
-      method: '',
-      url: '',
-      body: ''
-    };
-  }
-
-  cancelStep(): void {
-    this.currentStep = undefined;
-  }
-
-  saveStep(step: StepDto): void {
-    if (step.id == 0) {
-      this.stepService.apiPlanPlanIdStepPost(this.plan!.id!, step).subscribe({
-        next: d => {
-          this.toastr.success("Created Step!", "Success")
-          this.steps.push(step);
-        },
-        error: e => {
-          this.toastr.error("Could not create Step!", "Error")
-          console.log(e)
-        }
-      });
-    } else if (this.currentStep) {
-      var tmp = this.currentStep!;
-      this.stepService.apiPlanPlanIdStepStepIdPost(this.plan!.id!, tmp.id!, step).subscribe({
-        next: d => {
-          var idx = this.steps.indexOf(tmp);
-          if (idx >= 0) this.steps.splice(idx, 1, step);
-          this.toastr.success("Updated Step!", "Success")
-        },
-        error: e => {
-          this.toastr.error("Could not update Step!", "Error")
-        }
-      })
-    }
-    this.currentStep = undefined;
+    this.currentStep = {id: -1}
+    this.createStep = true;
   }
 }
