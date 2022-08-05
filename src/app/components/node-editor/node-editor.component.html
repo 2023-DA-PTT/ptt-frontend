@@ -1,3 +1,14 @@
-<div class="w-full h-full bg-black">
+<div style="width: 800px; height:500px; overflow: hidden;" class="node-editor w-full h-full bg-gray-800"
+    (dragstart)="onDragStart($event)"
+    (drag)="onDrag($event)"
+    (dragend)="onDragEnd($event)" draggable="true">
+    <div style="opacity: 1; transform: translate({{x}}px,{{y}}px);" class="">
+        <div style="width: 150px; height:60px;" class="text-center text-gray-100 border-solid border-2 border-sky-500 rounded-md bg-gray-700">
+            Sign Up
+        </div>
 
+        <div style="width: 150px; height:60px;" class="text-center text-gray-100 border-solid border-2 border-sky-500 rounded-md bg-gray-700">
+            Login
+        </div>
+    </div>
 </div>
