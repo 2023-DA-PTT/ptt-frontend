@@ -16,6 +16,7 @@ import { StepDetailComponent } from './components/test-plan/test-plan-detail/ste
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NodeEditorComponent } from './components/node-editor/node-editor.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TestPlanDetailComponent,
     FooterComponent,
     NavbarComponent,
-    StepDetailComponent
+    StepDetailComponent,
+    NodeEditorComponent
   ],
   imports: [
     FormsModule,
