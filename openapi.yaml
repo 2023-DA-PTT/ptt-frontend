@@ -37,6 +37,32 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DataPointDto'
+  /api/datapoint/planrun/{planRunId}/step/{stepId}:
+    get:
+      tags:
+      - Data Point Resource
+      parameters:
+      - name: planRunId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataPointDto'
   /api/plan:
     get:
       tags:
