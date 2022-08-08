@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AdvancedPlanRunDto } from 'src/app/models/plan-run';
+import { PlanResourceService, PlanRunResourceService } from 'src/app/services';
+import { PlanRunDto } from 'src/app/services/model/planRunDto';
 
 @Component({
   selector: 'app-test-result-list',
@@ -7,9 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestResultListComponent implements OnInit {
 
-  constructor() { }
+  planRuns: AdvancedPlanRunDto[] = [];
+
+  constructor(private planRunService: PlanRunResourceService,
+    private planService: PlanResourceService) { }
 
   ngOnInit(): void {
+    this.planRunService.apiPlanrunGet().subscribe({
+      next: planRunDtos => {
+        planRunDtos.forEach(e => {
+          this.planService.apiPlanIdGet(e.planId!).subscribe({
+            next: planDto => {
+              this.planRuns.push({
+                planRun:e,
+                plan: planDto
+              })
+            },
+            error: err=> {
+              console.log(err)
+            }
+          })
+        })
+      },
+      error: err=>console.log(err)
+    })
   }
-
 }

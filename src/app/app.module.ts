@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestResultListComponent } from './components/test-result/test-result-list/test-result-list.component';
 import { TestResultDetailComponent } from './components/test-result/test-result-detail/test-result-detail.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,9 @@ import { TestResultDetailComponent } from './components/test-result/test-result-
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(), // ToastrModule added
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}],
   bootstrap: [AppComponent]

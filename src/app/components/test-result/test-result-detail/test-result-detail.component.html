@@ -1,1 +1,5 @@
-<p>test-result-detail works!</p>
+
+<div *ngFor="let graphItem of graphItems">
+    <h3 class="font-medium font-bold leading-tight text-3xl mt-0 mb-2 text-blue-600 text-center">{{graphItem.step.name}}</h3>
+    <div echarts [options]="graphItem.option" class="demo-chart"></div>
+</div>
