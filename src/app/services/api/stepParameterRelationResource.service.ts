@@ -154,10 +154,10 @@ export class StepParameterRelationResourceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiPlanPlanIdStepStepIdParameterRelationPost(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<StepParameterRelationDto>;
-    public apiPlanPlanIdStepStepIdParameterRelationPost(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<StepParameterRelationDto>>;
-    public apiPlanPlanIdStepStepIdParameterRelationPost(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<StepParameterRelationDto>>;
-    public apiPlanPlanIdStepStepIdParameterRelationPost(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public apiPlanPlanIdStepStepIdParameterRelationPost(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public apiPlanPlanIdStepStepIdParameterRelationPost(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public apiPlanPlanIdStepStepIdParameterRelationPost(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public apiPlanPlanIdStepStepIdParameterRelationPost(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (planId === null || planId === undefined) {
             throw new Error('Required parameter planId was null or undefined when calling apiPlanPlanIdStepStepIdParameterRelationPost.');
         }
@@ -171,7 +171,6 @@ export class StepParameterRelationResourceService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -205,7 +204,7 @@ export class StepParameterRelationResourceService {
             }
         }
 
-        return this.httpClient.post<StepParameterRelationDto>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}/parameterRelation`,
+        return this.httpClient.post<any>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}/parameterRelation`,
             stepParameterRelationDto,
             {
                 context: localVarHttpContext,

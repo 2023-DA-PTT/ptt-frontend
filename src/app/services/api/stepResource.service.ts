@@ -149,10 +149,10 @@ export class StepResourceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiPlanPlanIdStepPost(planId: number, stepDto?: StepDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<StepDto>;
-    public apiPlanPlanIdStepPost(planId: number, stepDto?: StepDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<StepDto>>;
-    public apiPlanPlanIdStepPost(planId: number, stepDto?: StepDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<StepDto>>;
-    public apiPlanPlanIdStepPost(planId: number, stepDto?: StepDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public apiPlanPlanIdStepPost(planId: number, stepDto?: StepDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public apiPlanPlanIdStepPost(planId: number, stepDto?: StepDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public apiPlanPlanIdStepPost(planId: number, stepDto?: StepDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public apiPlanPlanIdStepPost(planId: number, stepDto?: StepDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (planId === null || planId === undefined) {
             throw new Error('Required parameter planId was null or undefined when calling apiPlanPlanIdStepPost.');
         }
@@ -163,7 +163,6 @@ export class StepResourceService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -197,7 +196,7 @@ export class StepResourceService {
             }
         }
 
-        return this.httpClient.post<StepDto>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step`,
+        return this.httpClient.post<any>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step`,
             stepDto,
             {
                 context: localVarHttpContext,
@@ -277,10 +276,10 @@ export class StepResourceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiPlanPlanIdStepStepIdPost(planId: number, stepId: number, stepDto?: StepDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<StepDto>;
-    public apiPlanPlanIdStepStepIdPost(planId: number, stepId: number, stepDto?: StepDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<StepDto>>;
-    public apiPlanPlanIdStepStepIdPost(planId: number, stepId: number, stepDto?: StepDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<StepDto>>;
-    public apiPlanPlanIdStepStepIdPost(planId: number, stepId: number, stepDto?: StepDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public apiPlanPlanIdStepStepIdPost(planId: number, stepId: number, stepDto?: StepDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public apiPlanPlanIdStepStepIdPost(planId: number, stepId: number, stepDto?: StepDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public apiPlanPlanIdStepStepIdPost(planId: number, stepId: number, stepDto?: StepDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public apiPlanPlanIdStepStepIdPost(planId: number, stepId: number, stepDto?: StepDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (planId === null || planId === undefined) {
             throw new Error('Required parameter planId was null or undefined when calling apiPlanPlanIdStepStepIdPost.');
         }
@@ -294,7 +293,6 @@ export class StepResourceService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -328,7 +326,7 @@ export class StepResourceService {
             }
         }
 
-        return this.httpClient.post<StepDto>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}`,
+        return this.httpClient.post<any>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}`,
             stepDto,
             {
                 context: localVarHttpContext,

@@ -201,10 +201,10 @@ export class PlanResourceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiPlanUserIdPost(userId: number, planDto?: PlanDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<PlanDto>;
-    public apiPlanUserIdPost(userId: number, planDto?: PlanDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<PlanDto>>;
-    public apiPlanUserIdPost(userId: number, planDto?: PlanDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<PlanDto>>;
-    public apiPlanUserIdPost(userId: number, planDto?: PlanDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public apiPlanUserIdPost(userId: number, planDto?: PlanDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public apiPlanUserIdPost(userId: number, planDto?: PlanDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public apiPlanUserIdPost(userId: number, planDto?: PlanDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public apiPlanUserIdPost(userId: number, planDto?: PlanDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (userId === null || userId === undefined) {
             throw new Error('Required parameter userId was null or undefined when calling apiPlanUserIdPost.');
         }
@@ -215,7 +215,6 @@ export class PlanResourceService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -249,7 +248,7 @@ export class PlanResourceService {
             }
         }
 
-        return this.httpClient.post<PlanDto>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(userId))}`,
+        return this.httpClient.post<any>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(userId))}`,
             planDto,
             {
                 context: localVarHttpContext,
