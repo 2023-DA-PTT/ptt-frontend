@@ -16,6 +16,7 @@ import { StepDetailComponent } from './components/test-plan/test-plan-detail/ste
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NodeEditorComponent } from './components/node-editor/node-editor.component';
 import { TestResultListComponent } from './components/test-result/test-result-list/test-result-list.component';
 import { TestResultDetailComponent } from './components/test-result/test-result-detail/test-result-detail.component';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -29,6 +30,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     FooterComponent,
     NavbarComponent,
     StepDetailComponent,
+    NodeEditorComponent,
     TestResultListComponent,
     TestResultDetailComponent
   ],
