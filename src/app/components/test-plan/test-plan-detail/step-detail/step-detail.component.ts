@@ -1,6 +1,5 @@
-import { StepResourceService } from './../../../../services/api/stepResource.service';
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { InputArgumentDto, InputArgumentResourceService, OutputArgumentDto, OutputArgumentResourceService, StepDto } from 'src/app/services';
 
 @Component({
@@ -27,7 +26,7 @@ export class StepDetailComponent implements OnInit {
   @Output() cancelStep = new EventEmitter<void>();
 
   constructor(
-    private stepService: StepResourceService,
+    //private stepService: StepResourceService,
     private inputService: InputArgumentResourceService,
     private outputService: OutputArgumentResourceService,
     private toastr: ToastrService) { }
@@ -36,10 +35,7 @@ export class StepDetailComponent implements OnInit {
     this.currentStep = {
       id: this.step.id,
       name: this.step.name,
-      description: this.step.description,
-      method: this.step.method,
-      url: this.step.url,
-      body: this.step.body
+      description: this.step.description
     };
 
     this.inputService.apiPlanPlanIdStepStepIdInputArgumentGet(this.planId, this.step.id!).subscribe({
@@ -84,8 +80,7 @@ export class StepDetailComponent implements OnInit {
     this.outputs.push({
       id:0,
       name: '',
-      stepId: this.step.id,
-      jsonLocation: ''
+      stepId: this.step.id
     })
   }
 

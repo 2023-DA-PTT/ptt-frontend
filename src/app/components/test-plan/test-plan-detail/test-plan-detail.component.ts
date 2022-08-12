@@ -46,9 +46,6 @@ export class TestPlanDetailComponent implements OnInit {
       id: 0,
       name: '',
       description: '',
-      method: '',
-      url: '',
-      body: ''
     };
   }
 
@@ -57,30 +54,6 @@ export class TestPlanDetailComponent implements OnInit {
   }
 
   saveStep(step: StepDto): void {
-    if (step.id == 0) {
-      this.stepService.apiPlanPlanIdStepPost(this.plan!.id!, step).subscribe({
-        next: d => {
-          this.toastr.success("Created Step!", "Success")
-          this.steps.push(step);
-        },
-        error: e => {
-          this.toastr.error("Could not create Step!", "Error")
-          console.log(e)
-        }
-      });
-    } else if (this.currentStep) {
-      var tmp = this.currentStep!;
-      this.stepService.apiPlanPlanIdStepStepIdPost(this.plan!.id!, tmp.id!, step).subscribe({
-        next: d => {
-          var idx = this.steps.indexOf(tmp);
-          if (idx >= 0) this.steps.splice(idx, 1, step);
-          this.toastr.success("Updated Step!", "Success")
-        },
-        error: e => {
-          this.toastr.error("Could not update Step!", "Error")
-        }
-      })
-    }
     this.currentStep = undefined;
   }
 }

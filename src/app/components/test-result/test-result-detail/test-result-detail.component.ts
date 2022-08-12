@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TestResultGraphItem } from 'src/app/models/test-result-graph-item';
-import { DataPointResourceService, PlanDto, PlanResourceService, PlanRunResourceService, StepResourceService } from 'src/app/services';
+import { DataPointResourceService, HttpStepResourceService, PlanDto, PlanResourceService, PlanRunResourceService, StepResourceService } from 'src/app/services';
 import { DataPointDto } from 'src/app/services/model/dataPointDto';
 import { PlanRunDto } from 'src/app/services/model/planRunDto';
 
@@ -19,7 +19,7 @@ export class TestResultDetailComponent implements OnInit {
 
   constructor(private planRunService: PlanRunResourceService,
     private planService: PlanResourceService,
-    private stepService: StepResourceService,
+    private stepService: HttpStepResourceService,
     private dataPointService: DataPointResourceService,
     private route: ActivatedRoute,
     private toastr: ToastrService) { }
@@ -37,7 +37,7 @@ export class TestResultDetailComponent implements OnInit {
           this.planService.apiPlanIdGet(planRun.planId!).subscribe({
             next: d => {
               this.plan = d;
-              this.stepService.apiPlanPlanIdStepGet(this.plan.id!).subscribe({
+              this.stepService.apiPlanPlanIdStepHttpGet(this.plan.id!).subscribe({
                 next: steps=> {
                   steps.forEach(step => {
                     this.dataPointService.apiDatapointPlanrunPlanRunIdStepStepIdGet(planRun.id!, step.id!).subscribe({
