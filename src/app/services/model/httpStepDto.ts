@@ -9,10 +9,17 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { RequestContentType } from './requestContentType';
 
 
-export interface PlanRunInstructionDto { 
-    numberOfClients?: number;
-    nodeName?: string;
+export interface HttpStepDto { 
+    id?: number;
+    name?: string;
+    description?: string;
+    method?: string;
+    url?: string;
+    body?: string;
+    responseContentType?: RequestContentType;
+    contentType?: RequestContentType;
 }
 
