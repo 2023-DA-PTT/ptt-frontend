@@ -15,8 +15,6 @@ export interface StepDto {
     id?: number;
     name?: string;
     description?: string;
-    method?: string;
-    url?: string;
-    body?: string;
+    type?: string;
 }
 

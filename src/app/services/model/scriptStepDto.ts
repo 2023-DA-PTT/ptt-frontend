@@ -11,8 +11,10 @@
  */
 
 
-export interface PlanRunInstructionDto { 
-    numberOfClients?: number;
-    nodeName?: string;
+export interface ScriptStepDto { 
+    id?: number;
+    name?: string;
+    description?: string;
+    script?: string;
 }
 

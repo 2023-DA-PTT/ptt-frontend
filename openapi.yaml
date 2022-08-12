@@ -134,9 +134,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/StepDto'
+  /api/plan/{planId}/step/http:
+    get:
+      tags:
+      - Http Step Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HttpStepDto'
     post:
       tags:
-      - Step Resource
+      - Http Step Resource
       parameters:
       - name: planId
         in: path
@@ -148,7 +168,45 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StepDto'
+              $ref: '#/components/schemas/HttpStepDto'
+      responses:
+        "200":
+          description: OK
+  /api/plan/{planId}/step/script:
+    get:
+      tags:
+      - Script Step Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScriptStepDto'
+    post:
+      tags:
+      - Script Step Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptStepDto'
       responses:
         "200":
           description: OK
@@ -176,9 +234,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StepDto'
+  /api/plan/{planId}/step/{stepId}/http:
     post:
       tags:
-      - Step Resource
+      - Http Step Resource
       parameters:
       - name: planId
         in: path
@@ -196,7 +255,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StepDto'
+              $ref: '#/components/schemas/HttpStepDto'
       responses:
         "200":
           description: OK
@@ -437,6 +496,31 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/StepParameterRelationDto'
+  /api/plan/{planId}/step/{stepId}/script:
+    post:
+      tags:
+      - Script Step Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptStepDto'
+      responses:
+        "200":
+          description: OK
   /api/plan/{userId}:
     post:
       tags:
@@ -518,6 +602,26 @@ components:
         duration:
           format: int64
           type: integer
+    HttpStepDto:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        method:
+          type: string
+        url:
+          type: string
+        body:
+          type: string
+        responseContentType:
+          $ref: '#/components/schemas/RequestContentType'
+        contentType:
+          $ref: '#/components/schemas/RequestContentType'
     InputArgumentDto:
       type: object
       properties:
@@ -540,8 +644,15 @@ components:
           type: integer
         name:
           type: string
-        jsonLocation:
+        parameterLocation:
           type: string
+        outputType:
+          $ref: '#/components/schemas/OutputType'
+    OutputType:
+      enum:
+      - PLAIN_TEXT
+      - OCTET_STREAM
+      type: string
     PlanDto:
       type: object
       properties:
@@ -577,10 +688,27 @@ components:
     PlanRunInstructionDto:
       type: object
       properties:
-        amount:
+        numberOfClients:
           format: int32
           type: integer
         nodeName:
+          type: string
+    RequestContentType:
+      enum:
+      - APPLICATION_JSON
+      - MULTIPART_FORM_DATA
+      type: string
+    ScriptStepDto:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        script:
           type: string
     StepDto:
       type: object
@@ -592,11 +720,7 @@ components:
           type: string
         description:
           type: string
-        method:
-          type: string
-        url:
-          type: string
-        body:
+        type:
           type: string
     StepParameterRelationDto:
       type: object

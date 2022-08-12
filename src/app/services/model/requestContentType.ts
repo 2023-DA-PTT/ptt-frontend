@@ -11,8 +11,10 @@
  */
 
 
-export interface PlanRunInstructionDto { 
-    numberOfClients?: number;
-    nodeName?: string;
-}
+export type RequestContentType = 'APPLICATION_JSON' | 'MULTIPART_FORM_DATA';
+
+export const RequestContentType = {
+    ApplicationJson: 'APPLICATION_JSON' as RequestContentType,
+    MultipartFormData: 'MULTIPART_FORM_DATA' as RequestContentType
+};
 

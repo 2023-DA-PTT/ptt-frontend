@@ -11,8 +11,10 @@
  */
 
 
-export interface PlanRunInstructionDto { 
-    numberOfClients?: number;
-    nodeName?: string;
-}
+export type OutputType = 'PLAIN_TEXT' | 'OCTET_STREAM';
+
+export const OutputType = {
+    PlainText: 'PLAIN_TEXT' as OutputType,
+    OctetStream: 'OCTET_STREAM' as OutputType
+};
 
