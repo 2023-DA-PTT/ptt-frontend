@@ -21,6 +21,7 @@ import { SidebarComponent } from './components/dashboard/sidebar/sidebar.compone
 import { OverviewComponent } from './components/dashboard/overview/overview.component';
 import { WebpageComponent } from './components/webpage/webpage.component';
 import { TestPlanOverviewComponent } from './components/dashboard/test-plan-overview/test-plan-overview.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { TestPlanOverviewComponent } from './components/dashboard/test-plan-over
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgChartsModule,
     ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}],
