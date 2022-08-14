@@ -1,4 +1,4 @@
-import { StepResourceService } from './../../../../services/api/stepResource.service';
+import { StepResourceService } from '../../../../../services/api/stepResource.service';
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { InputArgumentDto, InputArgumentResourceService, OutputArgumentDto, OutputArgumentResourceService, StepDto } from 'src/app/services';

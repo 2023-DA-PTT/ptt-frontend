@@ -1,0 +1,15 @@
+<nav class="border-gray-200 bg-white px-2 py-2.5 dark:border-gray-700 dark:bg-gray-800 sm:px-4 rounded">
+    <div class="mx-auto flex flex-wrap items-center justify-between">
+      <a href="https://flowbite.com/" class="flex items-center">
+        <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">PTT</span>
+      </a>
+      <div class="w-full md:block md:w-auto hidden" data-testid="navbar-collapse">
+        <ul class="mt-4 flex flex-col md:mt-0 md:flex-row md:space-x-8 md:text-sm text-gray-600">
+          <a routerLinkActive="md:font-medium text-black" routerLink="/" [routerLinkActiveOptions]="{exact: true}">Home</a>
+          <a routerLinkActive="md:font-medium text-black" routerLink="/dashboard">Dashboard</a>
+          <a routerLinkActive="md:font-medium text-black" routerLink="/test-plans" [routerLinkActiveOptions]="{exact: true}">Test Plans</a>
+          <a routerLinkActive="md:font-medium text-black" routerLink="/asdf" [routerLinkActiveOptions]="{exact: true}">Test Results</a>
+        </ul>
+      </div>
+    </div>
+  </nav>

@@ -3,19 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { TestPlanListComponent } from './components/test-plan/test-plan-list/test-plan-list.component';
-import { TestPlanDetailComponent } from './components/test-plan/test-plan-detail/test-plan-detail.component';
+import { HomeComponent } from './components/webpage/home/home.component';
+import { TestPlanListComponent } from './components/webpage/test-plan/test-plan-list/test-plan-list.component';
+import { TestPlanDetailComponent } from './components/webpage/test-plan/test-plan-detail/test-plan-detail.component';
 import { ApiModule, BASE_PATH } from './services';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { RouterModule } from '@angular/router';
-import { FooterComponent } from './components/footer/footer.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { StepDetailComponent } from './components/test-plan/test-plan-detail/step-detail/step-detail.component';
+import { FooterComponent } from './components/webpage/footer/footer.component';
+import { NavbarComponent } from './components/webpage/navbar/navbar.component';
+import { StepDetailComponent } from './components/webpage/test-plan/test-plan-detail/step-detail/step-detail.component';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SidebarComponent } from './components/dashboard/sidebar/sidebar.component';
+import { OverviewComponent } from './components/dashboard/overview/overview.component';
+import { WebpageComponent } from './components/webpage/webpage.component';
+import { TestPlanOverviewComponent } from './components/dashboard/test-plan-overview/test-plan-overview.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TestPlanDetailComponent,
     FooterComponent,
     NavbarComponent,
-    StepDetailComponent
+    StepDetailComponent,
+    DashboardComponent,
+    SidebarComponent,
+    OverviewComponent,
+    WebpageComponent,
+    TestPlanOverviewComponent
   ],
   imports: [
     FormsModule,
