@@ -3,7 +3,7 @@
         Results</div>
 </div>
 
-<a *ngFor="let planRun of planRuns" [routerLink]="['/test-results', planRun.planRun.id]">
+<a *ngFor="let planRun of planRuns" [routerLink]="['/test-result', planRun.planRun.id]">
     <div class="flex rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col"
         data-testid="flowbite-card">
         <div class="flex h-full flex-col justify-center gap-4 p-6">

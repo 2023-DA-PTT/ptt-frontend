@@ -20,6 +20,8 @@ const routes: Routes = [
       { path: 'editor', component: NodeEditorComponent },
       { path: 'test-plans', component: TestPlanListComponent },
       { path: 'test-plan/:id', component: TestPlanDetailComponent },
+      { path: 'test-results', component: TestResultListComponent },
+      { path: 'test-result/:id', component: TestResultDetailComponent },
     ]
   },
   { path: 'dashboard', component: DashboardComponent, children: [

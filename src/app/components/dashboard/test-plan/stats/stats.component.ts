@@ -1,3 +1,4 @@
+import { HttpStepDto } from './../../../../services/model/httpStepDto';
 import { Component, OnInit } from '@angular/core';
 import {PlanDto, StepDto} from "../../../../services";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -12,7 +13,7 @@ export class StatsComponent implements OnInit {
   testId: number = -1;
   runId: number = -1;
   testPlan: PlanDto = {id:-1,startId:-1,name:"Example test plan", description: "Test plan description"}
-  step: StepDto = {id:-1,name:"Example test plan", description: "Test plan description", method: "POST", url: "https://google.com", body: "asdf"}
+  step: HttpStepDto = {id:-1,name:"Example test plan", description: "Test plan description", method: "POST", url: "https://google.com", body: "asdf"}
 
   constructor(private activeRoute: ActivatedRoute,
               private router: Router) {
