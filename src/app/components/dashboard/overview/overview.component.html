@@ -40,7 +40,7 @@
   <div class="col-span-4 my-5">
     <p class="text-4xl">My awesome Test Plan</p>
   </div>
-  <div class="col-span-4 mb-10 w-full h-64">
+  <div class="col-span-4 w-full h-64 rounded p-3">
     <canvas baseChart
             [type]="'line'"
             [data]="lineChartData"
@@ -63,4 +63,22 @@
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-yellow-400 dark:text-white">300.5 ms</h5>
     <p class="font-normal text-gray-700 dark:text-gray-400">Average duration of steps in last run</p>
   </a>
+
+  <div class="rounded-2xl px-3 pt-3 col-span-2 bg-gray-100">
+    <p class="text-xl mb-3">Distributed Response Time</p>
+    <canvas class="mb-10 w-full h-64" baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [type]="'bar'"
+    >
+    </canvas>
+  </div>
+  <div class="rounded-2xl px-3 pt-3 col-span-1 bg-gray-100">
+    <p class="text-xl mb-4">Origin of Virtual Users</p>
+    <canvas baseChart
+            [data]="pieChartData"
+            [type]="'pie'"
+            [options]="pieChartOptions">
+    </canvas>
+  </div>
 </div>

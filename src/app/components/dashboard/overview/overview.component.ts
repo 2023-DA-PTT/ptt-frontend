@@ -45,6 +45,46 @@ export class OverviewComponent implements OnInit {
   };
   public lineChartLegend = true;
 
+  public barChartOptions: ChartOptions<'bar'> = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: {
+      x: {},
+      y: {
+        min: 10
+      }
+    },
+    plugins: {
+      legend: {
+        display: true,
+      }
+    }
+  };
+
+  public barChartData: ChartConfiguration<'bar'>['data'] = {
+    labels: [ '0s', '1s', '2s', '3s', '4s', '5s', '6s' ],
+    datasets: [
+      { data: [ 65, 59, 80, 81, 56, 55, 40 ], label: 'Requests from US' },
+      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Requests from EU' }
+    ]
+  };
+
+  public pieChartOptions: ChartOptions<'pie'> = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+      }
+    }
+  };
+  public pieChartData: ChartConfiguration<'pie', number[], string | string[]>['data'] = {
+    labels: [ [ 'US'], [ 'EU' ] ],
+    datasets: [ {
+      data: [ 300, 500 ]
+    } ]
+  };
+
   constructor() { }
 
   ngOnInit(): void {
