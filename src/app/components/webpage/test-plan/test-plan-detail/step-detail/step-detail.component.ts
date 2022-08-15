@@ -71,8 +71,7 @@ export class StepDetailComponent implements OnInit {
     this.outputs.push({
       id:0,
       name: '',
-      stepId: this.step.id,
-      jsonLocation: ''
+      stepId: this.step.id
     })
   }
 
@@ -89,7 +88,7 @@ export class StepDetailComponent implements OnInit {
   }
 
   save(): void {
-    if (this.isNewStep) {
+    /*if (this.isNewStep) {
       this.stepService.apiPlanPlanIdStepPost(this.planId, this.step).subscribe({
         next: s => {
           this.toastr.success("Created Step!", "Success")
@@ -136,11 +135,11 @@ export class StepDetailComponent implements OnInit {
         error: e => {
           this.toastr.error("Could not update Step!", "Error")
         }
-      })*/
+      })
       throw new Error("Update Not implemented!");
     }
 
-    console.log(this.step);
+    console.log(this.step);*/
 
     this.close();
   }

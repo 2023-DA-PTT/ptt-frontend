@@ -11,9 +11,10 @@
  */
 
 
-export interface StepParameterRelationDto { 
+export interface ScriptStepDto { 
     id?: number;
-    fromId?: number;
-    toId?: number;
+    name?: string;
+    description?: string;
+    script?: string;
 }
 

@@ -25,6 +25,10 @@ import { NgChartsModule } from 'ng2-charts';
 import { TestPlanComponent } from './components/dashboard/test-plan/test-plan.component';
 import { StepComponent } from './components/dashboard/test-plan/step/step.component';
 import { StatsComponent } from './components/dashboard/test-plan/stats/stats.component';
+import { NodeEditorComponent } from './components/node-editor/node-editor.component';
+import { TestResultListComponent } from './components/test-result/test-result-list/test-result-list.component';
+import { TestResultDetailComponent } from './components/test-result/test-result-detail/test-result-detail.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,10 @@ import { StatsComponent } from './components/dashboard/test-plan/stats/stats.com
     TestPlanOverviewComponent,
     TestPlanComponent,
     StepComponent,
-    StatsComponent
+    StatsComponent,
+    NodeEditorComponent,
+    TestResultListComponent,
+    TestResultDetailComponent
   ],
   imports: [
     FormsModule,
@@ -53,6 +60,9 @@ import { StatsComponent } from './components/dashboard/test-plan/stats/stats.com
     BrowserAnimationsModule,
     NgChartsModule,
     ToastrModule.forRoot(), // ToastrModule added
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}],
   bootstrap: [AppComponent]

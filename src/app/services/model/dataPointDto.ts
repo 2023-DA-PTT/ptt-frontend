@@ -11,9 +11,11 @@
  */
 
 
-export interface StepParameterRelationDto { 
+export interface DataPointDto { 
     id?: number;
-    fromId?: number;
-    toId?: number;
+    planRunId?: number;
+    stepId?: number;
+    startTime?: number;
+    duration?: number;
 }
 
