@@ -20,8 +20,9 @@ const routes: Routes = [
   },
   { path: 'dashboard', component: DashboardComponent, children: [
       { path: '', component: OverviewComponent },
-      { path: 'test-plan-overview', component: TestPlanOverviewComponent },
+      { path: 'test-plan', component: TestPlanOverviewComponent },
       { path: 'test-plan/:test-id', component: TestPlanComponent },
+      { path: 'test-plan/:test-id/step', pathMatch: 'full', redirectTo:'test-plan/:test-id' },
       { path: 'test-plan/:test-id/step/:step-id', component: StepComponent },
       { path: 'test-plan/:test-id/stats/:run-id', component: StatsComponent },
     ] },

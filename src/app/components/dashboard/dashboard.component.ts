@@ -17,10 +17,8 @@ export class DashboardComponent implements OnInit {
     switch (urlPath) {
       case "dashboard":
         return "Dashboard";
-      case "test-plan-overview":
-        return "Test Plan Overview";
       case "test-plan":
-        return "Test Plan";
+        return "Test Plans";
       case "step":
         return "Step";
       case "stats":
