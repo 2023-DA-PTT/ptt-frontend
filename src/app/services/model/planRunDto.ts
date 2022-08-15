@@ -9,11 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { PlanRunInstructionDto } from './planRunInstructionDto';
 
 
-export interface StepParameterRelationDto { 
+export interface PlanRunDto { 
     id?: number;
-    fromId?: number;
-    toId?: number;
+    planId?: number;
+    startTime?: number;
+    duration?: number;
+    planRunInstructions?: Array<PlanRunInstructionDto>;
 }
 

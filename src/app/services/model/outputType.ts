@@ -11,9 +11,10 @@
  */
 
 
-export interface StepParameterRelationDto { 
-    id?: number;
-    fromId?: number;
-    toId?: number;
-}
+export type OutputType = 'PLAIN_TEXT' | 'OCTET_STREAM';
+
+export const OutputType = {
+    PlainText: 'PLAIN_TEXT' as OutputType,
+    OctetStream: 'OCTET_STREAM' as OutputType
+};
 

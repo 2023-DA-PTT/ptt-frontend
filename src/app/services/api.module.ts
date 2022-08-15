@@ -2,9 +2,13 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
+import { DataPointResourceService } from './api/dataPointResource.service';
+import { HttpStepResourceService } from './api/httpStepResource.service';
 import { InputArgumentResourceService } from './api/inputArgumentResource.service';
 import { OutputArgumentResourceService } from './api/outputArgumentResource.service';
 import { PlanResourceService } from './api/planResource.service';
+import { PlanRunResourceService } from './api/planRunResource.service';
+import { ScriptStepResourceService } from './api/scriptStepResource.service';
 import { StepParameterRelationResourceService } from './api/stepParameterRelationResource.service';
 import { StepResourceService } from './api/stepResource.service';
 

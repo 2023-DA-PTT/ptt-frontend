@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { InputArgumentDto } from '../model/inputArgumentDto';
+import { PlanRunDto } from '../model/planRunDto';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -30,7 +30,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class InputArgumentResourceService {
+export class PlanRunResourceService {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
@@ -88,20 +88,68 @@ export class InputArgumentResourceService {
     }
 
     /**
-     * @param planId 
-     * @param stepId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiPlanPlanIdStepStepIdInputArgumentGet(planId: number, stepId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InputArgumentDto>>;
-    public apiPlanPlanIdStepStepIdInputArgumentGet(planId: number, stepId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InputArgumentDto>>>;
-    public apiPlanPlanIdStepStepIdInputArgumentGet(planId: number, stepId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InputArgumentDto>>>;
-    public apiPlanPlanIdStepStepIdInputArgumentGet(planId: number, stepId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (planId === null || planId === undefined) {
-            throw new Error('Required parameter planId was null or undefined when calling apiPlanPlanIdStepStepIdInputArgumentGet.');
+    public apiPlanrunGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<PlanRunDto>>;
+    public apiPlanrunGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<PlanRunDto>>>;
+    public apiPlanrunGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<PlanRunDto>>>;
+    public apiPlanrunGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
-        if (stepId === null || stepId === undefined) {
-            throw new Error('Required parameter stepId was null or undefined when calling apiPlanPlanIdStepStepIdInputArgumentGet.');
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        return this.httpClient.get<Array<PlanRunDto>>(`${this.configuration.basePath}/api/planrun`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param planrunid 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiPlanrunPlanrunidGet(planrunid: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<PlanRunDto>;
+    public apiPlanrunPlanrunidGet(planrunid: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<PlanRunDto>>;
+    public apiPlanrunPlanrunidGet(planrunid: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<PlanRunDto>>;
+    public apiPlanrunPlanrunidGet(planrunid: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (planrunid === null || planrunid === undefined) {
+            throw new Error('Required parameter planrunid was null or undefined when calling apiPlanrunPlanrunidGet.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -135,7 +183,7 @@ export class InputArgumentResourceService {
             }
         }
 
-        return this.httpClient.get<Array<InputArgumentDto>>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}/inputArgument`,
+        return this.httpClient.get<PlanRunDto>(`${this.configuration.basePath}/api/planrun/${encodeURIComponent(String(planrunid))}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -148,86 +196,14 @@ export class InputArgumentResourceService {
     }
 
     /**
-     * @param inArgId 
-     * @param planId 
-     * @param stepId 
+     * @param planRunDto 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiPlanPlanIdStepStepIdInputArgumentInArgIdGet(inArgId: number, planId: number, stepId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InputArgumentDto>;
-    public apiPlanPlanIdStepStepIdInputArgumentInArgIdGet(inArgId: number, planId: number, stepId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InputArgumentDto>>;
-    public apiPlanPlanIdStepStepIdInputArgumentInArgIdGet(inArgId: number, planId: number, stepId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InputArgumentDto>>;
-    public apiPlanPlanIdStepStepIdInputArgumentInArgIdGet(inArgId: number, planId: number, stepId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (inArgId === null || inArgId === undefined) {
-            throw new Error('Required parameter inArgId was null or undefined when calling apiPlanPlanIdStepStepIdInputArgumentInArgIdGet.');
-        }
-        if (planId === null || planId === undefined) {
-            throw new Error('Required parameter planId was null or undefined when calling apiPlanPlanIdStepStepIdInputArgumentInArgIdGet.');
-        }
-        if (stepId === null || stepId === undefined) {
-            throw new Error('Required parameter stepId was null or undefined when calling apiPlanPlanIdStepStepIdInputArgumentInArgIdGet.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        return this.httpClient.get<InputArgumentDto>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}/inputArgument/${encodeURIComponent(String(inArgId))}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * @param planId 
-     * @param stepId 
-     * @param inputArgumentDto 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public apiPlanPlanIdStepStepIdInputArgumentPost(planId: number, stepId: number, inputArgumentDto?: InputArgumentDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public apiPlanPlanIdStepStepIdInputArgumentPost(planId: number, stepId: number, inputArgumentDto?: InputArgumentDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public apiPlanPlanIdStepStepIdInputArgumentPost(planId: number, stepId: number, inputArgumentDto?: InputArgumentDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public apiPlanPlanIdStepStepIdInputArgumentPost(planId: number, stepId: number, inputArgumentDto?: InputArgumentDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
-        if (planId === null || planId === undefined) {
-            throw new Error('Required parameter planId was null or undefined when calling apiPlanPlanIdStepStepIdInputArgumentPost.');
-        }
-        if (stepId === null || stepId === undefined) {
-            throw new Error('Required parameter stepId was null or undefined when calling apiPlanPlanIdStepStepIdInputArgumentPost.');
-        }
+    public apiPlanrunPost(planRunDto?: PlanRunDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public apiPlanrunPost(planRunDto?: PlanRunDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public apiPlanrunPost(planRunDto?: PlanRunDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public apiPlanrunPost(planRunDto?: PlanRunDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -268,8 +244,8 @@ export class InputArgumentResourceService {
             }
         }
 
-        return this.httpClient.post<any>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}/inputArgument`,
-            inputArgumentDto,
+        return this.httpClient.post<any>(`${this.configuration.basePath}/api/planrun`,
+            planRunDto,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

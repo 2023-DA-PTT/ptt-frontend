@@ -218,10 +218,10 @@ export class OutputArgumentResourceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiPlanPlanIdStepStepIdOutputArgumentPost(planId: number, stepId: number, outputArgumentDto?: OutputArgumentDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<OutputArgumentDto>;
-    public apiPlanPlanIdStepStepIdOutputArgumentPost(planId: number, stepId: number, outputArgumentDto?: OutputArgumentDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<OutputArgumentDto>>;
-    public apiPlanPlanIdStepStepIdOutputArgumentPost(planId: number, stepId: number, outputArgumentDto?: OutputArgumentDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<OutputArgumentDto>>;
-    public apiPlanPlanIdStepStepIdOutputArgumentPost(planId: number, stepId: number, outputArgumentDto?: OutputArgumentDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public apiPlanPlanIdStepStepIdOutputArgumentPost(planId: number, stepId: number, outputArgumentDto?: OutputArgumentDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public apiPlanPlanIdStepStepIdOutputArgumentPost(planId: number, stepId: number, outputArgumentDto?: OutputArgumentDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public apiPlanPlanIdStepStepIdOutputArgumentPost(planId: number, stepId: number, outputArgumentDto?: OutputArgumentDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public apiPlanPlanIdStepStepIdOutputArgumentPost(planId: number, stepId: number, outputArgumentDto?: OutputArgumentDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (planId === null || planId === undefined) {
             throw new Error('Required parameter planId was null or undefined when calling apiPlanPlanIdStepStepIdOutputArgumentPost.');
         }
@@ -235,7 +235,6 @@ export class OutputArgumentResourceService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -269,7 +268,7 @@ export class OutputArgumentResourceService {
             }
         }
 
-        return this.httpClient.post<OutputArgumentDto>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}/outputArgument`,
+        return this.httpClient.post<any>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}/outputArgument`,
             outputArgumentDto,
             {
                 context: localVarHttpContext,

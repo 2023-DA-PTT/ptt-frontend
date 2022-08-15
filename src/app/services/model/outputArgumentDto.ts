@@ -9,12 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { OutputType } from './outputType';
 
 
 export interface OutputArgumentDto { 
     stepId?: number;
     id?: number;
     name?: string;
-    jsonLocation?: string;
+    parameterLocation?: string;
+    outputType?: OutputType;
 }
 

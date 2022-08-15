@@ -11,9 +11,10 @@
  */
 
 
-export interface StepParameterRelationDto { 
-    id?: number;
-    fromId?: number;
-    toId?: number;
-}
+export type RequestContentType = 'APPLICATION_JSON' | 'MULTIPART_FORM_DATA';
+
+export const RequestContentType = {
+    ApplicationJson: 'APPLICATION_JSON' as RequestContentType,
+    MultipartFormData: 'MULTIPART_FORM_DATA' as RequestContentType
+};
 

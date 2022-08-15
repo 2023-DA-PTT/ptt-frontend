@@ -11,9 +11,8 @@
  */
 
 
-export interface StepParameterRelationDto { 
-    id?: number;
-    fromId?: number;
-    toId?: number;
+export interface PlanRunInstructionDto { 
+    numberOfClients?: number;
+    nodeName?: string;
 }
 
