@@ -14,13 +14,13 @@ export class TestPlanComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.activeRoute.snapshot.params)
-    if(!(this.activeRoute.snapshot.params['id']) || isNaN(parseInt(this.activeRoute.snapshot.params['id']!))) {
+    if(!(this.activeRoute.snapshot.params['test-id']) || isNaN(parseInt(this.activeRoute.snapshot.params['test-id']!))) {
       this.router.navigate(['/']);
       return;
     }
 
-    this.id = parseInt(this.activeRoute.snapshot.params['id']!);
-    console.log(this.id)
+    this.id = parseInt(this.activeRoute.snapshot.params['test-id']!);
+    console.debug(this.id)
   }
 
 }

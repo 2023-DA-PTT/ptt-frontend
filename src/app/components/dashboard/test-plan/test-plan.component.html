@@ -1,12 +1,24 @@
 <p class="text-2xl">Steps</p>
 <div class="grid-cols-3 grid gap-5 mt-5">
-  <a *ngFor="let i of [1,2,3,4,5]" [routerLink]="['/dashboard/test-plan/'+id+'/test-step/'+i]" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+  <a *ngFor="let i of [1,2,3,4,5]" [routerLink]="['/dashboard/test-plan/'+id+'/step/'+i]" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Sign Up</h5>
     <p class="font-normal text-gray-700 dark:text-gray-400">Sign up step used to test sign up.</p>
   </a>
   <a [routerLink]="['/dashboard/test-plan/'+this.id+'/create-step']" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex justify-center align-middle">
     <svg xmlns="http://www.w3.org/2000/svg" class="w-14 w-14 fill-black hover:fill-gray-300" viewBox="0 0 20 20" fill="currentColor">
       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+    </svg>
+  </a>
+</div>
+<p class="text-2xl mt-10">Runs</p>
+<div class="grid-cols-3 grid gap-5 mt-5">
+  <a *ngFor="let i of [1,2,3,4,5]" [routerLink]="['/dashboard/test-plan/'+id+'/stats/'+i]" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Test Run {{i}}</h5>
+    <p class="font-normal text-gray-700 dark:text-gray-400">Date: 22nd Feb. 11:00</p>
+  </a>
+  <a [routerLink]="['/dashboard/test-plan/'+this.id+'/start']" class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex justify-center align-middle">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-14 w-14 fill-black hover:fill-green-600" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
     </svg>
   </a>
 </div>

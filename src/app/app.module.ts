@@ -23,6 +23,8 @@ import { WebpageComponent } from './components/webpage/webpage.component';
 import { TestPlanOverviewComponent } from './components/dashboard/test-plan-overview/test-plan-overview.component';
 import { NgChartsModule } from 'ng2-charts';
 import { TestPlanComponent } from './components/dashboard/test-plan/test-plan.component';
+import { StepComponent } from './components/dashboard/test-plan/step/step.component';
+import { StatsComponent } from './components/dashboard/test-plan/stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { TestPlanComponent } from './components/dashboard/test-plan/test-plan.co
     OverviewComponent,
     WebpageComponent,
     TestPlanOverviewComponent,
-    TestPlanComponent
+    TestPlanComponent,
+    StepComponent,
+    StatsComponent
   ],
   imports: [
     FormsModule,

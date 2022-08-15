@@ -21,6 +21,10 @@ export class DashboardComponent implements OnInit {
         return "Test Plan Overview";
       case "test-plan":
         return "Test Plan";
+      case "step":
+        return "Step";
+      case "stats":
+        return "Statistics";
     }
 
     return urlPath;
