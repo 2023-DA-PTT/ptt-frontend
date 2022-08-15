@@ -1,1 +1,41 @@
-<p>stats works!</p>
+<div class="grid grid-cols-4">
+  <div class="col-span-4 w-full h-64 rounded p-3">
+    <p class="text-xl">All Steps Duration</p>
+    <canvas baseChart width="900px"
+            [type]="'line'"
+            [data]="lineChartData"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend">
+    </canvas>
+  </div>
+  <div class="col-span-3 mt-10">
+    <p class="text-2xl">Per-Step Statistics</p>
+  </div>
+  <div class="col-span-2 w-full h-64 rounded p-3 mt-5">
+    <p class="text-xl">Sign Up Duration</p>
+    <canvas baseChart
+            [type]="'line'"
+            [data]="lineChartDataSingle"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend">
+    </canvas>
+  </div>
+  <div class="col-span-2 w-full h-64 rounded p-3 mt-5">
+    <p class="text-xl">Log In Duration</p>
+    <canvas baseChart
+            [type]="'line'"
+            [data]="lineChartDataSingle"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend">
+    </canvas>
+  </div>
+  <div class="col-span-2 w-full h-64 rounded p-3 mt-5">
+    <p class="text-xl">Sleep Duration</p>
+    <canvas baseChart
+            [type]="'line'"
+            [data]="lineChartDataSingle"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend">
+    </canvas>
+  </div>
+</div>
