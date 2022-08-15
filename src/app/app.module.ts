@@ -22,6 +22,7 @@ import { OverviewComponent } from './components/dashboard/overview/overview.comp
 import { WebpageComponent } from './components/webpage/webpage.component';
 import { TestPlanOverviewComponent } from './components/dashboard/test-plan-overview/test-plan-overview.component';
 import { NgChartsModule } from 'ng2-charts';
+import { TestPlanComponent } from './components/dashboard/test-plan/test-plan.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NgChartsModule } from 'ng2-charts';
     SidebarComponent,
     OverviewComponent,
     WebpageComponent,
-    TestPlanOverviewComponent
+    TestPlanOverviewComponent,
+    TestPlanComponent
   ],
   imports: [
     FormsModule,
