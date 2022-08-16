@@ -37,3 +37,5 @@
 </div>
 <app-script-step *ngIf="isScriptStep(step)"></app-script-step>
 <app-http-step *ngIf="!isScriptStep(step)"></app-http-step>
+<app-input-parameters [stepId]="step.id!" [planId]="testPlan.id!"></app-input-parameters>
+<app-output-parameters [stepId]="step.id!" [planId]="testPlan.id!"></app-output-parameters>

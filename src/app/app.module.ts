@@ -32,6 +32,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { ScriptStepComponent } from './components/dashboard/test-plan/step/script-step/script-step.component';
 import {CodeEditorModule} from "@ngstack/code-editor";
 import { HttpStepComponent } from './components/dashboard/test-plan/step/http-step/http-step.component';
+import { InputParametersComponent } from './components/dashboard/test-plan/step/input-parameters/input-parameters.component';
+import { OutputParametersComponent } from './components/dashboard/test-plan/step/output-parameters/output-parameters.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { HttpStepComponent } from './components/dashboard/test-plan/step/http-st
     TestResultListComponent,
     TestResultDetailComponent,
     ScriptStepComponent,
-    HttpStepComponent
+    HttpStepComponent,
+    InputParametersComponent,
+    OutputParametersComponent
   ],
   imports: [
     FormsModule,
