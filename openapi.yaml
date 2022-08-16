@@ -235,6 +235,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/StepDto'
   /api/plan/{planId}/step/{stepId}/http:
+    get:
+      tags:
+      - Http Step Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
     post:
       tags:
       - Http Step Resource
@@ -309,6 +328,30 @@ paths:
       responses:
         "200":
           description: OK
+    patch:
+      tags:
+      - Input Argument Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputArgumentDto'
+      responses:
+        "200":
+          description: OK
   /api/plan/{planId}/step/{stepId}/inputArgument/{inArgId}:
     get:
       tags:
@@ -339,6 +382,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InputArgumentDto'
+    delete:
+      tags:
+      - Input Argument Resource
+      parameters:
+      - name: inArgId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+  /api/plan/{planId}/step/{stepId}/nexts:
+    get:
+      tags:
+      - Step Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StepDto'
   /api/plan/{planId}/step/{stepId}/outputArgument:
     get:
       tags:
@@ -366,6 +460,30 @@ paths:
                 items:
                   $ref: '#/components/schemas/OutputArgumentDto'
     post:
+      tags:
+      - Output Argument Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OutputArgumentDto'
+      responses:
+        "200":
+          description: OK
+    patch:
       tags:
       - Output Argument Resource
       parameters:
@@ -497,6 +615,25 @@ paths:
                 items:
                   $ref: '#/components/schemas/StepParameterRelationDto'
   /api/plan/{planId}/step/{stepId}/script:
+    get:
+      tags:
+      - Script Step Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
     post:
       tags:
       - Script Step Resource
