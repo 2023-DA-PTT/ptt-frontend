@@ -29,6 +29,11 @@ import { NodeEditorComponent } from './components/node-editor/node-editor.compon
 import { TestResultListComponent } from './components/test-result/test-result-list/test-result-list.component';
 import { TestResultDetailComponent } from './components/test-result/test-result-detail/test-result-detail.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { ScriptStepComponent } from './components/dashboard/test-plan/step/script-step/script-step.component';
+import {CodeEditorModule} from "@ngstack/code-editor";
+import { HttpStepComponent } from './components/dashboard/test-plan/step/http-step/http-step.component';
+import { InputParametersComponent } from './components/dashboard/test-plan/step/input-parameters/input-parameters.component';
+import { OutputParametersComponent } from './components/dashboard/test-plan/step/output-parameters/output-parameters.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +54,11 @@ import { NgxEchartsModule } from 'ngx-echarts';
     StatsComponent,
     NodeEditorComponent,
     TestResultListComponent,
-    TestResultDetailComponent
+    TestResultDetailComponent,
+    ScriptStepComponent,
+    HttpStepComponent,
+    InputParametersComponent,
+    OutputParametersComponent
   ],
   imports: [
     FormsModule,
@@ -62,7 +71,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
     ToastrModule.forRoot(), // ToastrModule added
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
-    })
+    }),
+    CodeEditorModule.forRoot()
   ],
   providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}],
   bootstrap: [AppComponent]

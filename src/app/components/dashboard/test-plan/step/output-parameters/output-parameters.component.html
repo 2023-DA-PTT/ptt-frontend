@@ -1,0 +1,41 @@
+<div class="mt-10 sm:mt-0 mb-10">
+  <div class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="md:col-span-1">
+      <div class="px-4 sm:px-0">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Output Parameters</h3>
+        <p class="mt-1 text-sm text-gray-600">These settings define the output parameters of this step.</p>
+      </div>
+    </div>
+    <div class="mt-5 md:mt-0 md:col-span-2">
+      <form action="#" method="POST">
+        <div class="shadow overflow-hidden sm:rounded-md">
+          <div class="px-4 py-5 bg-white sm:p-6">
+            <div *ngFor="let outputParam of outputParameters; let i = index" class="grid grid-cols-6 gap-6 mt-3">
+              <div class="col-span-2">
+                <label for="ioutput-parameter-name-{{i}}" class="block text-sm font-medium text-gray-700">Parameter Name</label>
+                <input type="text" name="output-parameter-name-{{i}}" [(ngModel)]="outputParam.name" id="output-parameter-name-{{i}}" autocomplete="output-parameter-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
+              <div class="col-span-2">
+                <label for="output-parameter-location-{{i}}" class="block text-sm font-medium text-gray-700">Parameter Location</label>
+                <input type="text" name="output-parameter-location-{{i}}" [(ngModel)]="outputParam.parameterLocation" id="output-parameter-location-{{i}}" autocomplete="output-parameter-location" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
+              <div class="col-span-2">
+                <label for="input-parameter-{{i}}" class="block text-sm font-medium text-gray-700">Parameter Type</label>
+                <select name="output-parameter-type-{{i}}" [(ngModel)]="outputParam.outputType" id="output-parameter-type-{{i}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option value="PLAIN_TEXT">Plain Text</option>
+                  <option value="OCTET_STREAM">Octet Stream</option>
+                </select>
+              </div>
+            </div>
+
+            <button (click)="addNewOutputParam()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3">+</button>
+
+          </div>
+          <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
