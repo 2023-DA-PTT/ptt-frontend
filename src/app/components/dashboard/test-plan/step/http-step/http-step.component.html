@@ -1,0 +1,59 @@
+<div>
+  <div class="md:grid md:grid-cols-3 md:gap-6 mt-10 mb-10">
+    <div class="md:col-span-1">
+      <div class="px-4 sm:px-0">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Http Settings</h3>
+        <p class="mt-1 text-sm text-gray-600">Informations about how to send the request.</p>
+      </div>
+    </div>
+    <div class="mt-5 md:mt-0 md:col-span-2">
+      <form action="#" method="POST">
+        <div class="shadow sm:rounded-md sm:overflow-hidden">
+          <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+            <div class="grid grid-cols-3 gap-6">
+              <div class="col-span-1">
+                <label for="request-method" class="block text-sm font-medium text-gray-700"> Method </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input type="text" name="company-website" id="request-method" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="GET">
+                </div>
+              </div>
+              <div class="col-span-2 sm:col-span-2">
+                <label for="request-url" class="block text-sm font-medium text-gray-700"> URL </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input type="text" name="company-website" id="request-url" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="https://example.com">
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label for="about" class="block text-sm font-medium text-gray-700"> Body </label>
+              <div class="mt-1">
+                <textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder='{"username": "spiderman"}'></textarea>
+              </div>
+              <p class="mt-2 text-sm text-gray-500">Static body of request</p>
+            </div>
+
+            <div>
+              <label for="content-type" class="block text-sm font-medium text-gray-700"> Content Type </label>
+              <div class="mt-1 flex rounded-md shadow-sm">
+                <input type="text" name="company-website" id="content-type" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="APPLICATION_JSON">
+              </div>
+              <p class="mt-2 text-sm text-gray-500">Content Type of Request</p>
+            </div>
+
+            <div>
+              <label for="content-type-response" class="block text-sm font-medium text-gray-700"> Response Content Type </label>
+              <div class="mt-1 flex rounded-md shadow-sm">
+                <input type="text" name="company-website" id="content-type-response" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="MULTIPART_FORM_DATA">
+              </div>
+              <p class="mt-2 text-sm text-gray-500">Content Type of Response from Server</p>
+            </div>
+          </div>
+          <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
