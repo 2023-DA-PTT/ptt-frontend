@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {InputArgumentDto, InputArgumentResourceService, StepDto} from "../../../../../services";
+import {NgForm} from "@angular/forms";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-input-parameters',
@@ -13,16 +15,38 @@ export class InputParametersComponent implements OnInit {
   planId: number = -1;
   inputParameters: InputArgumentDto[] = [];
 
-  constructor(private inputParamsService: InputArgumentResourceService) { }
+  constructor(private inputParamsService: InputArgumentResourceService,
+              private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
-    /*this.inputParamsService.apiPlanPlanIdStepStepIdInputArgumentGet(this.planId, this.stepId).subscribe(
+    this.inputParamsService.apiPlanPlanIdStepStepIdInputArgumentGet(this.planId, this.stepId).subscribe(
       (args: InputArgumentDto[]) => {
-      this.inputParameters = args;
-    })*/
+        console.log(args)
+        this.inputParameters = args;
+      });
   }
 
   addNewInputParam() {
-    this.inputParameters.push({id:-1,stepId:this.stepId })
+    this.inputParameters.push({stepId: this.stepId})
+  }
+
+  onSubmit(inputParamForm: NgForm) {
+    if (!inputParamForm.valid) {
+      console.log("UNVALID")
+      return;
+    }
+
+    this.inputParameters.filter(p => p.name).filter(p => !p.id).forEach(p => {
+      this.inputParamsService.apiPlanPlanIdStepStepIdInputArgumentPost(this.planId, this.stepId, p).subscribe(p => {
+        this.toastr.success("Created Input Parameter " + p.name);
+      })
+    });
+
+    this.inputParameters.filter(p => p.name).filter(p => p.id).forEach(p => {
+      this.inputParamsService.apiPlanPlanIdStepStepIdInputArgumentPatch(this.planId, this.stepId, p).subscribe(p => {
+        this.toastr.success("Updated Input Parameter " + p.name);
+      })
+    });
   }
 }

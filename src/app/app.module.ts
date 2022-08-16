@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './components/webpage/footer/footer.component';
 import { NavbarComponent } from './components/webpage/navbar/navbar.component';
 import { StepDetailComponent } from './components/webpage/test-plan/test-plan-detail/step-detail/step-detail.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -60,20 +60,21 @@ import { OutputParametersComponent } from './components/dashboard/test-plan/step
     InputParametersComponent,
     OutputParametersComponent
   ],
-  imports: [
-    FormsModule,
-    ApiModule,
-    HttpClientModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    NgChartsModule,
-    ToastrModule.forRoot(), // ToastrModule added
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts')
-    }),
-    CodeEditorModule.forRoot()
-  ],
+    imports: [
+        FormsModule,
+        ApiModule,
+        HttpClientModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        NgChartsModule,
+        ToastrModule.forRoot(), // ToastrModule added
+        NgxEchartsModule.forRoot({
+            echarts: () => import('echarts')
+        }),
+        CodeEditorModule.forRoot(),
+        ReactiveFormsModule
+    ],
   providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}],
   bootstrap: [AppComponent]
 })
