@@ -20,11 +20,13 @@ export class TestPlanComponent implements OnInit {
   id: number = -1;
   httpSteps: HttpStepDto[] = [];
   scriptSteps: ScriptStepDto[] = [];
+  steps: StepDto[] = [];
 
   constructor(private activeRoute: ActivatedRoute,
               private router: Router,
               private httpStepsService: HttpStepResourceService,
-              private scriptStepService: ScriptStepResourceService) {
+              private scriptStepService: ScriptStepResourceService,
+              private stepService: StepResourceService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +36,8 @@ export class TestPlanComponent implements OnInit {
     }
 
     this.id = parseInt(this.activeRoute.snapshot.params['test-id']!);
+
+    this.stepService.apiPlanPlanIdStepGet(this.id).subscribe(steps => this.steps=steps);
 
     this.httpStepsService.apiPlanPlanIdStepHttpGet(this.id).subscribe(steps => {
       this.httpSteps = steps;
