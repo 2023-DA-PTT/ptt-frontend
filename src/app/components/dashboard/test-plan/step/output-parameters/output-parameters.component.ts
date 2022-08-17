@@ -34,7 +34,7 @@ export class OutputParametersComponent implements OnInit {
 
   addNewOutputParam() {
     console.log(this.outputParameters);
-    this.outputParameters.push({id:-1, stepId: this.stepId})
+    this.outputParameters.push({stepId: this.stepId})
   }
 
   onSubmit(outputParamForm: NgForm) {
