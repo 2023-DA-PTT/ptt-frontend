@@ -33,14 +33,14 @@ export class StepDetailComponent implements OnInit {
       next: inputs => {
         this.inputs = inputs;
       }, error: err => {
-        this.toastr.error("Could not load inputs for Step!", "Error");
+        this.toastr.error();
       }
     })
     this.outputArgService.apiPlanPlanIdStepStepIdOutputArgumentGet(this.planId, this.step.id!).subscribe({
       next: outputs => {
         this.outputs = outputs;
       }, error: () => {
-        this.toastr.error("Could not load inputs for Step!", "Error");
+        this.toastr.error();
       }
     })
   }

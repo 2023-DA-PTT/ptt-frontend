@@ -21,6 +21,7 @@ export class TestPlanComponent implements OnInit {
   httpSteps: HttpStepDto[] = [];
   scriptSteps: ScriptStepDto[] = [];
   steps: StepDto[] = [];
+  createNewStepModal = false;
 
   constructor(private activeRoute: ActivatedRoute,
               private router: Router,
@@ -48,4 +49,12 @@ export class TestPlanComponent implements OnInit {
     })
   }
 
+  createNewStep(type: string) {
+    if(type == 'http') {
+      this.router.navigate(["/dashboard/test-plan/"+ this.id + "/step/http"]).then();
+    }
+    else if(type == 'script') {
+      this.router.navigate(["/dashboard/test-plan/" + this.id + "/step/script"]).then();
+    }
+  }
 }

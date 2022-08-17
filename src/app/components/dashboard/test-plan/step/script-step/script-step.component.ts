@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CodeModel} from "@ngstack/code-editor";
 import {ScriptStepDto, ScriptStepResourceService} from "../../../../../services";
 import {FormGroup, NgForm} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-script-step',
@@ -10,8 +11,8 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./script-step.component.scss']
 })
 export class ScriptStepComponent implements OnInit {
-  @Input()
-  step: ScriptStepDto = {};
+  @Input() step: ScriptStepDto = {};
+  @Output() stepChange = new EventEmitter<ScriptStepDto>();
   @Input()
   planId: number = -1;
 
@@ -28,7 +29,8 @@ export class ScriptStepComponent implements OnInit {
   };
 
   constructor(private scriptStepService: ScriptStepResourceService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -43,13 +45,29 @@ export class ScriptStepComponent implements OnInit {
 
     this.step.script = this.editorModel.value;
 
-    this.scriptStepService.apiPlanPlanIdStepStepIdScriptPut(this.planId, this.step.id!, this.step).subscribe({
-      next: newStep => {
-        this.toastr.success("Saved")
-      },
-      error: err => {
-        this.toastr.error("Error! ")
-      }
-    });
+    if (this.step.id == -1) {
+      this.scriptStepService.apiPlanPlanIdStepScriptPost(this.planId, this.step).subscribe({
+        next: step => {
+          this.toastr.success("Success!")
+          this.step = step;
+          this.stepChange.emit(step);
+          this.router.navigate(["/dashboard/test-plan/"+this.planId+"/step/"+step.id]).then()
+        },
+        error: () => {
+          this.toastr.error("Error!")
+        }
+      });
+    } else {
+      this.scriptStepService.apiPlanPlanIdStepStepIdScriptPut(this.planId, this.step.id!, this.step).subscribe({
+        next: step => {
+          this.step = step;
+          this.stepChange.emit(step);
+          this.toastr.success("Saved")
+        },
+        error: () => {
+          this.toastr.error()
+        }
+      });
+    }
   }
 }
