@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HttpStepDto } from 'src/app/services';
+import { HttpStepDto, RequestContentType } from 'src/app/services';
 
 @Component({
   selector: 'app-http-step',
@@ -13,9 +13,12 @@ export class HttpStepComponent implements OnInit {
   @Input()
   planId: number = -1;
 
+  contentTypes: RequestContentType[] = [];
+
   constructor() { }
 
   ngOnInit(): void {
+    this.contentTypes = Object.values(RequestContentType);
   }
 
 }
