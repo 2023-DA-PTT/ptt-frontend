@@ -22,6 +22,7 @@
     "@ngstack/code-editor": "^4.0.0",
     "echarts": "^5.3.3",
     "flowbite": "^1.5.1",
+    "moment": "^2.29.4",
     "ng2-charts": "^4.0.0",
     "ngx-echarts": "^14.0.0",
     "ngx-toastr": "^15.0.0",

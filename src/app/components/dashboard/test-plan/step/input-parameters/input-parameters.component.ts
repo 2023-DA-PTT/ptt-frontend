@@ -41,7 +41,7 @@ export class InputParametersComponent implements OnInit {
     });
 
     this.inputParameters.filter(p => p.name).filter(p => p.id).forEach(p => {
-      this.inputParamsService.apiPlanPlanIdStepStepIdInputArgumentPut(this.planId, this.stepId, p).subscribe(p => {
+      this.inputParamsService.apiPlanPlanIdStepStepIdInputArgumentInArgIdPut(p.id!, this.planId, this.stepId, p).subscribe(p => {
         this.toastr.success("Updated Input Parameter " + p.name);
       })
     });
