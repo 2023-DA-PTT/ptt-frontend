@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HttpStepDto, RequestContentType } from 'src/app/services';
+import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { HttpStepDto, HttpStepResourceService, RequestContentType } from 'src/app/services';
 
 @Component({
   selector: 'app-http-step',
@@ -15,10 +17,26 @@ export class HttpStepComponent implements OnInit {
 
   contentTypes: RequestContentType[] = [];
 
-  constructor() { }
+  constructor(private httpStepService: HttpStepResourceService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.contentTypes = Object.values(RequestContentType);
   }
 
+  onSubmit(submitScriptStep: NgForm) {
+    if (!submitScriptStep.valid) {
+      console.debug("FORM UNVALID!")
+      return;
+    }
+
+    this.httpStepService.apiPlanPlanIdStepStepIdHttpPut(this.planId, this.step.id!, this.step).subscribe({
+      next: newStep => {
+        this.toastr.success("Saved")
+      },
+      error: err => {
+        this.toastr.error("Error! ")
+      }
+    });
+  }
 }
