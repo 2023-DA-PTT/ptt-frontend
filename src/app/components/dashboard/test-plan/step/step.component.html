@@ -33,6 +33,6 @@
   </div>
 </div>
 <app-script-step *ngIf="step.id && stepType === 'script'" [(step)]="step" [planId]="testId"></app-script-step>
-<app-http-step *ngIf="step.id && stepType === 'http'" [step]="step" [planId]="testId"></app-http-step>
+<app-http-step *ngIf="step.id && stepType === 'http'" [(step)]="step" [planId]="testId"></app-http-step>
 <app-input-parameters *ngIf="step.id && step.id >= 0" [stepId]="step.id!" [planId]="testPlan.id!"></app-input-parameters>
 <app-output-parameters *ngIf="step.id && step.id >= 0" [stepId]="step.id!" [planId]="testPlan.id!"></app-output-parameters>
