@@ -43,7 +43,7 @@ export class ScriptStepComponent implements OnInit {
 
     this.step.script = this.editorModel.value;
 
-    this.scriptStepService.apiPlanPlanIdStepStepIdScriptPost(this.planId, this.step.id!, this.step).subscribe({
+    this.scriptStepService.apiPlanPlanIdStepStepIdScriptPut(this.planId, this.step.id!, this.step).subscribe({
       next: newStep => {
         this.toastr.success("Saved")
       },
