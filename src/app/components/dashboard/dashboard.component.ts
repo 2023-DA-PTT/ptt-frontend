@@ -23,6 +23,10 @@ export class DashboardComponent implements OnInit {
         return "Step";
       case "stats":
         return "Statistics";
+      case "script":
+        return "Script Step";
+      case "http":
+        return "Http Step";
     }
 
     return urlPath;

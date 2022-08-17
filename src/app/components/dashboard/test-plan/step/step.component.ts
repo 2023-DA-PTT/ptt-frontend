@@ -18,7 +18,7 @@ export class StepComponent implements OnInit {
   testId: number = -1;
   stepId: number = -1;
   testPlan: PlanDto = {id:-1,startId:-1,name:"Example test plan", description: "Test plan description"}
-  step: HttpStepDto | ScriptStepDto = {id:-1,name:"Example test plan", script:"asdf"}
+  step: HttpStepDto | ScriptStepDto = {}
   stepType: string = "";
 
   constructor(private activeRoute: ActivatedRoute,
@@ -33,40 +33,50 @@ export class StepComponent implements OnInit {
     console.log(this.activeRoute.snapshot.params)
     if(!(this.activeRoute.snapshot.params['test-id'])
       || !(this.activeRoute.snapshot.params['step-id'])
-      || isNaN(parseInt(this.activeRoute.snapshot.params['test-id']!))
-      || isNaN(parseInt(this.activeRoute.snapshot.params['step-id']!))) {
-      this.router.navigate(['/']);
+      || isNaN(parseInt(this.activeRoute.snapshot.params['test-id']!))) {
+      this.router.navigate(['/']).then();
       return;
     }
 
     this.testId = parseInt(this.activeRoute.snapshot.params['test-id']!);
-    this.stepId = parseInt(this.activeRoute.snapshot.params['step-id']!);
 
     this.testPlanService.apiPlanIdGet(this.testId).subscribe(testPlan => {
       this.testPlan = testPlan;
     });
 
-    this.stepService.apiPlanPlanIdStepStepIdGet(this.testId, this.stepId).subscribe(step => {
-      if(!step.type) {
-        this.router.navigate(['/']);
-        return;
-      }
+    if(this.activeRoute.snapshot.params['step-id']! === 'script') {
+      this.stepType = 'script';
+      this.step = {id:-1, name: "", script: ""}
+    }
+    else if(this.activeRoute.snapshot.params['step-id']! === 'http') {
+      this.stepType = 'http';
+      this.step = {id:-1, name: "", description: "", body: "", url: "", method: ""}
+    }
+    else {
+      this.stepId = parseInt(this.activeRoute.snapshot.params['step-id']!);
 
-      this.stepType = step.type;
+      this.stepService.apiPlanPlanIdStepStepIdGet(this.testId, this.stepId).subscribe(step => {
+        if(!step.type) {
+          this.router.navigate(['/']).then();
+          return;
+        }
 
-      if(step.type === 'http') {
-        this.httpStepService.apiPlanPlanIdStepStepIdHttpGet(this.testId, this.stepId).subscribe(step => {
-          this.step = step;
-        })
-      }
-      else if(step.type === 'script') {
-        this.scriptStepService.apiPlanPlanIdStepStepIdScriptGet(this.testId, this.stepId).subscribe(step => {
-          this.step = step;
-        })
-      }
-      else {
-        console.error("UNKOWN TYPE " + step.type)
-      }
-    })
+        this.stepType = step.type;
+
+        if(step.type === 'http') {
+          this.httpStepService.apiPlanPlanIdStepStepIdHttpGet(this.testId, this.stepId).subscribe(step => {
+            this.step = step;
+          })
+        }
+        else if(step.type === 'script') {
+          this.scriptStepService.apiPlanPlanIdStepStepIdScriptGet(this.testId, this.stepId).subscribe(step => {
+            this.step = step;
+          })
+        }
+        else {
+          console.error()
+        }
+      })
+    }
   }
 }
