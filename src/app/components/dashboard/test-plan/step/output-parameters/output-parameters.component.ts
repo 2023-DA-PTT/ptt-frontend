@@ -50,7 +50,7 @@ export class OutputParametersComponent implements OnInit {
     });
 
     this.outputParameters.filter(p => p.name).filter(p => p.id).forEach(p => {
-      this.outputParamService.apiPlanPlanIdStepStepIdOutputArgumentPut(this.planId, this.stepId, p).subscribe(p => {
+      this.outputParamService.apiPlanPlanIdStepStepIdOutputArgumentOutArgIdPut(p.id!, this.planId, this.stepId, p).subscribe(p => {
         this.toastr.success("Updated Output Parameter " + p.name);
       })
     });
