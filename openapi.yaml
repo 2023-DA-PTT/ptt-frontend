@@ -254,7 +254,7 @@ paths:
       responses:
         "200":
           description: OK
-    post:
+    put:
       tags:
       - Http Step Resource
       parameters:
@@ -304,7 +304,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/InputArgumentDto'
-    post:
+    put:
       tags:
       - Input Argument Resource
       parameters:
@@ -328,7 +328,7 @@ paths:
       responses:
         "200":
           description: OK
-    patch:
+    post:
       tags:
       - Input Argument Resource
       parameters:
@@ -382,31 +382,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InputArgumentDto'
-    delete:
-      tags:
-      - Input Argument Resource
-      parameters:
-      - name: inArgId
-        in: path
-        required: true
-        schema:
-          format: int64
-          type: integer
-      - name: planId
-        in: path
-        required: true
-        schema:
-          format: int64
-          type: integer
-      - name: stepId
-        in: path
-        required: true
-        schema:
-          format: int64
-          type: integer
-      responses:
-        "200":
-          description: OK
   /api/plan/{planId}/step/{stepId}/nexts:
     get:
       tags:
@@ -432,7 +407,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/StepDto'
+                  $ref: '#/components/schemas/NextStepDto'
   /api/plan/{planId}/step/{stepId}/outputArgument:
     get:
       tags:
@@ -459,7 +434,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/OutputArgumentDto'
-    post:
+    put:
       tags:
       - Output Argument Resource
       parameters:
@@ -483,7 +458,7 @@ paths:
       responses:
         "200":
           description: OK
-    patch:
+    post:
       tags:
       - Output Argument Resource
       parameters:
@@ -634,7 +609,7 @@ paths:
       responses:
         "200":
           description: OK
-    post:
+    put:
       tags:
       - Script Step Resource
       parameters:
@@ -769,6 +744,17 @@ components:
           type: string
         stepId:
           format: int64
+          type: integer
+    NextStepDto:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        toStep:
+          $ref: '#/components/schemas/StepDto'
+        repeatAmount:
+          format: int32
           type: integer
     OutputArgumentDto:
       type: object

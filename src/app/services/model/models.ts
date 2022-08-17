@@ -1,6 +1,7 @@
 export * from './dataPointDto';
 export * from './httpStepDto';
 export * from './inputArgumentDto';
+export * from './nextStepDto';
 export * from './outputArgumentDto';
 export * from './outputType';
 export * from './planDto';

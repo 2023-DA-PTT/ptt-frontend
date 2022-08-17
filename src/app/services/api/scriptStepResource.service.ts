@@ -275,15 +275,15 @@ export class ScriptStepResourceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiPlanPlanIdStepStepIdScriptPost(planId: number, stepId: number, scriptStepDto?: ScriptStepDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public apiPlanPlanIdStepStepIdScriptPost(planId: number, stepId: number, scriptStepDto?: ScriptStepDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public apiPlanPlanIdStepStepIdScriptPost(planId: number, stepId: number, scriptStepDto?: ScriptStepDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public apiPlanPlanIdStepStepIdScriptPost(planId: number, stepId: number, scriptStepDto?: ScriptStepDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public apiPlanPlanIdStepStepIdScriptPut(planId: number, stepId: number, scriptStepDto?: ScriptStepDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public apiPlanPlanIdStepStepIdScriptPut(planId: number, stepId: number, scriptStepDto?: ScriptStepDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public apiPlanPlanIdStepStepIdScriptPut(planId: number, stepId: number, scriptStepDto?: ScriptStepDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public apiPlanPlanIdStepStepIdScriptPut(planId: number, stepId: number, scriptStepDto?: ScriptStepDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (planId === null || planId === undefined) {
-            throw new Error('Required parameter planId was null or undefined when calling apiPlanPlanIdStepStepIdScriptPost.');
+            throw new Error('Required parameter planId was null or undefined when calling apiPlanPlanIdStepStepIdScriptPut.');
         }
         if (stepId === null || stepId === undefined) {
-            throw new Error('Required parameter stepId was null or undefined when calling apiPlanPlanIdStepStepIdScriptPost.');
+            throw new Error('Required parameter stepId was null or undefined when calling apiPlanPlanIdStepStepIdScriptPut.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -325,7 +325,7 @@ export class ScriptStepResourceService {
             }
         }
 
-        return this.httpClient.post<any>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}/script`,
+        return this.httpClient.put<any>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}/script`,
             scriptStepDto,
             {
                 context: localVarHttpContext,

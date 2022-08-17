@@ -19,6 +19,7 @@ model/dataPointDto.ts
 model/httpStepDto.ts
 model/inputArgumentDto.ts
 model/models.ts
+model/nextStepDto.ts
 model/outputArgumentDto.ts
 model/outputType.ts
 model/planDto.ts
