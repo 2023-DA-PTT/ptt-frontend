@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { HttpStepDto } from 'src/app/services';
 
 @Component({
   selector: 'app-http-step',
@@ -6,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./http-step.component.scss']
 })
 export class HttpStepComponent implements OnInit {
+  
+  @Input()
+  step: HttpStepDto = {};
+  @Input()
+  planId: number = -1;
 
   constructor() { }
 

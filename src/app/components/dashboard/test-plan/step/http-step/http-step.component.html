@@ -14,21 +14,21 @@
               <div class="col-span-1">
                 <label for="request-method" class="block text-sm font-medium text-gray-700"> Method </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="company-website" id="request-method" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="GET">
+                  <input [(ngModel)]="step.method" type="text" name="request-method" id="request-method" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="GET">
                 </div>
               </div>
               <div class="col-span-2 sm:col-span-2">
                 <label for="request-url" class="block text-sm font-medium text-gray-700"> URL </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="company-website" id="request-url" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="https://example.com">
+                  <input [(ngModel)]="step.url" type="text" name="request-url" id="request-url" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="https://example.com">
                 </div>
               </div>
             </div>
 
             <div>
-              <label for="about" class="block text-sm font-medium text-gray-700"> Body </label>
+              <label for="body" class="block text-sm font-medium text-gray-700"> Body </label>
               <div class="mt-1">
-                <textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder='{"username": "spiderman"}'></textarea>
+                <textarea [(ngModel)]="step.body" id="body" name="body" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder='{"username": "spiderman"}'></textarea>
               </div>
               <p class="mt-2 text-sm text-gray-500">Static body of request</p>
             </div>
@@ -36,7 +36,7 @@
             <div>
               <label for="content-type" class="block text-sm font-medium text-gray-700"> Content Type </label>
               <div class="mt-1 flex rounded-md shadow-sm">
-                <input type="text" name="company-website" id="content-type" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="APPLICATION_JSON">
+                <input [(ngModel)]="step.contentType" type="text" name="content-type" id="content-type" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="APPLICATION_JSON">
               </div>
               <p class="mt-2 text-sm text-gray-500">Content Type of Request</p>
             </div>
@@ -44,7 +44,7 @@
             <div>
               <label for="content-type-response" class="block text-sm font-medium text-gray-700"> Response Content Type </label>
               <div class="mt-1 flex rounded-md shadow-sm">
-                <input type="text" name="company-website" id="content-type-response" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="MULTIPART_FORM_DATA">
+                <input [(ngModel)]="step.responseContentType" type="text" name="content-type-response" id="content-type-response" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="MULTIPART_FORM_DATA">
               </div>
               <p class="mt-2 text-sm text-gray-500">Content Type of Response from Server</p>
             </div>
