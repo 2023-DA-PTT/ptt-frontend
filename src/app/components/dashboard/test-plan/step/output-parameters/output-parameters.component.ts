@@ -3,7 +3,8 @@ import {
   InputArgumentDto,
   InputArgumentResourceService,
   OutputArgumentDto,
-  OutputArgumentResourceService
+  OutputArgumentResourceService,
+  OutputType
 } from "../../../../../services";
 
 @Component({
@@ -17,10 +18,12 @@ export class OutputParametersComponent implements OnInit {
   @Input()
   planId: number = -1;
   outputParameters: OutputArgumentDto[] = [];
+  outputTypes: string[] = []
 
   constructor(private outputParamService: OutputArgumentResourceService) { }
 
   ngOnInit(): void {
+    this.outputTypes = Object.values(OutputType);
   }
 
   addNewOutputParam() {
