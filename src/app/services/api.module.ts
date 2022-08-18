@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { DataPointResourceService } from './api/dataPointResource.service';
 import { HttpStepResourceService } from './api/httpStepResource.service';
 import { InputArgumentResourceService } from './api/inputArgumentResource.service';
+import { NodeResourceService } from './api/nodeResource.service';
 import { OutputArgumentResourceService } from './api/outputArgumentResource.service';
 import { PlanResourceService } from './api/planResource.service';
 import { PlanRunResourceService } from './api/planRunResource.service';

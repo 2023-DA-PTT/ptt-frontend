@@ -63,6 +63,20 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DataPointDto'
+  /api/node/locations:
+    get:
+      tags:
+      - Node Resource
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  type: string
   /api/plan:
     get:
       tags:

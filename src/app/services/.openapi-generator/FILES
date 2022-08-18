@@ -5,6 +5,7 @@ api/api.ts
 api/dataPointResource.service.ts
 api/httpStepResource.service.ts
 api/inputArgumentResource.service.ts
+api/nodeResource.service.ts
 api/outputArgumentResource.service.ts
 api/planResource.service.ts
 api/planRunResource.service.ts
