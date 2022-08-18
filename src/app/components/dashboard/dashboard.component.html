@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
-<div class="flex">
+<div class="flex w-full">
   <div class="flex-none w-64">
     <app-sidebar></app-sidebar>
   </div>
-  <div class="flex-none mt-5">
+  <div class="mt-5 w-full 2xl:max-w-screen-2xl mr-5">
     <div class="mb-5 text-gray-500 flex">
       <ng-container *ngFor="let urlPath of router.url.split('/'); let last = last;let first = first;let i = index;">
         <a [routerLink]="router.url.split('/').slice(0,i+1).join('/')">{{formatUrlPath(urlPath)}}</a>

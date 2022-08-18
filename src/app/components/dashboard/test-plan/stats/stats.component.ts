@@ -26,7 +26,8 @@ export class StatsComponent implements OnInit {
 
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
+    
   };
   public lineChartLegend = true;
 
@@ -60,8 +61,8 @@ export class StatsComponent implements OnInit {
             const data: number[] = [];
 
             dataPoints.forEach(dp => {
-              labels.push(((dp.startTime! - this.testDate)/1000000) + 'ms');
-              data.push(dp.duration! / 1000000);
+              labels.push((dp.startTime! - this.testDate) + 'ms');
+              data.push(dp.duration! / 1_000_000);
             });
 
             if (labels.length == data.length && labels.length != 0) {

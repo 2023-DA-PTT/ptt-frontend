@@ -1,6 +1,6 @@
-<div class="grid grid-cols-3 auto-cols-min max-w gap-6">
+<div class="grid-cols-3 grid gap-5">
   <div
-    class="col-span-1 p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 flex">
+    class="col-span-1 p-6 max-w bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 flex">
     <div class="flex-col flex justify-center items-center w-20 h-full align mr-5">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"
            stroke-width="2">
@@ -14,7 +14,7 @@
     </div>
   </div>
   <div
-    class="col-span-1 p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 flex">
+    class="col-span-1 p-6 max-w bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 flex">
     <div class="flex-col flex justify-center items-center w-20 h-full align mr-5">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
@@ -26,7 +26,7 @@
     </div>
   </div>
   <div
-    class="col-span-1 p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 flex">
+    class="col-span-1 p-6 max-w bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 flex">
     <div class="flex-col flex justify-center items-center w-20 h-full align mr-5">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -37,10 +37,8 @@
       <p class="mb-2 font-normal text-gray-500 dark:text-gray-400">Test Steps</p>
     </div>
   </div>
-  <div class="col-span-4 my-5">
+  <div class="col-span-3 row-span-2 w-full h-64 rounded p-3 mb-5">
     <p class="text-4xl">My awesome Test Plan</p>
-  </div>
-  <div class="col-span-4 w-full h-64 rounded p-3">
     <canvas baseChart
             [type]="'line'"
             [data]="lineChartData"
@@ -49,17 +47,17 @@
     </canvas>
   </div>
   <a href="#"
-     class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+     class="block p-6 max-w bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-green-500 dark:text-white">30.5 ms</h5>
     <p class="font-normal text-gray-700 dark:text-gray-400">Average duration of steps in last run</p>
   </a>
   <a href="#"
-     class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+     class="block p-6 max-w bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-red-500 dark:text-white">1100.5 ms</h5>
     <p class="font-normal text-gray-700 dark:text-gray-400">Average duration of steps in last run</p>
   </a>
   <a href="#"
-     class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+     class="block p-6 max-w bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-yellow-400 dark:text-white">300.5 ms</h5>
     <p class="font-normal text-gray-700 dark:text-gray-400">Average duration of steps in last run</p>
   </a>

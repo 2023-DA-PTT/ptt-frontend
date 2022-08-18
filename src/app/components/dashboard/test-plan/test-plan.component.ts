@@ -11,6 +11,9 @@ import {
 import {ScriptStepComponent} from "./step/script-step/script-step.component";
 import {HttpStepComponent} from "./step/http-step/http-step.component";
 import {formatDate} from "@angular/common";
+import { NgForm } from '@angular/forms';
+import { NodeResourceService } from 'src/app/services/api/nodeResource.service';
+import { Toast, ToastrComponentlessModule, ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -24,14 +27,23 @@ export class TestPlanComponent implements OnInit {
   scriptSteps: ScriptStepDto[] = [];
   steps: StepDto[] = [];
   createNewStepModal = false;
+  createNewPlanRunModal = false;
+  actTestPlanRun: PlanRunDto = {runOnce:true,startTime: 0, duration: 0, planRunInstructions: []};
   testRuns: PlanRunDto[] = [];
+  nodeLocations: string[] = [];
 
   constructor(private activeRoute: ActivatedRoute,
+              private toastr: ToastrService,
               private router: Router,
               private httpStepsService: HttpStepResourceService,
               private scriptStepService: ScriptStepResourceService,
               private stepService: StepResourceService,
-              private testRunService: PlanRunResourceService) {
+              private testRunService: PlanRunResourceService,
+              private nodeService: NodeResourceService) {
+  }
+
+  clearActPlanRun() {
+    this.actTestPlanRun = {planId: this.id, runOnce:true,startTime: 0, duration: 0, planRunInstructions: []};
   }
 
   ngOnInit(): void {
@@ -41,6 +53,7 @@ export class TestPlanComponent implements OnInit {
     }
 
     this.id = parseInt(this.activeRoute.snapshot.params['test-id']!);
+    this.clearActPlanRun();
 
     this.stepService.apiPlanPlanIdStepGet(this.id).subscribe(steps => this.steps=steps);
 
@@ -54,6 +67,10 @@ export class TestPlanComponent implements OnInit {
 
     this.testRunService.apiPlanrunPlanPlanIdGet(this.id).subscribe(runs => {
       this.testRuns = runs;
+    })
+
+    this.nodeService.apiNodeLocationsGet().subscribe(locations => {
+      this.nodeLocations = Array.from(locations.values());
     })
   }
 
@@ -72,11 +89,29 @@ export class TestPlanComponent implements OnInit {
 
   formatTestRunDuration(testRun: PlanRunDto) {
     const d = new Date(testRun.duration!*1000);
-    console.log(d);
     const seconds = d.getUTCSeconds();
     const minutes = d.getUTCMinutes();
     const hours = d.getUTCHours();
     const days = d.getDate()-1;
-    return `${days != 0 ? days + " days" : ""} ${hours} h ${minutes} min ${seconds} s`;
+    let str = "";
+    if(days != 0) str += days + " days";
+    if(hours != 0) str += hours + " h";
+    if(minutes != 0) str += minutes + " min";
+    if(seconds != 0) str += seconds + " s";
+    return str;
+  }
+  
+  onSubmit(createNewTestPlanRunForm: NgForm) : void {
+    this.testRunService.apiPlanrunPost(this.actTestPlanRun).subscribe({
+      next: d=> {
+        this.toastr.success("Started Plan Run", "Plan Run");
+      }
+    })
+    this.createNewPlanRunModal = false;
+    this.clearActPlanRun();
+  }
+
+  addNewPlanInstructionParam() {
+    this.actTestPlanRun.planRunInstructions?.push({numberOfClients: 1, nodeName: this.nodeLocations[0]})
   }
 }

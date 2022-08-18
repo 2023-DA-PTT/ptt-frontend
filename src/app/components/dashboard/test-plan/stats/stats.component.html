@@ -1,4 +1,4 @@
-<div class="grid grid-cols-4">
+<div class="grid grid-cols-4 w-full">
   <div class="col-span-3 mb-10">
     <p class="text-2xl">Test started at {{testDate | date: 'dd.MM.yyyy hh:mm:ss'}}</p>
   </div>
@@ -16,7 +16,7 @@
   </div>
   <div *ngFor="let lineChartDataSingle of lineChartData" class="col-span-2 w-full h-64 rounded p-3 mt-5">
     <p class="text-xl">{{lineChartDataSingle.datasets[0].label}}</p>
-    <canvas baseChart width="700"
+    <canvas class="block" baseChart
             [type]="'line'"
             [data]="lineChartDataSingle"
             [options]="lineChartOptions"
