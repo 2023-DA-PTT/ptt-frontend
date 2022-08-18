@@ -72,6 +72,12 @@ export class TestPlanComponent implements OnInit {
   }
 
   formatTestRunDuration(testRun: PlanRunDto) {
-    return moment.utc(testRun.duration! / Math.pow(10, 5)).format('H [h] m [min] s [s] SSS [millis]');
+    const d = new Date(testRun.duration!*1000);
+    console.log(d);
+    const seconds = d.getUTCSeconds();
+    const minutes = d.getUTCMinutes();
+    const hours = d.getUTCHours();
+    const days = d.getDate()-1;
+    return `${days != 0 ? days + " days" : ""} ${hours} h ${minutes} min ${seconds} s`;
   }
 }

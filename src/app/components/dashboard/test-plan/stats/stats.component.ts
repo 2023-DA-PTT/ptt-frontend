@@ -52,16 +52,15 @@ export class StatsComponent implements OnInit {
 
     this.stepService.apiPlanPlanIdStepHttpGet(this.testId).subscribe( steps => {
       this.testRunService.apiPlanrunPlanrunidGet(this.runId).subscribe(testRun => {
-        this.testDate = testRun.startTime!;
-        const testRunTime = testRun.startTime! * 1000; // TODO: test start time has 3 less 0es than datapoint start time
-        console.log(testRunTime);
+        this.testDate = testRun.startTime!* 1000;
+        console.log(this.testDate);
         steps.forEach(step => {
           this.dataPointService.apiDatapointPlanrunPlanRunIdStepStepIdGet(this.runId, step.id!).subscribe(dataPoints => {
             const labels: string[] = [];
             const data: number[] = [];
 
             dataPoints.forEach(dp => {
-              labels.push(((dp.startTime! - testRunTime)/1000000) + 'ms');
+              labels.push(((dp.startTime! - this.testDate)/1000000) + 'ms');
               data.push(dp.duration! / 1000000);
             });
 
