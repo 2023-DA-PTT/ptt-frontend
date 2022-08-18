@@ -905,6 +905,8 @@ components:
         duration:
           format: int64
           type: integer
+        runOnce:
+          type: boolean
         planRunInstructions:
           type: array
           items:

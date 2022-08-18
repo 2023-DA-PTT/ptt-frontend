@@ -17,6 +17,7 @@ export interface PlanRunDto {
     planId?: number;
     startTime?: number;
     duration?: number;
+    runOnce?: boolean;
     planRunInstructions?: Array<PlanRunInstructionDto>;
 }
 
