@@ -11,7 +11,6 @@ import {
 import {ScriptStepComponent} from "./step/script-step/script-step.component";
 import {HttpStepComponent} from "./step/http-step/http-step.component";
 import {formatDate} from "@angular/common";
-import * as moment from "moment";
 
 
 @Component({
