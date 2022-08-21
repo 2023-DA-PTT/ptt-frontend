@@ -3,7 +3,6 @@
   <a *ngFor="let step of steps" [routerLink]="['/dashboard/test-plan/'+id+'/step/'+step.id]"
     class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <div>
-      <h5 class="inline-block mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{step.name}}</h5>
       <container-element [ngSwitch]="step.type">
         <span *ngSwitchCase="'script'"
           class="float-right bg-yellow-100 text-yellow-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">Script</span>
@@ -12,6 +11,7 @@
         <span *ngSwitchDefault
           class="float-right bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Unknown</span>
       </container-element>
+      <h5 class="inline mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{step.name}}</h5>
     </div>
     <p class="font-normal text-gray-700 dark:text-gray-400">{{step.description}}</p>
   </a>
@@ -136,7 +136,7 @@
                 </select>
               </div>
             </div>
-            
+
             <button type="button" (click)="addNewPlanInstructionParam()" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-3">+</button>
           </div>
           <button type="submit"
