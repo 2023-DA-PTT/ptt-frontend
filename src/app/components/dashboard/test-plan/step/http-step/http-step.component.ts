@@ -27,6 +27,10 @@ export class HttpStepComponent implements OnInit {
     this.contentTypes = Object.values(RequestContentType);
   }
 
+  addNewHeader(): void {
+    this.step.headers?.push({})
+  }
+
   onSubmit(submitScriptStep: NgForm) {
     if (!submitScriptStep.valid) {
       console.debug("FORM UNVALID!")
