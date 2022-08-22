@@ -34,6 +34,7 @@ import {CodeEditorModule} from "@ngstack/code-editor";
 import { HttpStepComponent } from './components/dashboard/test-plan/step/http-step/http-step.component';
 import { InputParametersComponent } from './components/dashboard/test-plan/step/input-parameters/input-parameters.component';
 import { OutputParametersComponent } from './components/dashboard/test-plan/step/output-parameters/output-parameters.component';
+import { NextStepsComponent } from './components/dashboard/test-plan/step/next-steps/next-steps.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { OutputParametersComponent } from './components/dashboard/test-plan/step
     ScriptStepComponent,
     HttpStepComponent,
     InputParametersComponent,
-    OutputParametersComponent
+    OutputParametersComponent,
+    NextStepsComponent
   ],
     imports: [
         FormsModule,

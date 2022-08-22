@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { NextStepDto } from '../model/nextStepDto';
+import { NextStepWithParameterRelationDto } from '../model/nextStepWithParameterRelationDto';
 // @ts-ignore
 import { StepDto } from '../model/stepDto';
 
@@ -270,9 +270,9 @@ export class StepResourceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiPlanPlanIdStepStepIdNextsGet(planId: number, stepId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<NextStepDto>>;
-    public apiPlanPlanIdStepStepIdNextsGet(planId: number, stepId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<NextStepDto>>>;
-    public apiPlanPlanIdStepStepIdNextsGet(planId: number, stepId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<NextStepDto>>>;
+    public apiPlanPlanIdStepStepIdNextsGet(planId: number, stepId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<NextStepWithParameterRelationDto>>;
+    public apiPlanPlanIdStepStepIdNextsGet(planId: number, stepId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<NextStepWithParameterRelationDto>>>;
+    public apiPlanPlanIdStepStepIdNextsGet(planId: number, stepId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<NextStepWithParameterRelationDto>>>;
     public apiPlanPlanIdStepStepIdNextsGet(planId: number, stepId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (planId === null || planId === undefined) {
             throw new Error('Required parameter planId was null or undefined when calling apiPlanPlanIdStepStepIdNextsGet.');
@@ -312,7 +312,7 @@ export class StepResourceService {
             }
         }
 
-        return this.httpClient.get<Array<NextStepDto>>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}/nexts`,
+        return this.httpClient.get<Array<NextStepWithParameterRelationDto>>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}/nexts`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
