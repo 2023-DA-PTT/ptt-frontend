@@ -18,6 +18,7 @@ git_push.sh
 index.ts
 model/dataPointDto.ts
 model/httpStepDto.ts
+model/httpStepHeaderDto.ts
 model/inputArgumentDto.ts
 model/models.ts
 model/nextStepDto.ts

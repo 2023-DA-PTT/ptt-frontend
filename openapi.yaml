@@ -849,6 +849,20 @@ components:
           $ref: '#/components/schemas/RequestContentType'
         contentType:
           $ref: '#/components/schemas/RequestContentType'
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/HttpStepHeaderDto'
+    HttpStepHeaderDto:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        value:
+          type: string
     InputArgumentDto:
       type: object
       properties:

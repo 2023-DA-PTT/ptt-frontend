@@ -9,19 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { RequestContentType } from './requestContentType';
-import { HttpStepHeaderDto } from './httpStepHeaderDto';
 
 
-export interface HttpStepDto { 
+export interface HttpStepHeaderDto { 
     id?: number;
     name?: string;
-    description?: string;
-    method?: string;
-    url?: string;
-    body?: string;
-    responseContentType?: RequestContentType;
-    contentType?: RequestContentType;
-    headers?: Array<HttpStepHeaderDto>;
+    value?: string;
 }
 

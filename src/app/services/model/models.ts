@@ -1,5 +1,6 @@
 export * from './dataPointDto';
 export * from './httpStepDto';
+export * from './httpStepHeaderDto';
 export * from './inputArgumentDto';
 export * from './nextStepDto';
 export * from './outputArgumentDto';
