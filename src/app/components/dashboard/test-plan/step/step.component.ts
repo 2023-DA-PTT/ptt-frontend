@@ -50,7 +50,7 @@ export class StepComponent implements OnInit {
     }
     else if(this.activeRoute.snapshot.params['step-id']! === 'http') {
       this.stepType = 'http';
-      this.step = {id:-1, name: "", description: "", body: "", url: "", method: ""}
+      this.step = {id:-1, name: "", description: "", body: "", url: "", method: "", headers: []}
     }
     else {
       this.stepId = parseInt(this.activeRoute.snapshot.params['step-id']!);
