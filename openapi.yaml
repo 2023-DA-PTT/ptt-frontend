@@ -471,7 +471,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NextStepDto'
+                  $ref: '#/components/schemas/NextStepWithParameterRelationDto'
   /api/plan/{planId}/step/{stepId}/outputArgument:
     get:
       tags:
@@ -811,6 +811,17 @@ paths:
                 $ref: '#/components/schemas/PlanRunDto'
 components:
   schemas:
+    AdvancedStepParameterRelationDto:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        inputArg:
+          $ref: '#/components/schemas/InputArgumentDto'
+        outputArgId:
+          format: int64
+          type: integer
     DataPointDto:
       type: object
       properties:
@@ -874,7 +885,7 @@ components:
         stepId:
           format: int64
           type: integer
-    NextStepDto:
+    NextStepWithParameterRelationDto:
       type: object
       properties:
         id:
@@ -885,6 +896,10 @@ components:
         repeatAmount:
           format: int32
           type: integer
+        stepParameterRelations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdvancedStepParameterRelationDto'
     OutputArgumentDto:
       type: object
       properties:
