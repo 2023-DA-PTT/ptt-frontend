@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PlanDto, PlanResourceService} from "../../../services";
 import {NgForm} from "@angular/forms";
 import {Toast, ToastrService} from "ngx-toastr";
+import { CodeModel } from '@ngstack/code-editor';
 
 @Component({
   selector: 'app-test-plan-overview',
@@ -13,9 +14,20 @@ export class TestPlanOverviewComponent implements OnInit {
   createNewPlanModal= false;
   createNewPlanManualModal= false;
   createNewPlanFromJsonModal= false;
-  testPlanJsonString = "";
   actTestPlan: PlanDto = {name: "", description: ""};
 
+  editorModel: CodeModel = {
+    language: 'json',
+    value: '',
+    uri: 'script.json',
+  };
+  options = {
+    contextmenu: true,
+    minimap: {
+      enabled: false,
+    }
+  };
+  
   constructor(private testPlanService: PlanResourceService,
               private toastr: ToastrService) { }
 
@@ -28,7 +40,7 @@ export class TestPlanOverviewComponent implements OnInit {
   createFromJson() {
     let testPlanJsonObj = {};
     try {
-      testPlanJsonObj = JSON.parse(this.testPlanJsonString); 
+      testPlanJsonObj = JSON.parse(this.editorModel.value); 
     } catch (error: any) {
       this.toastr.error(error.message,"Testplan")
       return;
