@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {
   HttpStepDto,
-  HttpStepResourceService, PlanRunDto, PlanRunResourceService,
+  HttpStepResourceService, PlanResourceService, PlanRunDto, PlanRunResourceService,
   ScriptStepDto,
   ScriptStepResourceService,
   StepDto,
@@ -39,7 +39,8 @@ export class TestPlanComponent implements OnInit {
               private scriptStepService: ScriptStepResourceService,
               private stepService: StepResourceService,
               private testRunService: PlanRunResourceService,
-              private nodeService: NodeResourceService) {
+              private nodeService: NodeResourceService,
+              private planService: PlanResourceService) {
   }
 
   clearActPlanRun() {
@@ -72,6 +73,18 @@ export class TestPlanComponent implements OnInit {
     this.nodeService.apiNodeLocationsGet().subscribe(locations => {
       this.nodeLocations = Array.from(locations.values());
     })
+  }
+
+  downloadFile(data: string, type: string) {
+    const blob = new Blob([data], { type: type });
+    const url= window.URL.createObjectURL(blob);
+    window.open(url)
+  }
+
+  exportTestPlan() {
+    this.planService.apiPlanExportIdGet(this.id).subscribe(
+      d=> this.downloadFile(JSON.stringify(d), 'application/json')
+    )
   }
 
   createNewStep(type: string) {

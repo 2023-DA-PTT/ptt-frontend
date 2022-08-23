@@ -11,6 +11,9 @@ import {Toast, ToastrService} from "ngx-toastr";
 export class TestPlanOverviewComponent implements OnInit {
   testPlans: PlanDto[] = [];
   createNewPlanModal= false;
+  createNewPlanManualModal= false;
+  createNewPlanFromJsonModal= false;
+  testPlanJsonString = "";
   actTestPlan: PlanDto = {name: "", description: ""};
 
   constructor(private testPlanService: PlanResourceService,
@@ -20,6 +23,28 @@ export class TestPlanOverviewComponent implements OnInit {
     this.testPlanService.apiPlanGet().subscribe(testPlans => {
       this.testPlans = testPlans;
     });
+  }
+
+  createFromJson() {
+    let testPlanJsonObj = {};
+    try {
+      testPlanJsonObj = JSON.parse(this.testPlanJsonString); 
+    } catch (error: any) {
+      this.toastr.error(error.message,"Testplan")
+      return;
+    }
+    this.testPlanService.apiPlanImportPost(testPlanJsonObj).subscribe(
+      {
+        next: d=> {
+          this.toastr.success("Created Testplan from JSON", "Testplan");
+          this.createNewPlanFromJsonModal = false;
+          this.testPlanService.apiPlanGet().subscribe(testPlans => {
+            this.testPlans = testPlans;
+          });
+        },
+        error: e=> this.toastr.error("Could not create Testplan","Testplan")
+      }
+    )
   }
 
   onSubmit(form: NgForm) {
