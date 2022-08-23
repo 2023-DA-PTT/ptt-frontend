@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { InputArgumentDto, InputArgumentResourceService, NextStepWithParameterRelationDto, OutputArgumentDto, OutputArgumentResourceService, StepDto, StepResourceService } from 'src/app/services';
 import { NextStepDto } from 'src/app/services/model/nextStepDto';
 
@@ -21,7 +22,8 @@ export class NextStepsComponent implements OnInit {
 
   constructor(private stepResource: StepResourceService,
     private outputArgResource: OutputArgumentResourceService,
-    private inputArgResource: InputArgumentResourceService,) { }
+    private inputArgResource: InputArgumentResourceService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.stepResource.apiPlanPlanIdStepGet(this.planId).subscribe(
@@ -40,7 +42,9 @@ export class NextStepsComponent implements OnInit {
   }
 
   onSubmit(nextStepsForm: NgForm): void {
-    console.log(JSON.stringify(this.nextSteps));
+    this.stepResource.apiPlanPlanIdStepStepIdNextsPost(this.planId, this.stepId, this.nextSteps).subscribe(
+      d=> this.toastr.success("Next steps have been updated", "Next Steps")
+    )
   }
 
   addNewNextStep() {

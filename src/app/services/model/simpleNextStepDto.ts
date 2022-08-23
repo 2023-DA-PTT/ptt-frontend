@@ -11,10 +11,10 @@
  */
 
 
-export interface HttpStepHeaderDto { 
+export interface SimpleNextStepDto { 
     id?: number;
-    name?: string;
-    value?: string;
-    stepId?: number;
+    fromStepId?: number;
+    toStepId?: number;
+    repeatAmount?: number;
 }
 

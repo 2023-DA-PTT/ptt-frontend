@@ -90,6 +90,32 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PlanDto'
+  /api/plan/export/{id}:
+    get:
+      tags:
+      - Plan Resource
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+  /api/plan/import:
+    post:
+      tags:
+      - Plan Resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanExportDto'
+      responses:
+        "200":
+          description: OK
   /api/plan/user/{userId}:
     get:
       tags:
@@ -472,6 +498,32 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/NextStepWithParameterRelationDto'
+    post:
+      tags:
+      - Step Resource
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/NextStepWithParameterRelationDto'
+      responses:
+        "200":
+          description: OK
   /api/plan/{planId}/step/{stepId}/outputArgument:
     get:
       tags:
@@ -874,6 +926,9 @@ components:
           type: string
         value:
           type: string
+        stepId:
+          format: int64
+          type: integer
     InputArgumentDto:
       type: object
       properties:
@@ -933,6 +988,35 @@ components:
           type: string
         description:
           type: string
+    PlanExportDto:
+      type: object
+      properties:
+        plan:
+          $ref: '#/components/schemas/PlanDto'
+        httpSteps:
+          type: array
+          items:
+            $ref: '#/components/schemas/HttpStepDto'
+        scriptSteps:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptStepDto'
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputArgumentDto'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/OutputArgumentDto'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepParameterRelationDto'
+        nextSteps:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleNextStepDto'
     PlanRunDto:
       type: object
       properties:
@@ -979,6 +1063,21 @@ components:
           type: string
         script:
           type: string
+    SimpleNextStepDto:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        fromStepId:
+          format: int64
+          type: integer
+        toStepId:
+          format: int64
+          type: integer
+        repeatAmount:
+          format: int32
+          type: integer
     StepDto:
       type: object
       properties:

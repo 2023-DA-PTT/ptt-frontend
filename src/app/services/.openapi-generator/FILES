@@ -26,10 +26,12 @@ model/nextStepWithParameterRelationDto.ts
 model/outputArgumentDto.ts
 model/outputType.ts
 model/planDto.ts
+model/planExportDto.ts
 model/planRunDto.ts
 model/planRunInstructionDto.ts
 model/requestContentType.ts
 model/scriptStepDto.ts
+model/simpleNextStepDto.ts
 model/stepDto.ts
 model/stepParameterRelationDto.ts
 variables.ts
