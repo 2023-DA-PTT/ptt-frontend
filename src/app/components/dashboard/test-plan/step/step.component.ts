@@ -30,7 +30,6 @@ export class StepComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.activeRoute.snapshot.params)
     if(!(this.activeRoute.snapshot.params['test-id'])
       || !(this.activeRoute.snapshot.params['step-id'])
       || isNaN(parseInt(this.activeRoute.snapshot.params['test-id']!))) {
