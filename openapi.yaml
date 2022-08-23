@@ -974,6 +974,7 @@ components:
       enum:
       - PLAIN_TEXT
       - OCTET_STREAM
+      - FROM_INPUT_PARAMETER
       type: string
     PlanDto:
       type: object
