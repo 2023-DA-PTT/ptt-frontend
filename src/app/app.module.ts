@@ -35,6 +35,7 @@ import { HttpStepComponent } from './components/dashboard/test-plan/step/http-st
 import { InputParametersComponent } from './components/dashboard/test-plan/step/input-parameters/input-parameters.component';
 import { OutputParametersComponent } from './components/dashboard/test-plan/step/output-parameters/output-parameters.component';
 import { NextStepsComponent } from './components/dashboard/test-plan/step/next-steps/next-steps.component';
+import { NgxGraphModule } from '@swimlane/ngx-graph';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { NextStepsComponent } from './components/dashboard/test-plan/step/next-s
             echarts: () => import('echarts')
         }),
         CodeEditorModule.forRoot(),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxGraphModule
     ],
   providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}],
   bootstrap: [AppComponent]

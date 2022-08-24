@@ -34,4 +34,5 @@ model/scriptStepDto.ts
 model/simpleNextStepDto.ts
 model/stepDto.ts
 model/stepParameterRelationDto.ts
+model/stepWithNextsDto.ts
 variables.ts

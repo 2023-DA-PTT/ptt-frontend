@@ -15,3 +15,4 @@ export * from './scriptStepDto';
 export * from './simpleNextStepDto';
 export * from './stepDto';
 export * from './stepParameterRelationDto';
+export * from './stepWithNextsDto';

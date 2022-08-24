@@ -1,4 +1,52 @@
 <button (click)="exportTestPlan()" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-base font-medium text-white focus:outline-none sm:w-auto sm:text-sm">Export Test Plan</button>
+<div class="max-h-96 border border-gray-200 mt-5">
+  <ngx-graph
+    class="chart-container"
+    [center$]="center$"
+    [links]="graphLinks"
+    [nodes]="graphNodes"
+    layout="dagre"
+  >
+  <ng-template #defsTemplate>
+    <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4" orient="auto">
+      <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
+    </svg:marker>
+  </ng-template>
+
+  <ng-template #nodeTemplate let-node>
+    <svg:g class="node">
+      <svg:rect
+      [attr.width]="node.dimension.width"
+        [attr.height]="node.dimension.height"
+        [attr.fill]="node.data.color"
+        [attr.rx]="5"
+        [attr.ry]="5"
+        [attr.fill-opacity]="0.5"
+        />
+        <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="node.dimension.height / 2+5">
+        {{node.label}}
+      </svg:text>
+    </svg:g>
+  </ng-template>
+
+  <ng-template #linkTemplate let-link>
+    <svg:g class="edge">
+      <svg:path class="line" stroke-width="2" marker-end="url(#arrow)"></svg:path>
+      <svg:text class="edge-label" text-anchor="middle">
+        <textPath
+          class="text-path"
+          [attr.href]="'#' + link.id"
+          [style.dominant-baseline]="link.dominantBaseline"
+          startOffset="50%"
+        >
+          {{link.label}}
+        </textPath>
+      </svg:text>
+    </svg:g>
+  </ng-template>
+  </ngx-graph>
+</div>
+
 <p class="text-2xl mt-10">Steps</p>
 <div class="sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid gap-5 mt-5">
   <a *ngFor="let step of steps" [routerLink]="['/dashboard/test-plan/'+id+'/step/'+step.id]"

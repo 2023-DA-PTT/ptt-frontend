@@ -173,7 +173,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/StepDto'
+                  $ref: '#/components/schemas/StepWithNextsDto'
   /api/plan/{planId}/step/http:
     get:
       tags:
@@ -1102,3 +1102,19 @@ components:
         toId:
           format: int64
           type: integer
+    StepWithNextsDto:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        nexts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleNextStepDto'

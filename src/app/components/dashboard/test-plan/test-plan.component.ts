@@ -6,7 +6,9 @@ import {
   ScriptStepDto,
   ScriptStepResourceService,
   StepDto,
-  StepResourceService
+  StepParameterRelationResourceService,
+  StepResourceService,
+  StepWithNextsDto
 } from "../../../services";
 import {ScriptStepComponent} from "./step/script-step/script-step.component";
 import {HttpStepComponent} from "./step/http-step/http-step.component";
@@ -14,6 +16,8 @@ import {formatDate} from "@angular/common";
 import { NgForm } from '@angular/forms';
 import { NodeResourceService } from 'src/app/services/api/nodeResource.service';
 import { Toast, ToastrComponentlessModule, ToastrService } from 'ngx-toastr';
+import { Edge, Node } from '@swimlane/ngx-graph';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -23,14 +27,16 @@ import { Toast, ToastrComponentlessModule, ToastrService } from 'ngx-toastr';
 })
 export class TestPlanComponent implements OnInit {
   id: number = -1;
-  httpSteps: HttpStepDto[] = [];
-  scriptSteps: ScriptStepDto[] = [];
-  steps: StepDto[] = [];
+  steps: StepWithNextsDto[] = [];
   createNewStepModal = false;
   createNewPlanRunModal = false;
   actTestPlanRun: PlanRunDto = {runOnce:true,startTime: 0, duration: 0, planRunInstructions: []};
   testRuns: PlanRunDto[] = [];
   nodeLocations: string[] = [];
+
+  graphNodes : Node[] = []
+  graphLinks : Edge[] = []
+  center$: Subject<boolean> = new Subject();
 
   constructor(private activeRoute: ActivatedRoute,
               private toastr: ToastrService,
@@ -40,7 +46,8 @@ export class TestPlanComponent implements OnInit {
               private stepService: StepResourceService,
               private testRunService: PlanRunResourceService,
               private nodeService: NodeResourceService,
-              private planService: PlanResourceService) {
+              private planService: PlanResourceService,
+              private relationService: StepParameterRelationResourceService) {
   }
 
   clearActPlanRun() {
@@ -56,14 +63,17 @@ export class TestPlanComponent implements OnInit {
     this.id = parseInt(this.activeRoute.snapshot.params['test-id']!);
     this.clearActPlanRun();
 
-    this.stepService.apiPlanPlanIdStepGet(this.id).subscribe(steps => this.steps=steps);
-
-    this.httpStepsService.apiPlanPlanIdStepHttpGet(this.id).subscribe(steps => {
-      this.httpSteps = steps;
-    });
-
-    this.scriptStepService.apiPlanPlanIdStepScriptGet(this.id).subscribe(steps => {
-      this.scriptSteps = steps;
+    this.stepService.apiPlanPlanIdStepGet(this.id).subscribe(steps => {
+      this.steps=steps;
+      this.steps.forEach(e => {
+        this.graphNodes.push({id: e.id!.toString(), label: e.name})
+        e.nexts?.forEach(n=> {
+          this.graphLinks.push({
+            source: n.fromStepId!.toString(),
+            target: n.toStepId!.toString(),
+            label: n.repeatAmount?.toString()
+          })})
+        })
     });
 
     this.testRunService.apiPlanrunPlanPlanIdGet(this.id).subscribe(runs => {
