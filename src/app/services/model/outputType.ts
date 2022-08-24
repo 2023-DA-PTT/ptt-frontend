@@ -11,10 +11,11 @@
  */
 
 
-export type OutputType = 'PLAIN_TEXT' | 'OCTET_STREAM';
+export type OutputType = 'PLAIN_TEXT' | 'OCTET_STREAM' | 'FROM_INPUT_PARAMETER';
 
 export const OutputType = {
     PlainText: 'PLAIN_TEXT' as OutputType,
-    OctetStream: 'OCTET_STREAM' as OutputType
+    OctetStream: 'OCTET_STREAM' as OutputType,
+    FromInputParameter: 'FROM_INPUT_PARAMETER' as OutputType
 };
 
