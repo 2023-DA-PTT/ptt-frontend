@@ -81,6 +81,9 @@
             },
             "development": {
               "browserTarget": "ptt:build:development"
+            },
+            "skaffold": {
+              "browserTarget": "ptt:build:skaffold"
             }
           },
           "defaultConfiguration": "development"
