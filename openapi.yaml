@@ -1075,6 +1075,8 @@ components:
           type: integer
         runOnce:
           type: boolean
+        name:
+          type: string
         planRunInstructions:
           type: array
           items:

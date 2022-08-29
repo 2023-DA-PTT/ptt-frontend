@@ -30,7 +30,7 @@ export class TestPlanComponent implements OnInit {
   steps: StepWithNextsDto[] = [];
   createNewStepModal = false;
   createNewPlanRunModal = false;
-  actTestPlanRun: PlanRunDto = {runOnce:true,startTime: 0, duration: 0, planRunInstructions: []};
+  actTestPlanRun: PlanRunDto = {runOnce:true,startTime: 0, duration: 0, planRunInstructions: [], name: ''};
   testRuns: PlanRunDto[] = [];
   nodeLocations: string[] = [];
 
@@ -51,7 +51,7 @@ export class TestPlanComponent implements OnInit {
   }
 
   clearActPlanRun() {
-    this.actTestPlanRun = {planId: this.id, runOnce:true,startTime: 0, duration: 0, planRunInstructions: []};
+    this.actTestPlanRun = {planId: this.id, runOnce:true,startTime: 0, duration: 0, planRunInstructions: [], name: ''};
   }
 
   ngOnInit(): void {
