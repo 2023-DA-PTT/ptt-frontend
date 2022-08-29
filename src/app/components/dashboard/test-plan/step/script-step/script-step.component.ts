@@ -46,7 +46,7 @@ export class ScriptStepComponent implements OnInit {
     this.step.script = this.editorModel.value;
 
     if (this.step.id == -1) {
-      this.scriptStepService.apiPlanPlanIdStepScriptPost(this.planId, this.step).subscribe({
+      this.scriptStepService.createScriptStepForPlan(this.planId, this.step).subscribe({
         next: step => {
           this.toastr.success("Success!")
           this.step = step;
@@ -58,7 +58,7 @@ export class ScriptStepComponent implements OnInit {
         }
       });
     } else {
-      this.scriptStepService.apiPlanPlanIdStepStepIdScriptPut(this.planId, this.step.id!, this.step).subscribe({
+      this.scriptStepService.updateScriptStepForPlan(this.planId, this.step.id!, this.step).subscribe({
         next: step => {
           this.step = step;
           this.stepChange.emit(step);

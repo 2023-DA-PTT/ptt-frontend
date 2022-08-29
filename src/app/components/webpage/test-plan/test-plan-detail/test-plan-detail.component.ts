@@ -33,10 +33,10 @@ export class TestPlanDetailComponent implements OnInit {
         return;
       }
 
-      this.planService.apiPlanIdGet(id).subscribe({
+      this.planService.getPlanById(id).subscribe({
         next: plan => {
           this.plan = plan;
-          this.stepService.apiPlanPlanIdStepGet(id).subscribe({ next: steps => this.steps = steps })
+          this.stepService.getAllStepsForPlan(id).subscribe({ next: steps => this.steps = steps })
         }
       })
     });

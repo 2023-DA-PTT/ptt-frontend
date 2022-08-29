@@ -10,7 +10,7 @@ import { HttpStepDto, HttpStepResourceService, RequestContentType } from 'src/ap
   styleUrls: ['./http-step.component.scss']
 })
 export class HttpStepComponent implements OnInit {
-  
+
   @Output() stepChange = new EventEmitter<HttpStepDto>();
   @Input()
   step: HttpStepDto = {};
@@ -38,7 +38,7 @@ export class HttpStepComponent implements OnInit {
     }
 
     if (this.step.id == -1) {
-      this.httpStepService.apiPlanPlanIdStepHttpPost(this.planId, this.step).subscribe({
+      this.httpStepService.createHttpStepForPlan(this.planId, this.step).subscribe({
         next: step => {
           this.toastr.success("Success!")
           this.step = step;
@@ -50,7 +50,7 @@ export class HttpStepComponent implements OnInit {
         }
       });
     } else {
-      this.httpStepService.apiPlanPlanIdStepStepIdHttpPut(this.planId, this.step.id!, this.step).subscribe({
+      this.httpStepService.updateHttpStepForPlan(this.planId, this.step.id!, this.step).subscribe({
         next: step => {
           this.step = step;
           this.stepChange.emit(step);

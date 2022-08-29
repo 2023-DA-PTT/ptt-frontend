@@ -78,8 +78,10 @@
 <div class="sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid gap-5 mt-5">
   <a *ngFor="let testRun of testRuns; " [routerLink]="['/dashboard/test-plan/'+id+'/stats/'+testRun.id]"
     class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{(testRun.startTime! * 1000) |
-      date: 'dd.MM.yyyy hh:mm:ss'}}</h5>
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+      <ng-container *ngIf="testRun.name">{{testRun.name}}</ng-container>
+      <ng-container *ngIf="!testRun.name">{{(testRun.startTime! * 1000) | date: 'dd.MM.yyyy hh:mm:ss'}}</ng-container>
+    </h5>
     <p class="font-normal text-gray-700 dark:text-gray-400">Duration: {{!testRun.runOnce? formatTestRunDuration(testRun):"not calculated"}}</p>
   </a>
 
@@ -155,6 +157,12 @@
       <div class="py-6 px-6 lg:px-8">
         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Start Plan Run</h3>
         <form class="space-y-6" #createNewTestPlanRunForm="ngForm" (ngSubmit)="onSubmit(createNewTestPlanRunForm)">
+          <div class="mt-4">
+            <label for="tp-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
+            <input [(ngModel)]="actTestPlanRun.name" type="text" name="tp-name" id="tp-name"
+                   class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                   placeholder="Name for the test run">
+          </div>
           <div class="flex flex-col p-4 rounded border border-gray-200 dark:border-gray-700">
             <div class="">
               <input id="runOnce" type="checkbox" [(ngModel)]="actTestPlanRun.runOnce" name="bordered-checkbox"
@@ -163,9 +171,9 @@
                 Once</label>
             </div>
             <div *ngIf="!actTestPlanRun.runOnce" class="mt-4">
-              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Duration
+              <label for="duration" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Duration
                 [s]</label>
-              <input [(ngModel)]="actTestPlanRun.duration" type="name" name="name" id="name"
+              <input [(ngModel)]="actTestPlanRun.duration" type="text" name="duration" id="duration"
                 class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 placeholder="duration in seconds" required="">
             </div>

@@ -20,7 +20,7 @@ export class InputParametersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.inputParamsService.apiPlanPlanIdStepStepIdInputArgumentGet(this.planId, this.stepId).subscribe(
+    this.inputParamsService.getAllInputArgumentForStep(this.planId, this.stepId).subscribe(
         (data) => this.inputParameters = data );
   }
 
@@ -35,13 +35,13 @@ export class InputParametersComponent implements OnInit {
     }
 
     this.inputParameters.filter(p => p.name).filter(p => !p.id).forEach(p => {
-      this.inputParamsService.apiPlanPlanIdStepStepIdInputArgumentPost(this.planId, this.stepId, p).subscribe(p => {
+      this.inputParamsService.createInputArgumentForStep(this.planId, this.stepId, p).subscribe(p => {
         this.toastr.success("Created Input Parameter " + p.name);
       })
     });
 
     this.inputParameters.filter(p => p.name).filter(p => p.id).forEach(p => {
-      this.inputParamsService.apiPlanPlanIdStepStepIdInputArgumentInArgIdPut(p.id!, this.planId, this.stepId, p).subscribe(p => {
+      this.inputParamsService.putInputArgumentForStep(p.id!, this.planId, this.stepId, p).subscribe(p => {
         this.toastr.success("Updated Input Parameter " + p.name);
       })
     });

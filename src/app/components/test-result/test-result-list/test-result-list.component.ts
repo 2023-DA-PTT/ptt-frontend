@@ -16,10 +16,10 @@ export class TestResultListComponent implements OnInit {
     private planService: PlanResourceService) { }
 
   ngOnInit(): void {
-    this.planRunService.apiPlanrunGet().subscribe({
+    this.planRunService.getAllPlanRuns().subscribe({
       next: planRunDtos => {
         planRunDtos.forEach(e => {
-          this.planService.apiPlanIdGet(e.planId!).subscribe({
+          this.planService.getPlanById(e.planId!).subscribe({
             next: planDto => {
               this.planRuns.push({
                 planRun:e,

@@ -13,7 +13,7 @@ export class TestPlanListComponent implements OnInit {
   constructor(private planService: PlanResourceService) { }
 
   ngOnInit(): void {
-    this.planService.apiPlanGet().subscribe({
+    this.planService.getAllPlans().subscribe({
       next: d=> {
         this.plans = d;
       }

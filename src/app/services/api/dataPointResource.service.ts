@@ -91,10 +91,10 @@ export class DataPointResourceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiDatapointGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<DataPointDto>>;
-    public apiDatapointGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<DataPointDto>>>;
-    public apiDatapointGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<DataPointDto>>>;
-    public apiDatapointGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getAllDataPoints(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<DataPointDto>>;
+    public getAllDataPoints(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<DataPointDto>>>;
+    public getAllDataPoints(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<DataPointDto>>>;
+    public getAllDataPoints(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -144,12 +144,12 @@ export class DataPointResourceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiDatapointPlanrunPlanRunIdGet(planRunId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<DataPointDto>>;
-    public apiDatapointPlanrunPlanRunIdGet(planRunId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<DataPointDto>>>;
-    public apiDatapointPlanrunPlanRunIdGet(planRunId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<DataPointDto>>>;
-    public apiDatapointPlanrunPlanRunIdGet(planRunId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getDataPointsForPlanRun(planRunId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<DataPointDto>>;
+    public getDataPointsForPlanRun(planRunId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<DataPointDto>>>;
+    public getDataPointsForPlanRun(planRunId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<DataPointDto>>>;
+    public getDataPointsForPlanRun(planRunId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (planRunId === null || planRunId === undefined) {
-            throw new Error('Required parameter planRunId was null or undefined when calling apiDatapointPlanrunPlanRunIdGet.');
+            throw new Error('Required parameter planRunId was null or undefined when calling getDataPointsForPlanRun.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -201,15 +201,15 @@ export class DataPointResourceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiDatapointPlanrunPlanRunIdStepStepIdGet(planRunId: number, stepId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<DataPointDto>>;
-    public apiDatapointPlanrunPlanRunIdStepStepIdGet(planRunId: number, stepId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<DataPointDto>>>;
-    public apiDatapointPlanrunPlanRunIdStepStepIdGet(planRunId: number, stepId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<DataPointDto>>>;
-    public apiDatapointPlanrunPlanRunIdStepStepIdGet(planRunId: number, stepId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getDataPointsForStep(planRunId: number, stepId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<DataPointDto>>;
+    public getDataPointsForStep(planRunId: number, stepId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<DataPointDto>>>;
+    public getDataPointsForStep(planRunId: number, stepId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<DataPointDto>>>;
+    public getDataPointsForStep(planRunId: number, stepId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (planRunId === null || planRunId === undefined) {
-            throw new Error('Required parameter planRunId was null or undefined when calling apiDatapointPlanrunPlanRunIdStepStepIdGet.');
+            throw new Error('Required parameter planRunId was null or undefined when calling getDataPointsForStep.');
         }
         if (stepId === null || stepId === undefined) {
-            throw new Error('Required parameter stepId was null or undefined when calling apiDatapointPlanrunPlanRunIdStepStepIdGet.');
+            throw new Error('Required parameter stepId was null or undefined when calling getDataPointsForStep.');
         }
 
         let localVarHeaders = this.defaultHeaders;

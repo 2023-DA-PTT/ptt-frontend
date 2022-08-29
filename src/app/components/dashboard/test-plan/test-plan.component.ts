@@ -30,7 +30,7 @@ export class TestPlanComponent implements OnInit {
   steps: StepWithNextsDto[] = [];
   createNewStepModal = false;
   createNewPlanRunModal = false;
-  actTestPlanRun: PlanRunDto = {runOnce:true,startTime: 0, duration: 0, planRunInstructions: []};
+  actTestPlanRun: PlanRunDto = {runOnce:true,startTime: 0, duration: 0, planRunInstructions: [], name: ''};
   testRuns: PlanRunDto[] = [];
   nodeLocations: string[] = [];
 
@@ -51,7 +51,7 @@ export class TestPlanComponent implements OnInit {
   }
 
   clearActPlanRun() {
-    this.actTestPlanRun = {planId: this.id, runOnce:true,startTime: 0, duration: 0, planRunInstructions: []};
+    this.actTestPlanRun = {planId: this.id, runOnce:true,startTime: 0, duration: 0, planRunInstructions: [], name: ''};
   }
 
   ngOnInit(): void {
@@ -63,7 +63,7 @@ export class TestPlanComponent implements OnInit {
     this.id = parseInt(this.activeRoute.snapshot.params['test-id']!);
     this.clearActPlanRun();
 
-    this.stepService.apiPlanPlanIdStepGet(this.id).subscribe(steps => {
+    this.stepService.getAllStepsForPlan(this.id).subscribe(steps => {
       this.steps=steps;
       var nodes :Node[] = []
       var edges : Edge[] = []
@@ -81,12 +81,12 @@ export class TestPlanComponent implements OnInit {
         this.graphLinks = edges;
     });
 
-    this.testRunService.apiPlanrunPlanPlanIdGet(this.id).subscribe(runs => {
+    this.testRunService.getPlanRunsForPlan(this.id).subscribe(runs => {
       this.testRuns = runs;
     })
 
-    this.nodeService.apiNodeLocationsGet().subscribe(locations => {
-      this.nodeLocations = Array.from(locations.values());
+    this.nodeService.getAllNodeLocations().subscribe(locations => {
+      this.nodeLocations = Array.from([...locations,'any']);
     })
   }
 
@@ -97,7 +97,7 @@ export class TestPlanComponent implements OnInit {
   }
 
   exportTestPlan() {
-    this.planService.apiPlanExportIdGet(this.id).subscribe(
+    this.planService._export(this.id).subscribe(
       d=> this.downloadFile(JSON.stringify(d), 'application/json')
     )
   }
@@ -128,9 +128,9 @@ export class TestPlanComponent implements OnInit {
     if(seconds != 0) str += seconds + " s";
     return str;
   }
-  
+
   onSubmit(createNewTestPlanRunForm: NgForm) : void {
-    this.testRunService.apiPlanrunPost(this.actTestPlanRun).subscribe({
+    this.testRunService.createPlanRun(this.actTestPlanRun).subscribe({
       next: d=> {
         this.toastr.success("Started Plan Run", "Plan Run");
       }
