@@ -39,7 +39,7 @@ export class StepComponent implements OnInit {
 
     this.testId = parseInt(this.activeRoute.snapshot.params['test-id']!);
 
-    this.testPlanService.apiPlanIdGet(this.testId).subscribe(testPlan => {
+    this.testPlanService.getPlanById(this.testId).subscribe(testPlan => {
       this.testPlan = testPlan;
     });
 
@@ -54,7 +54,7 @@ export class StepComponent implements OnInit {
     else {
       this.stepId = parseInt(this.activeRoute.snapshot.params['step-id']!);
 
-      this.stepService.apiPlanPlanIdStepStepIdGet(this.testId, this.stepId).subscribe(step => {
+      this.stepService.getAllStepByIdForPlan(this.testId, this.stepId).subscribe(step => {
         if(!step.type) {
           this.router.navigate(['/']).then();
           return;
@@ -63,12 +63,12 @@ export class StepComponent implements OnInit {
         this.stepType = step.type;
 
         if(step.type === 'http') {
-          this.httpStepService.apiPlanPlanIdStepStepIdHttpGet(this.testId, this.stepId).subscribe(step => {
+          this.httpStepService.getHttpStepForPlan(this.testId, this.stepId).subscribe(step => {
             this.step = step;
           })
         }
         else if(step.type === 'script') {
-          this.scriptStepService.apiPlanPlanIdStepStepIdScriptGet(this.testId, this.stepId).subscribe(step => {
+          this.scriptStepService.getScriptStepForPlan(this.testId, this.stepId).subscribe(step => {
             this.step = step;
           })
         }

@@ -31,16 +31,16 @@ export class TestResultDetailComponent implements OnInit {
         return;
       }
 
-      this.planRunService.apiPlanrunPlanrunidGet(id).subscribe({
+      this.planRunService.getPlanRunById(id).subscribe({
         next: planRun => {
           this.planRun = planRun;
-          this.planService.apiPlanIdGet(planRun.planId!).subscribe({
+          this.planService.getPlanById(planRun.planId!).subscribe({
             next: d => {
               this.plan = d;
-              this.stepService.apiPlanPlanIdStepHttpGet(this.plan.id!).subscribe({
+              this.stepService.getAllHttpStepsForPlan(this.plan.id!).subscribe({
                 next: steps=> {
                   steps.forEach(step => {
-                    this.dataPointService.apiDatapointPlanrunPlanRunIdStepStepIdGet(planRun.id!, step.id!).subscribe({
+                    this.dataPointService.getDataPointsForStep(planRun.id!, step.id!).subscribe({
                       next: dataPoints => {
                         dataPoints.sort((a,b)=>a.startTime! - b.startTime!);
                         const xAxisData: string[] = [];

@@ -8,6 +8,7 @@ paths:
     get:
       tags:
       - Data Point Resource
+      operationId: getAllDataPoints
       responses:
         "200":
           description: OK
@@ -21,6 +22,7 @@ paths:
     get:
       tags:
       - Data Point Resource
+      operationId: getDataPointsForPlanRun
       parameters:
       - name: planRunId
         in: path
@@ -41,6 +43,7 @@ paths:
     get:
       tags:
       - Data Point Resource
+      operationId: getDataPointsForStep
       parameters:
       - name: planRunId
         in: path
@@ -67,6 +70,7 @@ paths:
     get:
       tags:
       - Node Resource
+      operationId: getAllNodeLocations
       responses:
         "200":
           description: OK
@@ -81,6 +85,7 @@ paths:
     get:
       tags:
       - Plan Resource
+      operationId: getAllPlans
       responses:
         "200":
           description: OK
@@ -94,6 +99,7 @@ paths:
     get:
       tags:
       - Plan Resource
+      operationId: export
       parameters:
       - name: id
         in: path
@@ -108,6 +114,7 @@ paths:
     post:
       tags:
       - Plan Resource
+      operationId: importPlan
       requestBody:
         content:
           application/json:
@@ -120,6 +127,7 @@ paths:
     get:
       tags:
       - Plan Resource
+      operationId: getAllPlansForUser
       parameters:
       - name: userId
         in: path
@@ -140,6 +148,7 @@ paths:
     get:
       tags:
       - Plan Resource
+      operationId: getPlanById
       parameters:
       - name: id
         in: path
@@ -158,6 +167,7 @@ paths:
     get:
       tags:
       - Step Resource
+      operationId: getAllStepsForPlan
       parameters:
       - name: planId
         in: path
@@ -178,6 +188,7 @@ paths:
     get:
       tags:
       - Http Step Resource
+      operationId: getAllHttpStepsForPlan
       parameters:
       - name: planId
         in: path
@@ -197,6 +208,7 @@ paths:
     post:
       tags:
       - Http Step Resource
+      operationId: createHttpStepForPlan
       parameters:
       - name: planId
         in: path
@@ -216,6 +228,7 @@ paths:
     get:
       tags:
       - Script Step Resource
+      operationId: getAllScriptStepsForPlan
       parameters:
       - name: planId
         in: path
@@ -235,6 +248,7 @@ paths:
     post:
       tags:
       - Script Step Resource
+      operationId: createScriptStepForPlan
       parameters:
       - name: planId
         in: path
@@ -254,6 +268,7 @@ paths:
     get:
       tags:
       - Step Resource
+      operationId: getAllStepByIdForPlan
       parameters:
       - name: planId
         in: path
@@ -277,6 +292,7 @@ paths:
     delete:
       tags:
       - Step Resource
+      operationId: deleteStepById
       parameters:
       - name: planId
         in: path
@@ -297,6 +313,7 @@ paths:
     get:
       tags:
       - Http Step Resource
+      operationId: getHttpStepForPlan
       parameters:
       - name: planId
         in: path
@@ -316,6 +333,7 @@ paths:
     put:
       tags:
       - Http Step Resource
+      operationId: updateHttpStepForPlan
       parameters:
       - name: planId
         in: path
@@ -341,6 +359,7 @@ paths:
     get:
       tags:
       - Input Argument Resource
+      operationId: getAllInputArgumentForStep
       parameters:
       - name: planId
         in: path
@@ -366,6 +385,7 @@ paths:
     post:
       tags:
       - Input Argument Resource
+      operationId: createInputArgumentForStep
       parameters:
       - name: planId
         in: path
@@ -391,6 +411,7 @@ paths:
     get:
       tags:
       - Input Argument Resource
+      operationId: getInputArgumentByIdForStep
       parameters:
       - name: inArgId
         in: path
@@ -420,6 +441,7 @@ paths:
     put:
       tags:
       - Input Argument Resource
+      operationId: putInputArgumentForStep
       parameters:
       - name: inArgId
         in: path
@@ -450,6 +472,7 @@ paths:
     delete:
       tags:
       - Input Argument Resource
+      operationId: deleteInputArgumentById
       parameters:
       - name: inArgId
         in: path
@@ -476,6 +499,7 @@ paths:
     get:
       tags:
       - Step Resource
+      operationId: getAllNextsByIdForPlan
       parameters:
       - name: planId
         in: path
@@ -501,6 +525,7 @@ paths:
     post:
       tags:
       - Step Resource
+      operationId: updateAllNextsByIdForPlan
       parameters:
       - name: planId
         in: path
@@ -528,6 +553,7 @@ paths:
     get:
       tags:
       - Output Argument Resource
+      operationId: getAllOutputArgumentForStep
       parameters:
       - name: planId
         in: path
@@ -553,6 +579,7 @@ paths:
     post:
       tags:
       - Output Argument Resource
+      operationId: createOutputArgumentForStep
       parameters:
       - name: planId
         in: path
@@ -578,6 +605,7 @@ paths:
     get:
       tags:
       - Output Argument Resource
+      operationId: getOutputArgumentByIdForStep
       parameters:
       - name: outArgId
         in: path
@@ -607,6 +635,7 @@ paths:
     put:
       tags:
       - Output Argument Resource
+      operationId: putOutputArgumentForStep
       parameters:
       - name: outArgId
         in: path
@@ -637,6 +666,7 @@ paths:
     delete:
       tags:
       - Output Argument Resource
+      operationId: deleteOutputArgumentById
       parameters:
       - name: outArgId
         in: path
@@ -663,6 +693,7 @@ paths:
     post:
       tags:
       - Step Parameter Relation Resource
+      operationId: createParameterRelation
       parameters:
       - name: planId
         in: path
@@ -688,6 +719,7 @@ paths:
     get:
       tags:
       - Step Parameter Relation Resource
+      operationId: getAllParameterRelationForStepFrom
       parameters:
       - name: planId
         in: path
@@ -714,6 +746,7 @@ paths:
     get:
       tags:
       - Step Parameter Relation Resource
+      operationId: getAllParameterRelationForStepTo
       parameters:
       - name: planId
         in: path
@@ -740,6 +773,7 @@ paths:
     get:
       tags:
       - Script Step Resource
+      operationId: getScriptStepForPlan
       parameters:
       - name: planId
         in: path
@@ -759,6 +793,7 @@ paths:
     put:
       tags:
       - Script Step Resource
+      operationId: updateScriptStepForPlan
       parameters:
       - name: planId
         in: path
@@ -784,6 +819,7 @@ paths:
     post:
       tags:
       - Plan Resource
+      operationId: createPlanForUser
       parameters:
       - name: userId
         in: path
@@ -803,6 +839,7 @@ paths:
     get:
       tags:
       - Plan Run Resource
+      operationId: getAllPlanRuns
       responses:
         "200":
           description: OK
@@ -815,6 +852,7 @@ paths:
     post:
       tags:
       - Plan Run Resource
+      operationId: createPlanRun
       requestBody:
         content:
           application/json:
@@ -827,6 +865,7 @@ paths:
     get:
       tags:
       - Plan Run Resource
+      operationId: getPlanRunsForPlan
       parameters:
       - name: planId
         in: path
@@ -847,6 +886,7 @@ paths:
     get:
       tags:
       - Plan Run Resource
+      operationId: getPlanRunById
       parameters:
       - name: planrunid
         in: path

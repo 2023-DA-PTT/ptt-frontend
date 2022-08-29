@@ -27,12 +27,12 @@ export class TestPlanOverviewComponent implements OnInit {
       enabled: false,
     }
   };
-  
+
   constructor(private testPlanService: PlanResourceService,
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.testPlanService.apiPlanGet().subscribe(testPlans => {
+    this.testPlanService.getAllPlans().subscribe(testPlans => {
       this.testPlans = testPlans;
     });
   }
@@ -40,17 +40,17 @@ export class TestPlanOverviewComponent implements OnInit {
   createFromJson() {
     let testPlanJsonObj = {};
     try {
-      testPlanJsonObj = JSON.parse(this.editorModel.value); 
+      testPlanJsonObj = JSON.parse(this.editorModel.value);
     } catch (error: any) {
       this.toastr.error(error.message,"Testplan")
       return;
     }
-    this.testPlanService.apiPlanImportPost(testPlanJsonObj).subscribe(
+    this.testPlanService.importPlan(testPlanJsonObj).subscribe(
       {
         next: d=> {
           this.toastr.success("Created Testplan from JSON", "Testplan");
           this.createNewPlanFromJsonModal = false;
-          this.testPlanService.apiPlanGet().subscribe(testPlans => {
+          this.testPlanService.getAllPlans().subscribe(testPlans => {
             this.testPlans = testPlans;
           });
         },
@@ -65,10 +65,10 @@ export class TestPlanOverviewComponent implements OnInit {
       return;
     }
 
-    this.testPlanService.apiPlanUserIdPost(1, this.actTestPlan).subscribe({
+    this.testPlanService.createPlanForUser(1, this.actTestPlan).subscribe({
       next: () => {
         this.toastr.success("Success!");
-        this.testPlanService.apiPlanGet().subscribe(testPlans => {
+        this.testPlanService.getAllPlans().subscribe(testPlans => {
           this.testPlans = testPlans;
         });
         this.createNewPlanModal = false;

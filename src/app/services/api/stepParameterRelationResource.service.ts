@@ -90,79 +90,19 @@ export class StepParameterRelationResourceService {
     /**
      * @param planId 
      * @param stepId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public apiPlanPlanIdStepStepIdParameterRelationFromGet(planId: number, stepId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<StepParameterRelationDto>>;
-    public apiPlanPlanIdStepStepIdParameterRelationFromGet(planId: number, stepId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<StepParameterRelationDto>>>;
-    public apiPlanPlanIdStepStepIdParameterRelationFromGet(planId: number, stepId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<StepParameterRelationDto>>>;
-    public apiPlanPlanIdStepStepIdParameterRelationFromGet(planId: number, stepId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (planId === null || planId === undefined) {
-            throw new Error('Required parameter planId was null or undefined when calling apiPlanPlanIdStepStepIdParameterRelationFromGet.');
-        }
-        if (stepId === null || stepId === undefined) {
-            throw new Error('Required parameter stepId was null or undefined when calling apiPlanPlanIdStepStepIdParameterRelationFromGet.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        return this.httpClient.get<Array<StepParameterRelationDto>>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}/parameterRelation/from`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * @param planId 
-     * @param stepId 
      * @param stepParameterRelationDto 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiPlanPlanIdStepStepIdParameterRelationPost(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public apiPlanPlanIdStepStepIdParameterRelationPost(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public apiPlanPlanIdStepStepIdParameterRelationPost(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public apiPlanPlanIdStepStepIdParameterRelationPost(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public createParameterRelation(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public createParameterRelation(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public createParameterRelation(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public createParameterRelation(planId: number, stepId: number, stepParameterRelationDto?: StepParameterRelationDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (planId === null || planId === undefined) {
-            throw new Error('Required parameter planId was null or undefined when calling apiPlanPlanIdStepStepIdParameterRelationPost.');
+            throw new Error('Required parameter planId was null or undefined when calling createParameterRelation.');
         }
         if (stepId === null || stepId === undefined) {
-            throw new Error('Required parameter stepId was null or undefined when calling apiPlanPlanIdStepStepIdParameterRelationPost.');
+            throw new Error('Required parameter stepId was null or undefined when calling createParameterRelation.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -223,15 +163,75 @@ export class StepParameterRelationResourceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiPlanPlanIdStepStepIdParameterRelationToGet(planId: number, stepId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<StepParameterRelationDto>>;
-    public apiPlanPlanIdStepStepIdParameterRelationToGet(planId: number, stepId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<StepParameterRelationDto>>>;
-    public apiPlanPlanIdStepStepIdParameterRelationToGet(planId: number, stepId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<StepParameterRelationDto>>>;
-    public apiPlanPlanIdStepStepIdParameterRelationToGet(planId: number, stepId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getAllParameterRelationForStepFrom(planId: number, stepId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<StepParameterRelationDto>>;
+    public getAllParameterRelationForStepFrom(planId: number, stepId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<StepParameterRelationDto>>>;
+    public getAllParameterRelationForStepFrom(planId: number, stepId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<StepParameterRelationDto>>>;
+    public getAllParameterRelationForStepFrom(planId: number, stepId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (planId === null || planId === undefined) {
-            throw new Error('Required parameter planId was null or undefined when calling apiPlanPlanIdStepStepIdParameterRelationToGet.');
+            throw new Error('Required parameter planId was null or undefined when calling getAllParameterRelationForStepFrom.');
         }
         if (stepId === null || stepId === undefined) {
-            throw new Error('Required parameter stepId was null or undefined when calling apiPlanPlanIdStepStepIdParameterRelationToGet.');
+            throw new Error('Required parameter stepId was null or undefined when calling getAllParameterRelationForStepFrom.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        return this.httpClient.get<Array<StepParameterRelationDto>>(`${this.configuration.basePath}/api/plan/${encodeURIComponent(String(planId))}/step/${encodeURIComponent(String(stepId))}/parameterRelation/from`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param planId 
+     * @param stepId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllParameterRelationForStepTo(planId: number, stepId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<StepParameterRelationDto>>;
+    public getAllParameterRelationForStepTo(planId: number, stepId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<StepParameterRelationDto>>>;
+    public getAllParameterRelationForStepTo(planId: number, stepId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<StepParameterRelationDto>>>;
+    public getAllParameterRelationForStepTo(planId: number, stepId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (planId === null || planId === undefined) {
+            throw new Error('Required parameter planId was null or undefined when calling getAllParameterRelationForStepTo.');
+        }
+        if (stepId === null || stepId === undefined) {
+            throw new Error('Required parameter stepId was null or undefined when calling getAllParameterRelationForStepTo.');
         }
 
         let localVarHeaders = this.defaultHeaders;

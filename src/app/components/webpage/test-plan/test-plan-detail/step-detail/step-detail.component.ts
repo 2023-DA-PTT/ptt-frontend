@@ -29,14 +29,14 @@ export class StepDetailComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.inputArgService.apiPlanPlanIdStepStepIdInputArgumentGet(this.planId, this.step.id!).subscribe({
+    this.inputArgService.getAllInputArgumentForStep(this.planId, this.step.id!).subscribe({
       next: inputs => {
         this.inputs = inputs;
       }, error: err => {
         this.toastr.error();
       }
     })
-    this.outputArgService.apiPlanPlanIdStepStepIdOutputArgumentGet(this.planId, this.step.id!).subscribe({
+    this.outputArgService.getAllOutputArgumentForStep(this.planId, this.step.id!).subscribe({
       next: outputs => {
         this.outputs = outputs;
       }, error: () => {

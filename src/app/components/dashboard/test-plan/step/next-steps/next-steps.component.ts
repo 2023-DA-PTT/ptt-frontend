@@ -18,7 +18,7 @@ export class NextStepsComponent implements OnInit {
   nextSteps: NextStepWithParameterRelationDto[] = [];
   outputArgs: OutputArgumentDto[] = [];
   steps: StepDto[] = [];
-  inputLookUp = new Map<StepDto, InputArgumentDto[]>(); 
+  inputLookUp = new Map<StepDto, InputArgumentDto[]>();
 
   constructor(private stepResource: StepResourceService,
     private outputArgResource: OutputArgumentResourceService,
@@ -26,23 +26,23 @@ export class NextStepsComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.stepResource.apiPlanPlanIdStepGet(this.planId).subscribe(
+    this.stepResource.getAllStepsForPlan(this.planId).subscribe(
       data => {
         this.steps = data;
         this.steps.forEach((step)=> {
-          this.inputArgResource.apiPlanPlanIdStepStepIdInputArgumentGet(this.planId, step.id!).subscribe(
+          this.inputArgResource.getAllInputArgumentForStep(this.planId, step.id!).subscribe(
             inputsData=>this.inputLookUp.set(step, inputsData)
           )
         })
       })
-    this.stepResource.apiPlanPlanIdStepStepIdNextsGet(this.planId,this.stepId).subscribe(
+    this.stepResource.getAllNextsByIdForPlan(this.planId,this.stepId).subscribe(
       data => {this.nextSteps = data});
-    this.outputArgResource.apiPlanPlanIdStepStepIdOutputArgumentGet(this.planId, this.stepId).subscribe(
+    this.outputArgResource.getAllOutputArgumentForStep(this.planId, this.stepId).subscribe(
       data => {this.outputArgs=data});
   }
 
   onSubmit(nextStepsForm: NgForm): void {
-    this.stepResource.apiPlanPlanIdStepStepIdNextsPost(this.planId, this.stepId, this.nextSteps).subscribe(
+    this.stepResource.updateAllNextsByIdForPlan(this.planId, this.stepId, this.nextSteps).subscribe(
       d=> this.toastr.success("Next steps have been updated", "Next Steps")
     )
   }

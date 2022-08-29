@@ -27,7 +27,7 @@ export class StatsComponent implements OnInit {
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false,
-    
+
   };
   public lineChartLegend = true;
 
@@ -51,12 +51,12 @@ export class StatsComponent implements OnInit {
     this.testId = parseInt(this.activeRoute.snapshot.params['test-id']!);
     this.runId = parseInt(this.activeRoute.snapshot.params['run-id']!);
 
-    this.stepService.apiPlanPlanIdStepHttpGet(this.testId).subscribe( steps => {
-      this.testRunService.apiPlanrunPlanrunidGet(this.runId).subscribe(testRun => {
+    this.stepService.getAllHttpStepsForPlan(this.testId).subscribe( steps => {
+      this.testRunService.getPlanRunById(this.runId).subscribe(testRun => {
         this.testDate = testRun.startTime!* 1000;
         console.log(this.testDate);
         steps.forEach(step => {
-          this.dataPointService.apiDatapointPlanrunPlanRunIdStepStepIdGet(this.runId, step.id!).subscribe(dataPoints => {
+          this.dataPointService.getDataPointsForStep(this.runId, step.id!).subscribe(dataPoints => {
             const labels: string[] = [];
             const data: number[] = [];
 

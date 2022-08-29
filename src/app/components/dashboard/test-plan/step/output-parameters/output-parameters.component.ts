@@ -28,7 +28,7 @@ export class OutputParametersComponent implements OnInit {
   ngOnInit(): void {
     this.outputTypes = Object.values(OutputType);
 
-    this.outputParamService.apiPlanPlanIdStepStepIdOutputArgumentGet(this.planId, this.stepId).subscribe(
+    this.outputParamService.getAllOutputArgumentForStep(this.planId, this.stepId).subscribe(
       (data) => this.outputParameters = data );
   }
 
@@ -44,13 +44,13 @@ export class OutputParametersComponent implements OnInit {
     }
 
     this.outputParameters.filter(p => p.name).filter(p => !p.id).forEach(p => {
-      this.outputParamService.apiPlanPlanIdStepStepIdOutputArgumentPost(this.planId, this.stepId, p).subscribe(p => {
+      this.outputParamService.createOutputArgumentForStep(this.planId, this.stepId, p).subscribe(p => {
         this.toastr.success("Created Output Parameter " + p.name);
       })
     });
 
     this.outputParameters.filter(p => p.name).filter(p => p.id).forEach(p => {
-      this.outputParamService.apiPlanPlanIdStepStepIdOutputArgumentOutArgIdPut(p.id!, this.planId, this.stepId, p).subscribe(p => {
+      this.outputParamService.putOutputArgumentForStep(p.id!, this.planId, this.stepId, p).subscribe(p => {
         this.toastr.success("Updated Output Parameter " + p.name);
       })
     });
