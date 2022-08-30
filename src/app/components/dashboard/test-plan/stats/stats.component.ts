@@ -1,5 +1,5 @@
-import { HttpStepDto } from './../../../../services/model/httpStepDto';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
 import {
   DataPointDto,
   DataPointResourceService,
@@ -30,6 +30,9 @@ export class StatsComponent implements OnInit {
 
   };
   public lineChartLegend = true;
+  fromDate: Date = new Date(); // TODO: doesnt update date in view
+  toDate: Date = new Date();
+  interval: number = 1;
 
   constructor(private activeRoute: ActivatedRoute,
               private router: Router,
@@ -40,7 +43,7 @@ export class StatsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.activeRoute.snapshot.params)
-    if(!(this.activeRoute.snapshot.params['test-id'])
+    if (!(this.activeRoute.snapshot.params['test-id'])
       || !(this.activeRoute.snapshot.params['run-id'])
       || isNaN(parseInt(this.activeRoute.snapshot.params['test-id']!))
       || isNaN(parseInt(this.activeRoute.snapshot.params['run-id']!))) {
@@ -51,12 +54,19 @@ export class StatsComponent implements OnInit {
     this.testId = parseInt(this.activeRoute.snapshot.params['test-id']!);
     this.runId = parseInt(this.activeRoute.snapshot.params['run-id']!);
 
-    this.stepService.getAllHttpStepsForPlan(this.testId).subscribe( steps => {
+    this.stepService.getAllHttpStepsForPlan(this.testId).subscribe(steps => {
       this.testRunService.getPlanRunById(this.runId).subscribe(testRun => {
-        this.testDate = testRun.startTime!* 1000;
+        this.testDate = testRun.startTime! * 1000;
+        this.fromDate = new Date((testRun.startTime! * 1000)-60000); // one min before test start
+        if (testRun.runOnce) {
+          this.toDate = new Date((testRun.startTime! * 1000) + 60000) // one min after test start
+        } else {
+          this.toDate = new Date((testRun.startTime * 1000) + (testRun.duration / 1000) + 600000) // one min after test end
+        }
+
         console.log(this.testDate);
         steps.forEach(step => {
-          this.dataPointService.getDataPointsForStep(this.runId, step.id!).subscribe(dataPoints => {
+          this.dataPointService.getDataPointsForStep(this.runId, step.id!).subscribe((dataPoints: DataPointDto[]) => {
             const labels: string[] = [];
             const data: number[] = [];
 
@@ -85,5 +95,10 @@ export class StatsComponent implements OnInit {
         })
       })
     });
+  }
+
+  updateGraphs() {
+    console.log(this.toDate);
+    console.log(this.fromDate);
   }
 }
