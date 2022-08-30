@@ -86,7 +86,7 @@ export class TestPlanComponent implements OnInit {
     })
 
     this.nodeService.getAllNodeLocations().subscribe(locations => {
-      this.nodeLocations = Array.from([...locations,'any']);
+      this.nodeLocations = Array.from(['any',...locations]);
     })
   }
 
