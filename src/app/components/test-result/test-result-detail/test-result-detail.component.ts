@@ -41,7 +41,7 @@ export class TestResultDetailComponent implements OnInit {
                 next: steps=> {
                   steps.forEach(step => {
                     this.dataPointService.getDataPointsForStep(planRun.id!, step.id!).subscribe({
-                      next: dataPoints => {
+                      next: (dataPoints: DataPointDto[]) => {
                         dataPoints.sort((a,b)=>a.startTime! - b.startTime!);
                         const xAxisData: string[] = [];
                         const yAxisData: number[] = [];

@@ -57,15 +57,28 @@ paths:
         schema:
           format: int64
           type: integer
+      - name: aggr
+        in: query
+        schema:
+          type: string
+      - name: from
+        in: query
+        schema:
+          format: int64
+          type: integer
+      - name: interval
+        in: query
+        schema:
+          format: int32
+          type: integer
+      - name: to
+        in: query
+        schema:
+          format: int64
+          type: integer
       responses:
         "200":
           description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/DataPointDto'
   /api/node/locations:
     get:
       tags:
@@ -897,10 +910,6 @@ paths:
       responses:
         "200":
           description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlanRunDto'
 components:
   schemas:
     AdvancedStepParameterRelationDto:

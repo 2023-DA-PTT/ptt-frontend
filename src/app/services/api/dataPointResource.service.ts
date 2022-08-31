@@ -198,18 +198,40 @@ export class DataPointResourceService {
     /**
      * @param planRunId 
      * @param stepId 
+     * @param aggr 
+     * @param from 
+     * @param interval 
+     * @param to 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getDataPointsForStep(planRunId: number, stepId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<DataPointDto>>;
-    public getDataPointsForStep(planRunId: number, stepId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<DataPointDto>>>;
-    public getDataPointsForStep(planRunId: number, stepId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<DataPointDto>>>;
-    public getDataPointsForStep(planRunId: number, stepId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getDataPointsForStep(planRunId: number, stepId: number, aggr?: string, from?: number, interval?: number, to?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getDataPointsForStep(planRunId: number, stepId: number, aggr?: string, from?: number, interval?: number, to?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getDataPointsForStep(planRunId: number, stepId: number, aggr?: string, from?: number, interval?: number, to?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getDataPointsForStep(planRunId: number, stepId: number, aggr?: string, from?: number, interval?: number, to?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (planRunId === null || planRunId === undefined) {
             throw new Error('Required parameter planRunId was null or undefined when calling getDataPointsForStep.');
         }
         if (stepId === null || stepId === undefined) {
             throw new Error('Required parameter stepId was null or undefined when calling getDataPointsForStep.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (aggr !== undefined && aggr !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>aggr, 'aggr');
+        }
+        if (from !== undefined && from !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>from, 'from');
+        }
+        if (interval !== undefined && interval !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>interval, 'interval');
+        }
+        if (to !== undefined && to !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>to, 'to');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -218,7 +240,6 @@ export class DataPointResourceService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -243,9 +264,10 @@ export class DataPointResourceService {
             }
         }
 
-        return this.httpClient.get<Array<DataPointDto>>(`${this.configuration.basePath}/api/datapoint/planrun/${encodeURIComponent(String(planRunId))}/step/${encodeURIComponent(String(stepId))}`,
+        return this.httpClient.get<any>(`${this.configuration.basePath}/api/datapoint/planrun/${encodeURIComponent(String(planRunId))}/step/${encodeURIComponent(String(stepId))}`,
             {
                 context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

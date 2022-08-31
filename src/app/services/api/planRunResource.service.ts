@@ -206,10 +206,10 @@ export class PlanRunResourceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getPlanRunById(planrunid: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<PlanRunDto>;
-    public getPlanRunById(planrunid: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<PlanRunDto>>;
-    public getPlanRunById(planrunid: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<PlanRunDto>>;
-    public getPlanRunById(planrunid: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getPlanRunById(planrunid: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getPlanRunById(planrunid: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getPlanRunById(planrunid: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getPlanRunById(planrunid: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (planrunid === null || planrunid === undefined) {
             throw new Error('Required parameter planrunid was null or undefined when calling getPlanRunById.');
         }
@@ -220,7 +220,6 @@ export class PlanRunResourceService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -245,7 +244,7 @@ export class PlanRunResourceService {
             }
         }
 
-        return this.httpClient.get<PlanRunDto>(`${this.configuration.basePath}/api/planrun/${encodeURIComponent(String(planrunid))}`,
+        return this.httpClient.get<any>(`${this.configuration.basePath}/api/planrun/${encodeURIComponent(String(planrunid))}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
