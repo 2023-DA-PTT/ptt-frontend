@@ -35,7 +35,7 @@ export class StatsComponent implements OnInit {
   public lineChartLegend = true;
   fromDate: number = 0; // TODO: doesnt update date in view
   toDate: number = 0;
-  interval: number = 100;
+  interval: number = 10000;
 
   constructor(private activeRoute: ActivatedRoute,
               private router: Router,
