@@ -1,15 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 
 import {
-  DataPointDto,
   DataPointResourceService,
   HttpStepResourceService,
-  PlanDto, PlanRunResourceService,
-  StepDto,
-  StepResourceService
+  PlanRunResourceService
 } from "../../../../services";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ChartConfiguration, ChartOptions} from "chart.js";
+import {NgForm} from "@angular/forms";
+import {DataPointResultDto} from "../../../../services/model/dataPointResultDto";
 
 @Component({
   selector: 'app-stats',
@@ -27,12 +26,16 @@ export class StatsComponent implements OnInit {
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false,
-
+    plugins: {
+      tooltip: {
+        enabled: false
+      }
+    }
   };
   public lineChartLegend = true;
-  fromDate: Date = new Date(); // TODO: doesnt update date in view
-  toDate: Date = new Date();
-  interval: number = 1;
+  fromDate: number = 0; // TODO: doesnt update date in view
+  toDate: number = 0;
+  interval: number = 100;
 
   constructor(private activeRoute: ActivatedRoute,
               private router: Router,
@@ -56,28 +59,74 @@ export class StatsComponent implements OnInit {
 
     this.stepService.getAllHttpStepsForPlan(this.testId).subscribe(steps => {
       this.testRunService.getPlanRunById(this.runId).subscribe(testRun => {
-        this.testDate = testRun.startTime! * 1000;
-        this.fromDate = new Date((testRun.startTime! * 1000)-60000); // one min before test start
+        this.testDate = Math.floor(testRun.startTime! * 1000);
+        this.fromDate = Math.floor(testRun.startTime! * 1000) - 60000; // one min before test start
         if (testRun.runOnce) {
-          this.toDate = new Date((testRun.startTime! * 1000) + 60000) // one min after test start
+          this.toDate = Math.floor(testRun.startTime! * 1000) + 60000 // one min after test start
         } else {
-          this.toDate = new Date((testRun.startTime * 1000) + (testRun.duration / 1000) + 600000) // one min after test end
+          this.toDate = Math.floor((testRun.startTime * 1000) + (testRun.duration / 1000) + 600000) // one min after test end
         }
+      })
+    });
 
-        console.log(this.testDate);
+    this.updateGraphs();
+  }
+
+  setFromDate(fromD: string) {
+    const fromDate = new Date(fromD).getTime();
+
+    if (fromDate) {
+      this.fromDate = Math.floor(fromDate);
+    }
+  }
+
+  setToDate(toD: string) {
+    const toDate = new Date(toD).getTime();
+
+    if (toDate) {
+      this.toDate = Math.floor(toDate);
+    }
+  }
+
+  onSubmit(filterForm: NgForm) {
+    if(!filterForm.valid) {
+      return;
+    }
+
+    this.updateGraphs();
+  }
+
+   updateGraphs() {
+    this.lineChartData.length = 0;
+    const labels: number[] = [];
+    for (let labelTime = this.fromDate; labelTime < this.toDate; labelTime += this.interval) {
+      labels.push(labelTime);
+    }
+
+    this.stepService.getAllHttpStepsForPlan(this.testId).subscribe(steps => {
+      this.testRunService.getPlanRunById(this.runId).subscribe(testRun => {
         steps.forEach(step => {
-          this.dataPointService.getDataPointsForStep(this.runId, step.id!).subscribe((dataPoints: DataPointDto[]) => {
-            const labels: string[] = [];
+          this.dataPointService.getDataPointsForStep(this.runId, step.id!, 'min', this.fromDate, this.interval, this.toDate).subscribe((dataPoints: DataPointResultDto[]) => {
             const data: number[] = [];
+            let cnt = 0;
 
             dataPoints.forEach(dp => {
-              labels.push((dp.startTime! - this.testDate) + 'ms');
+              while(labels[cnt] != dp.start) {
+                data.push(0);
+                cnt++;
+              }
+
               data.push(dp.duration! / 1_000_000);
+              cnt++;
             });
 
-            if (labels.length == data.length && labels.length != 0) {
+            while (labels.length > data.length) {
+              data.push(0);
+            }
+
+            if (labels.length != 0) {
               this.lineChartData.push({
-                labels: labels,
+                labels: labels.map(label => new Date(label).toLocaleTimeString()),
                 datasets: [
                   {
                     data: data,
@@ -88,17 +137,12 @@ export class StatsComponent implements OnInit {
                     backgroundColor: 'rgba(67,144,248,0.3)',
                     pointBorderWidth: 0.5
                   }
-                ]
+                ],
               });
             }
           })
         })
       })
     });
-  }
-
-  updateGraphs() {
-    console.log(this.toDate);
-    console.log(this.fromDate);
   }
 }
