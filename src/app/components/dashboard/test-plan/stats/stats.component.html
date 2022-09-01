@@ -71,4 +71,21 @@
   <div class="col-span-3" *ngIf="lineChartData.length == 0">
     <p class="text-md ml-3">No Data available!</p>
   </div>
+  <div class="col-span-2 mt-10">
+    <p class="text-2xl">Compare test Runs</p>
+  </div>
+  <div class="col-span-1 mt-10">
+    <select name="test-run-comparation" (ngModelChange)="compareTestRun($event)" [(ngModel)]="testRunCompareId" id="test-run-comparation" class="border max-w-fit border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <option value="-1">Select test run to compare to</option>
+      <option *ngFor="let testRun of testRuns" value="{{testRun.id}}">{{testRun.name}} ({{(testRun.startTime!*1000) | date: 'dd.MM.yyyy HH:mm:ss'}})</option>
+    </select>
+  </div>
+  <div *ngFor="let compareChartData of compareTestChartData" class="col-span-2 w-full h-64 rounded p-3 mt-5">
+    <canvas class="block" baseChart
+            [type]="'line'"
+            [data]="compareChartData"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend">
+    </canvas>
+  </div>
 </div>
