@@ -8,7 +8,7 @@ import {
 import {ActivatedRoute, Router} from "@angular/router";
 import {ChartConfiguration, ChartOptions} from "chart.js";
 import {NgForm} from "@angular/forms";
-import {DataPointResultDto} from "../../../../services/model/dataPointResultDto";
+import {DataPointResultDto} from "../../../../models/dataPointResultDto";
 import {lab} from "d3";
 import {id} from "@swimlane/ngx-graph/lib/utils/id";
 import {lastValueFrom, Observable} from "rxjs";

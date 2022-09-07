@@ -34,10 +34,6 @@ export class TestPlanComponent implements OnInit {
   testRuns: PlanRunDto[] = [];
   nodeLocations: string[] = [];
 
-  graphNodes : Node[] = []
-  graphLinks : Edge[] = []
-  center$: Subject<boolean> = new Subject();
-
   constructor(private activeRoute: ActivatedRoute,
               private toastr: ToastrService,
               private router: Router,
@@ -65,20 +61,6 @@ export class TestPlanComponent implements OnInit {
 
     this.stepService.getAllStepsForPlan(this.id).subscribe(steps => {
       this.steps=steps;
-      var nodes :Node[] = []
-      var edges : Edge[] = []
-
-      this.steps.forEach(e => {
-        nodes.push({id: e.id!.toString(), label: e.name})
-        e.nexts?.forEach(n=> {
-          edges.push({
-            source: n.fromStepId!.toString(),
-            target: n.toStepId!.toString(),
-            label: n.repeatAmount?.toString()
-          })})
-        })
-        this.graphNodes = nodes;
-        this.graphLinks = edges;
     });
 
     this.testRunService.getPlanRunsForPlan(this.id).subscribe(runs => {

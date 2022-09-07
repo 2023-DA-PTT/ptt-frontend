@@ -18,6 +18,53 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DataPointDto'
+  /api/datapoint-aggr/planrun/{planRunId}/step/{stepId}/avg:
+    get:
+      tags:
+      - Data Point Aggregation Resource
+      operationId: getAvgDurationForPlanRun
+      parameters:
+      - name: planRunId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+  /api/datapoint-aggr/planrun/{planRunId}/step/{stepId}/compare:
+    get:
+      tags:
+      - Data Point Aggregation Resource
+      operationId: getAvgDifferenceBetweenPlanRuns
+      parameters:
+      - name: planRunId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: stepId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - name: compareTo
+        in: query
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
   /api/datapoint/planrun/{planRunId}:
     get:
       tags:

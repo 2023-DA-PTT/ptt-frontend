@@ -2,6 +2,7 @@
 README.md
 api.module.ts
 api/api.ts
+api/dataPointAggregationResource.service.ts
 api/dataPointResource.service.ts
 api/httpStepResource.service.ts
 api/inputArgumentResource.service.ts

@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
+import { DataPointAggregationResourceService } from './api/dataPointAggregationResource.service';
 import { DataPointResourceService } from './api/dataPointResource.service';
 import { HttpStepResourceService } from './api/httpStepResource.service';
 import { InputArgumentResourceService } from './api/inputArgumentResource.service';

@@ -1,3 +1,5 @@
+export * from './dataPointAggregationResource.service';
+import { DataPointAggregationResourceService } from './dataPointAggregationResource.service';
 export * from './dataPointResource.service';
 import { DataPointResourceService } from './dataPointResource.service';
 export * from './httpStepResource.service';
@@ -18,4 +20,4 @@ export * from './stepParameterRelationResource.service';
 import { StepParameterRelationResourceService } from './stepParameterRelationResource.service';
 export * from './stepResource.service';
 import { StepResourceService } from './stepResource.service';
-export const APIS = [DataPointResourceService, HttpStepResourceService, InputArgumentResourceService, NodeResourceService, OutputArgumentResourceService, PlanResourceService, PlanRunResourceService, ScriptStepResourceService, StepParameterRelationResourceService, StepResourceService];
+export const APIS = [DataPointAggregationResourceService, DataPointResourceService, HttpStepResourceService, InputArgumentResourceService, NodeResourceService, OutputArgumentResourceService, PlanResourceService, PlanRunResourceService, ScriptStepResourceService, StepParameterRelationResourceService, StepResourceService];

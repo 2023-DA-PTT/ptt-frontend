@@ -36,6 +36,8 @@ import { InputParametersComponent } from './components/dashboard/test-plan/step/
 import { OutputParametersComponent } from './components/dashboard/test-plan/step/output-parameters/output-parameters.component';
 import { NextStepsComponent } from './components/dashboard/test-plan/step/next-steps/next-steps.component';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { PlanNodeViewComponent } from './components/plan-node-view/plan-node-view.component';
+import { TestRunStepDataCardComponent } from './components/dashboard/overview/test-run-step-data-card/test-run-step-data-card.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { NgxGraphModule } from '@swimlane/ngx-graph';
     HttpStepComponent,
     InputParametersComponent,
     OutputParametersComponent,
-    NextStepsComponent
+    NextStepsComponent,
+    PlanNodeViewComponent,
+    TestRunStepDataCardComponent
   ],
     imports: [
         FormsModule,
