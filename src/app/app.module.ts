@@ -4,15 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/webpage/home/home.component';
-import { TestPlanListComponent } from './components/webpage/test-plan/test-plan-list/test-plan-list.component';
-import { TestPlanDetailComponent } from './components/webpage/test-plan/test-plan-detail/test-plan-detail.component';
 import { ApiModule, BASE_PATH } from './services';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './components/webpage/footer/footer.component';
 import { NavbarComponent } from './components/webpage/navbar/navbar.component';
-import { StepDetailComponent } from './components/webpage/test-plan/test-plan-detail/step-detail/step-detail.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,8 +23,6 @@ import { TestPlanComponent } from './components/dashboard/test-plan/test-plan.co
 import { StepComponent } from './components/dashboard/test-plan/step/step.component';
 import { StatsComponent } from './components/dashboard/test-plan/stats/stats.component';
 import { NodeEditorComponent } from './components/node-editor/node-editor.component';
-import { TestResultListComponent } from './components/test-result/test-result-list/test-result-list.component';
-import { TestResultDetailComponent } from './components/test-result/test-result-detail/test-result-detail.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ScriptStepComponent } from './components/dashboard/test-plan/step/script-step/script-step.component';
 import {CodeEditorModule} from "@ngstack/code-editor";
@@ -43,11 +38,8 @@ import { TestRunStepDataCardComponent } from './components/dashboard/overview/te
   declarations: [
     AppComponent,
     HomeComponent,
-    TestPlanListComponent,
-    TestPlanDetailComponent,
     FooterComponent,
     NavbarComponent,
-    StepDetailComponent,
     DashboardComponent,
     SidebarComponent,
     OverviewComponent,
@@ -57,8 +49,6 @@ import { TestRunStepDataCardComponent } from './components/dashboard/overview/te
     StepComponent,
     StatsComponent,
     NodeEditorComponent,
-    TestResultListComponent,
-    TestResultDetailComponent,
     ScriptStepComponent,
     HttpStepComponent,
     InputParametersComponent,
