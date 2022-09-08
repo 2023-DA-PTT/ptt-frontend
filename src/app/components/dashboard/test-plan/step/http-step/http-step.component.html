@@ -3,7 +3,7 @@
     <div class="md:col-span-1">
       <div class="px-4 sm:px-0">
         <h3 class="text-lg font-medium leading-6 text-gray-900">Http Settings</h3>
-        <p class="mt-1 text-sm text-gray-600">Informations about how to send the request.</p>
+        <p class="mt-1 params text-gray-600">Informations about how to send the request.</p>
       </div>
     </div>
     <div class="mt-5 md:mt-0 md:col-span-2">
@@ -35,9 +35,9 @@
                   <input type="text" name="header-value-{{i}}" [(ngModel)]="header.value" id="header-value-{{i}}" autocomplete="header-value" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
               </div>
-                
+
               <button type="button" (click)="addNewHeader()" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mt-3">+ {{step.headers?.length == 0 ? "Header":""}}</button>
-  
+
             </div>
             <div>
               <label for="body" class="block text-sm font-medium text-gray-700"> Body </label>

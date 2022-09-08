@@ -30,52 +30,55 @@ export class StepComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(!(this.activeRoute.snapshot.params['test-id'])
-      || !(this.activeRoute.snapshot.params['step-id'])
-      || isNaN(parseInt(this.activeRoute.snapshot.params['test-id']!))) {
-      this.router.navigate(['/']).then();
-      return;
-    }
 
-    this.testId = parseInt(this.activeRoute.snapshot.params['test-id']!);
+    this.activeRoute.params.subscribe(params => {
+      if(!(params['test-id'])
+        || !(params['step-id'])
+        || isNaN(parseInt(params['test-id']!))) {
+        this.router.navigate(['/']).then();
+        return;
+      }
 
-    this.testPlanService.getPlanById(this.testId).subscribe(testPlan => {
-      this.testPlan = testPlan;
+      this.testId = parseInt(params['test-id']!);
+
+      this.testPlanService.getPlanById(this.testId).subscribe(testPlan => {
+        this.testPlan = testPlan;
+      });
+
+      if(params['step-id']! === 'script') {
+        this.stepType = 'script';
+        this.step = {id:-1, name: "", script: ""}
+      }
+      else if(params['step-id']! === 'http') {
+        this.stepType = 'http';
+        this.step = {id:-1, name: "", description: "", body: "", url: "", method: "", headers: []}
+      }
+      else {
+        this.stepId = parseInt(params['step-id']!);
+
+        this.stepService.getAllStepByIdForPlan(this.testId, this.stepId).subscribe(step => {
+          if(!step.type) {
+            this.router.navigate(['/']).then();
+            return;
+          }
+
+          this.stepType = step.type;
+
+          if(step.type === 'http') {
+            this.httpStepService.getHttpStepForPlan(this.testId, this.stepId).subscribe(step => {
+              this.step = step;
+            })
+          }
+          else if(step.type === 'script') {
+            this.scriptStepService.getScriptStepForPlan(this.testId, this.stepId).subscribe(step => {
+              this.step = step;
+            })
+          }
+          else {
+            console.error()
+          }
+        })
+      }
     });
-
-    if(this.activeRoute.snapshot.params['step-id']! === 'script') {
-      this.stepType = 'script';
-      this.step = {id:-1, name: "", script: ""}
-    }
-    else if(this.activeRoute.snapshot.params['step-id']! === 'http') {
-      this.stepType = 'http';
-      this.step = {id:-1, name: "", description: "", body: "", url: "", method: "", headers: []}
-    }
-    else {
-      this.stepId = parseInt(this.activeRoute.snapshot.params['step-id']!);
-
-      this.stepService.getAllStepByIdForPlan(this.testId, this.stepId).subscribe(step => {
-        if(!step.type) {
-          this.router.navigate(['/']).then();
-          return;
-        }
-
-        this.stepType = step.type;
-
-        if(step.type === 'http') {
-          this.httpStepService.getHttpStepForPlan(this.testId, this.stepId).subscribe(step => {
-            this.step = step;
-          })
-        }
-        else if(step.type === 'script') {
-          this.scriptStepService.getScriptStepForPlan(this.testId, this.stepId).subscribe(step => {
-            this.step = step;
-          })
-        }
-        else {
-          console.error()
-        }
-      })
-    }
   }
 }

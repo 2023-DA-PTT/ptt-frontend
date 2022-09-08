@@ -5,7 +5,7 @@ import {
   HttpStepResourceService, PlanRunDto,
   PlanRunResourceService, StepDto
 } from "../../../../services";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Route, Router} from "@angular/router";
 import {ChartConfiguration, ChartOptions} from "chart.js";
 import {NgForm} from "@angular/forms";
 import {DataPointResultDto} from "../../../../models/dataPointResultDto";
@@ -51,31 +51,33 @@ export class StatsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!(this.activeRoute.snapshot.params['test-id'])
-      || !(this.activeRoute.snapshot.params['run-id'])
-      || isNaN(parseInt(this.activeRoute.snapshot.params['test-id']!))
-      || isNaN(parseInt(this.activeRoute.snapshot.params['run-id']!))) {
-      this.router.navigate(['/']);
-      return;
-    }
-
-    this.testId = parseInt(this.activeRoute.snapshot.params['test-id']!);
-    this.runId = parseInt(this.activeRoute.snapshot.params['run-id']!);
-
-    this.testRunService.getPlanRunById(this.runId).subscribe(testRun => {
-      this.testDate = Math.floor(testRun.startTime! * 1000);
-      this.fromDate = Math.floor(testRun.startTime! * 1000) - 60000; // one min before test start
-      if (testRun.runOnce) {
-        this.toDate = Math.floor(testRun.startTime! * 1000) + 60000 // one min after test start
-      } else {
-        this.toDate = Math.floor((testRun.startTime * 1000) + (testRun.duration / 1000) + 600000) // one min after test end
+    this.activeRoute.params.subscribe(params => {
+      if (!(params['test-id'])
+        || !(params['run-id'])
+        || isNaN(parseInt(params['test-id']!))
+        || isNaN(parseInt(params['run-id']!))) {
+        this.router.navigate(['/']);
+        return;
       }
-      this.updateGraphs();
-    });
 
-    this.testRunService.getPlanRunsForPlan(this.testId).subscribe(runs => {
-      this.testRuns = runs;
-    });
+      this.testId = parseInt(params['test-id']!);
+      this.runId = parseInt(params['run-id']!);
+
+      this.testRunService.getPlanRunById(this.runId).subscribe(testRun => {
+        this.testDate = Math.floor(testRun.startTime! * 1000);
+        this.fromDate = Math.floor(testRun.startTime! * 1000) - 60000; // one min before test start
+        if (testRun.runOnce) {
+          this.toDate = Math.floor(testRun.startTime! * 1000) + 60000 // one min after test start
+        } else {
+          this.toDate = Math.floor((testRun.startTime * 1000) + (testRun.duration / 1000) + 600000) // one min after test end
+        }
+        this.updateGraphs();
+      });
+
+      this.testRunService.getPlanRunsForPlan(this.testId).subscribe(runs => {
+        this.testRuns = runs;
+      });
+    })
 
   }
 

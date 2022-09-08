@@ -51,3 +51,5 @@ import 'zone.js';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+import 'flowbite/dist/flowbite.js';
+import 'tw-elements';
