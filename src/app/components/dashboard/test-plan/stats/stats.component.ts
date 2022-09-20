@@ -118,7 +118,7 @@ export class StatsComponent implements OnInit {
 
     this.stepService.getAllHttpStepsForPlan(this.testId).subscribe(steps => {
       steps.forEach((step, idx) => {
-        this.getChartDataForPlanAndStep(this.testId, step, labels).then(chartConfig => {
+        this.getChartDataForPlanAndStep(this.runId, step, labels).then(chartConfig => {
           locLinedata.push(chartConfig);
         });
       });
@@ -190,12 +190,13 @@ export class StatsComponent implements OnInit {
   getDataArrayForTestStep(planRunId: number,
                           step: StepDto,
                           labels: number[]): Promise<number[]> {
+    console.log("getting data . . . " + planRunId);
     return lastValueFrom(this.dataPointService.getDataPointsForStep(planRunId, step.id!, 'max', this.fromDate, this.interval, this.toDate)).then((dataPoints: DataPointResultDto[]) => {
       const data: number[] = [];
       let cnt = 0;
 
       dataPoints.forEach(dp => {
-        while (labels[cnt] != dp.start) {
+        while (labels[cnt] <= dp.start!) {
           data.push(0);
           cnt++;
         }
