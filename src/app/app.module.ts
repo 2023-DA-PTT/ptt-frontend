@@ -33,6 +33,8 @@ import { NextStepsComponent } from './components/dashboard/test-plan/step/next-s
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { PlanNodeViewComponent } from './components/plan-node-view/plan-node-view.component';
 import { TestRunStepDataCardComponent } from './components/dashboard/overview/test-run-step-data-card/test-run-step-data-card.component';
+import { CompareComponent } from './components/dashboard/test-plan/compare/compare.component';
+import { IntervalSelectComponent } from './components/dashboard/test-plan/interval-select/interval-select.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { TestRunStepDataCardComponent } from './components/dashboard/overview/te
     OutputParametersComponent,
     NextStepsComponent,
     PlanNodeViewComponent,
-    TestRunStepDataCardComponent
+    TestRunStepDataCardComponent,
+    CompareComponent,
+    IntervalSelectComponent
   ],
     imports: [
         FormsModule,

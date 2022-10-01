@@ -27,6 +27,8 @@ export class DashboardComponent implements OnInit {
         return "Script Step";
       case "http":
         return "Http Step";
+      case "compare":
+        return "Compare Runs";
     }
 
     return urlPath;
