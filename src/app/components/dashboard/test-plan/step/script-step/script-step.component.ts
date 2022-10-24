@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CodeModel} from "@ngstack/code-editor";
 import {ScriptStepDto, ScriptStepResourceService} from "../../../../../services";
-import {FormGroup, NgForm} from "@angular/forms";
+import {NgForm} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 

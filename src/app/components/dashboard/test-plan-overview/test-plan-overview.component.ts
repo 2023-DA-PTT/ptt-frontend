@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PlanDto, PlanResourceService} from "../../../services";
 import {NgForm} from "@angular/forms";
-import {Toast, ToastrService} from "ngx-toastr";
-import { CodeModel } from '@ngstack/code-editor';
+import {ToastrService} from "ngx-toastr";
+import {CodeModel} from '@ngstack/code-editor';
 
 @Component({
   selector: 'app-test-plan-overview',

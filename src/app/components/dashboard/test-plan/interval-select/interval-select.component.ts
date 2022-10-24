@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {IntervalSelectMode} from "../../../../models/interval-select-mode";
 import {ToastrService} from "ngx-toastr";
-import {from} from "rxjs";
 
 @Component({
   selector: 'app-interval-select',

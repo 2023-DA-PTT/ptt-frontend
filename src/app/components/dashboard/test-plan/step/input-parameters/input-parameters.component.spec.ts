@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { InputParametersComponent } from './input-parameters.component';
+import {InputParametersComponent} from './input-parameters.component';
 
 describe('InputParametersComponent', () => {
   let component: InputParametersComponent;

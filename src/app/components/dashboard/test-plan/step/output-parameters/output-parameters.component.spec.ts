@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { OutputParametersComponent } from './output-parameters.component';
+import {OutputParametersComponent} from './output-parameters.component';
 
 describe('OutputParametersComponent', () => {
   let component: OutputParametersComponent;

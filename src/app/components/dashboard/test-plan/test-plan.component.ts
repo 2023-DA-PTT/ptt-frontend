@@ -1,23 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Route, Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 import {
-  HttpStepDto,
-  HttpStepResourceService, PlanResourceService, PlanRunDto, PlanRunResourceService,
-  ScriptStepDto,
+  HttpStepResourceService,
+  PlanResourceService,
+  PlanRunDto,
+  PlanRunResourceService,
   ScriptStepResourceService,
-  StepDto,
   StepParameterRelationResourceService,
   StepResourceService,
   StepWithNextsDto
 } from "../../../services";
-import {ScriptStepComponent} from "./step/script-step/script-step.component";
-import {HttpStepComponent} from "./step/http-step/http-step.component";
 import {formatDate} from "@angular/common";
-import { NgForm } from '@angular/forms';
-import { NodeResourceService } from 'src/app/services/api/nodeResource.service';
-import { Toast, ToastrComponentlessModule, ToastrService } from 'ngx-toastr';
-import { Edge, Node } from '@swimlane/ngx-graph';
-import { Subject } from 'rxjs';
+import {NgForm} from '@angular/forms';
+import {NodeResourceService} from 'src/app/services/api/nodeResource.service';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({

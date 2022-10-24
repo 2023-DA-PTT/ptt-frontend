@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   DataPointAggregationResourceService,
   PlanResourceService,
-  PlanRunDto,
   PlanRunResourceService,
   StepResourceService
 } from "../../../services";

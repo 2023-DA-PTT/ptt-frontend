@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/webpage/home/home.component';
-import { NodeEditorComponent } from './components/node-editor/node-editor.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './components/webpage/home/home.component';
+import {NodeEditorComponent} from './components/node-editor/node-editor.component';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {WebpageComponent} from "./components/webpage/webpage.component";
 import {OverviewComponent} from "./components/dashboard/overview/overview.component";

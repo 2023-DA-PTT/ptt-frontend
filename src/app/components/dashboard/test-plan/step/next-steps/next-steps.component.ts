@@ -1,8 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { InputArgumentDto, InputArgumentResourceService, NextStepWithParameterRelationDto, OutputArgumentDto, OutputArgumentResourceService, StepDto, StepResourceService } from 'src/app/services';
-import { NextStepDto } from 'src/app/services/model/nextStepDto';
+import {Component, Input, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {
+  InputArgumentDto,
+  InputArgumentResourceService,
+  NextStepWithParameterRelationDto,
+  OutputArgumentDto,
+  OutputArgumentResourceService,
+  StepDto,
+  StepResourceService
+} from 'src/app/services';
 
 @Component({
   selector: 'app-next-steps',

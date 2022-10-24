@@ -1,12 +1,13 @@
-import { HttpStepDto } from './../../../../services/model/httpStepDto';
-import { Component, OnInit } from '@angular/core';
+import {HttpStepDto} from './../../../../services/model/httpStepDto';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {
   HttpStepResourceService,
-  PlanDto, PlanResourceService,
+  PlanDto,
+  PlanResourceService,
   ScriptStepDto,
   ScriptStepResourceService,
-  StepDto, StepResourceService
+  StepResourceService
 } from "../../../../services";
 
 @Component({

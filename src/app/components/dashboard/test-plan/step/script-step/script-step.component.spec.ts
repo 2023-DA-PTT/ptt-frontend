@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ScriptStepComponent } from './script-step.component';
+import {ScriptStepComponent} from './script-step.component';
 
 describe('ScriptStepComponent', () => {
   let component: ScriptStepComponent;

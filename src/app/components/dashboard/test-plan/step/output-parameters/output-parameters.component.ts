@@ -1,13 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import {
-  InputArgumentDto,
-  InputArgumentResourceService,
-  OutputArgumentDto,
-  OutputArgumentResourceService,
-  OutputType
-} from "../../../../../services";
+import {NgForm} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {OutputArgumentDto, OutputArgumentResourceService, OutputType} from "../../../../../services";
 
 @Component({
   selector: 'app-output-parameters',

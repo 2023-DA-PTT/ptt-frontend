@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TestRunStepDataCardComponent } from './test-run-step-data-card.component';
+import {TestRunStepDataCardComponent} from './test-run-step-data-card.component';
 
 describe('TestRunStepDataCardComponent', () => {
   let component: TestRunStepDataCardComponent;

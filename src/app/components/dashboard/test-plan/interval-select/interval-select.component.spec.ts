@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { IntervalSelectComponent } from './interval-select.component';
+import {IntervalSelectComponent} from './interval-select.component';
 
 describe('IntervalSelectComponent', () => {
   let component: IntervalSelectComponent;

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {InputArgumentDto, InputArgumentResourceService, StepDto} from "../../../../../services";
+import {InputArgumentDto, InputArgumentResourceService} from "../../../../../services";
 import {NgForm} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 

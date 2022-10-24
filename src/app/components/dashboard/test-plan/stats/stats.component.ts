@@ -1,18 +1,13 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {
-  DataPointResourceService, HttpStepDto,
-  HttpStepResourceService, PlanRunDto,
-  PlanRunResourceService, StepDto
+  DataPointResourceService,
+  HttpStepResourceService,
+  PlanRunDto,
+  PlanRunResourceService
 } from "../../../../services";
-import {ActivatedRoute, Route, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ChartConfiguration, ChartOptions} from "chart.js";
-import {NgForm} from "@angular/forms";
-import {DataPointResultDto} from "../../../../models/dataPointResultDto";
-import {lab} from "d3";
-import {id} from "@swimlane/ngx-graph/lib/utils/id";
-import {lastValueFrom, Observable, of} from "rxjs";
-import {data} from "autoprefixer";
 import {ChartServiceService} from "../../../../services/chart-service.service";
 import {ToastrService} from "ngx-toastr";
 

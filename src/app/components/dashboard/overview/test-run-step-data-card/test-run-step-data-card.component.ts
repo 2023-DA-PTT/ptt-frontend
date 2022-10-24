@@ -1,7 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {StepDto} from "../../../../services";
-import {PlanStepData} from "../../../../models/plan-step-data";
-import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-test-run-step-data-card',

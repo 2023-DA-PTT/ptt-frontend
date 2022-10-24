@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PlanData} from "../../../models/plan-data";
-import {PlanDto, PlanResourceService, PlanRunResourceService, StepResourceService} from "../../../services";
+import {PlanResourceService, PlanRunResourceService, StepResourceService} from "../../../services";
 
 @Component({
   selector: 'app-sidebar',

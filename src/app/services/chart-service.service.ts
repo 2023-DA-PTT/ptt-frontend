@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpStepDto} from "./model/httpStepDto";
 import {ChartConfiguration} from "chart.js";
 import {StepDto} from "./model/stepDto";
-import {lastValueFrom, of} from "rxjs";
+import {lastValueFrom} from "rxjs";
 import {DataPointResultDto} from "../models/dataPointResultDto";
 import {DataPointResourceService} from "./api/dataPointResource.service";
 

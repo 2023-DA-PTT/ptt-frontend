@@ -1,13 +1,12 @@
 import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
-import {ChartConfiguration, ChartOptions} from "chart.js";
-import {first, lastValueFrom} from "rxjs";
-import {HttpStepResourceService, PlanRunDto, PlanRunResourceService, StepResourceService} from "../../../../services";
+import {ChartOptions} from "chart.js";
+import {lastValueFrom} from "rxjs";
+import {HttpStepResourceService, PlanRunDto, PlanRunResourceService} from "../../../../services";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ChartServiceService} from "../../../../services/chart-service.service";
-import {lab} from "d3";
 import {IntervalSelectMode} from "../../../../models/interval-select-mode";
 import {ToastrService} from "ngx-toastr";
-import {DatePipe, formatDate} from "@angular/common";
+import {formatDate} from "@angular/common";
 import {NamedChartData} from "../../../../models/named-chart-data";
 
 @Component({

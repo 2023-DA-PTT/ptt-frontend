@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { HttpStepDto, HttpStepResourceService, RequestContentType } from 'src/app/services';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {HttpStepDto, HttpStepResourceService, RequestContentType} from 'src/app/services';
 
 @Component({
   selector: 'app-http-step',
