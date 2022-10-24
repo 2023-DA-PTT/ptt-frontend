@@ -20,25 +20,24 @@ export class NodeEditorComponent implements OnInit {
   }
 
   public onDragStart(event: DragEvent) {
-    this.dragging = true;
-    this.startX = event.clientX;
-    this.startY = event.clientY;
+    //this.dragging = true;
+    //this.startX = event.clientX;
+    //this.startY = event.clientY;
   }
 
   public onDrag(event: DragEvent) {
     if(!this.dragging) {
       return;
     }
-    
+
     //this.x += event.clientX - this.startX;
     //this.y += event.clientY - this.startY;
     //console.log(event);
   }
 
   public onDragEnd(event: DragEvent) {
-    this.dragging = false;
-    this.x += event.clientX-this.startX;
-    this.y += event.clientY-this.startY;
-    console.log(event);
+    //this.dragging = false;
+    //this.x += event.clientX-this.startX;
+    //this.y += event.clientY-this.startY;
   }
 }

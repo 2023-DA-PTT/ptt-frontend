@@ -35,7 +35,7 @@ export class ChartServiceService {
             borderColor: 'gray',
             backgroundColor: backgroundcolor ? backgroundcolor : 'rgba(67,144,248,0.3)',
             pointBorderWidth: 0.5
-          }
+          },
         ],
       };
     });

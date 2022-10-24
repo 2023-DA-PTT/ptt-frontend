@@ -1,27 +1,35 @@
 <div class="grid grid-cols-4 w-full">
-  <div class="col-span-1 mt-3">
+  <div class="col-span-1 mt-1">
     <p class="text-2xl">Compare Test Runs</p>
   </div>
   <app-interval-select class="col-span-3" [(fromDate)]="from" [(toDate)]="to" [(interval)]="interval" (submitValid)="compareTestRun(firstTestRun, secondTestRun, true)" [mode]="intervalSelectMode"></app-interval-select>
   <div class="col-span-1 mt-2">
     <p class="text-xl">Select Test Runs</p>
   </div>
-  <div class="col-span-1 mt-2">
+  <div class="col-span-3 mt-2 flex flex-row">
     <select name="test-run-comparation" (ngModelChange)="compareTestRun($event, secondTestRun, false)" [(ngModel)]="firstTestRun" id="test-run-comparation-first" class="border max-w-fit border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
       <option value="-1">Select first test run</option>
       <option *ngFor="let testRun of testRuns" value="{{testRun.id}}">{{testRun.name}} ({{(testRun.startTime!*1000) | date: 'dd.MM.yyyy HH:mm:ss'}})</option>
     </select>
-  </div>
-  <div class="col-span-1 mt-2">
-    <select name="test-run-comparation" (ngModelChange)="compareTestRun(firstTestRun, $event, false)" [(ngModel)]="secondTestRun" id="test-run-comparation-second" class="border max-w-fit border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <select name="test-run-comparation" (ngModelChange)="compareTestRun(firstTestRun, $event, false)" [(ngModel)]="secondTestRun" id="test-run-comparation-second" class="ml-10 border max-w-fit border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
       <option value="-1">Select second test run</option>
       <option *ngFor="let testRun of testRuns" value="{{testRun.id}}">{{testRun.name}} ({{(testRun.startTime!*1000) | date: 'dd.MM.yyyy HH:mm:ss'}})</option>
     </select>
+    <button *ngIf="largeView"
+            (click)="largeView = !largeView"
+            class="ml-10 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"> Zoom out
+    </button>
+    <button *ngIf="!largeView"
+            (click)="largeView = !largeView"
+            class="ml-10 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"> Zoom in
+    </button>
   </div>
-  <div *ngFor="let compareChartData of compareTestChartData" class="col-span-2 w-full h-64 rounded p-3 mt-5">
+
+  <div [ngClass]="{'col-span-4': largeView, 'col-span-2': !largeView}"  *ngFor="let compareChartData of compareTestChartData" class="w-full h-64 rounded p-3 mt-5">
+    <p>{{ compareChartData.name }}</p>
     <canvas class="block" baseChart
             [type]="'line'"
-            [data]="compareChartData"
+            [data]="compareChartData.data"
             [options]="lineChartOptions"
             [legend]="lineChartLegend">
     </canvas>

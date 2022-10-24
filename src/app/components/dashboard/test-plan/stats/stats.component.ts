@@ -43,8 +43,18 @@ export class StatsComponent implements OnInit {
       tooltip: {
         enabled: false
       }
+    },
+    scales: {
+      y: {
+        ticks: {
+          callback: function(value, index, ticks) {
+            return value + " ms";
+          }
+        }
+      }
     }
   };
+  largeView: boolean = false;
 
   constructor(private activeRoute: ActivatedRoute,
               private router: Router,

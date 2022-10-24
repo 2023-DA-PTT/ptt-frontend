@@ -33,13 +33,12 @@ export class OutputParametersComponent implements OnInit {
   }
 
   addNewOutputParam() {
-    console.log(this.outputParameters);
     this.outputParameters.push({stepId: this.stepId})
   }
 
   onSubmit(outputParamForm: NgForm) {
     if (!outputParamForm.valid) {
-      console.log("UNVALID")
+      this.toastr.error("Form invalid!")
       return;
     }
 

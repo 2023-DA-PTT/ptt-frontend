@@ -28,22 +28,12 @@ export class IntervalSelectComponent implements OnInit {
   setFromDate(fromD: string) {
     const fromDate = new Date(fromD).getTime();
 
-    if (!fromDate || this.checkOffsets(fromDate, this.toDate)) {
-      this.toastr.error("Invalid start date!");
-      return;
-    }
-
     this.fromDate = Math.floor(fromDate);
     this.fromDateChange.emit(this.fromDate);
   }
 
   setToDate(toD: string) {
     const toDate = new Date(toD).getTime();
-
-    if (!toDate || this.checkOffsets(toDate, this.toDate)) {
-      this.toastr.error("Invalid end date!");
-      return;
-    }
 
     this.toDate = Math.floor(toDate);
     this.toDateChange.emit(this.toDate);
@@ -54,40 +44,36 @@ export class IntervalSelectComponent implements OnInit {
       return;
     }
 
-    this.submitValid.emit();
-  }
-
-  setInterval($event: any) {
-    if ($event < 100) {
+    if (this.interval < 100) {
       this.toastr.error("Interval has to be greater than 100");
       return;
     }
 
+
+    if (this.fromDate == null || !this.toDate || !this.checkOffsets(this.fromDate, this.toDate)) {
+      this.toastr.error("Invalid start or end date!");
+      return;
+    }
+
+    this.submitValid.emit();
+  }
+
+  setInterval($event: any) {
     this.interval = $event;
     this.intervalChange.emit(this.interval);
   }
 
   setFromOffset($event: any) {
-    if (this.checkOffsets($event, this.toDate)) {
-      this.toastr.error("Invalid offset!");
-      return;
-    }
-
     this.fromDate = $event;
     this.fromDateChange.emit(this.fromDate);
   }
 
   setToOffset($event: any) {
-    if (this.checkOffsets(this.fromDate, $event)) {
-      this.toastr.error("Invalid offset!");
-      return;
-    }
-
     this.toDate = $event;
     this.toDateChange.emit(this.toDate);
   }
 
   checkOffsets(fromDate: number, toDate: number): boolean {
-    return fromDate < toDate && fromDate > 0 && toDate > 0;
+    return fromDate < toDate && fromDate >= 0 && toDate > 0;
   }
 }

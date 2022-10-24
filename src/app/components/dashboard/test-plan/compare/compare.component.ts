@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {ChartConfiguration, ChartOptions} from "chart.js";
 import {first, lastValueFrom} from "rxjs";
 import {HttpStepResourceService, PlanRunDto, PlanRunResourceService, StepResourceService} from "../../../../services";
@@ -7,6 +7,8 @@ import {ChartServiceService} from "../../../../services/chart-service.service";
 import {lab} from "d3";
 import {IntervalSelectMode} from "../../../../models/interval-select-mode";
 import {ToastrService} from "ngx-toastr";
+import {DatePipe, formatDate} from "@angular/common";
+import {NamedChartData} from "../../../../models/named-chart-data";
 
 @Component({
   selector: 'app-compare',
@@ -21,9 +23,18 @@ export class CompareComponent implements OnInit {
       tooltip: {
         enabled: false
       }
+    },
+    scales: {
+      y: {
+        ticks: {
+          callback: function(value, index, ticks) {
+            return value + " ms";
+          }
+        }
+      }
     }
   };
-  compareTestChartData: ChartConfiguration<'line'>['data'][] = [];
+  compareTestChartData: NamedChartData[] = [];
   lineChartLegend = true;
   testRuns: PlanRunDto[] = [];
   testId: number = -1;
@@ -35,13 +46,15 @@ export class CompareComponent implements OnInit {
   intervalSelectMode = IntervalSelectMode.TIME_AFTER_TEST_START;
   totalSteps: number = 0;
   loadedSteps: number = 0;
+  largeView: boolean = false;
 
   constructor(private activeRoute: ActivatedRoute,
               private router: Router,
               private stepService: HttpStepResourceService,
               private testRunService: PlanRunResourceService,
               private chartService: ChartServiceService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              @Inject(LOCALE_ID) private locale: string) {
   }
 
   ngOnInit(): void {
@@ -100,7 +113,7 @@ export class CompareComponent implements OnInit {
               (fromLocal + this.from) * 1000,
               (fromLocal + this.to) * 1000,
               this.interval,
-              firstPlanRun.name,
+              firstPlanRun.name ? firstPlanRun.name : formatDate(new Date(firstPlanRun.startTime!*1000), "dd.MM.yyyy HH:mm:ss", this.locale),
               'rgba(0,42,255,0.3)',
               offsetFirstPlanRun,
               (fromLocal + this.from) * 1000,
@@ -111,21 +124,22 @@ export class CompareComponent implements OnInit {
                 (fromLocal + this.from) * 1000,
                 (fromLocal + this.to) * 1000,
                 this.interval,
-                secondPlanRun.name,
+                secondPlanRun.name ? secondPlanRun.name : formatDate(new Date(secondPlanRun.startTime!*1000), "dd.MM.yyyy HH:mm:ss", this.locale),
                 'rgba(255,0,0,0.3)',
                 offsetSecondPlanRun,
                 (fromLocal + this.from) * 1000,
               ).then(secondChartConfig => {
                 this.compareTestChartData.push({
-                  labels: labels.map(label => label + 'ms'),
-                  datasets: firstChartConfig.datasets.concat(secondChartConfig.datasets)
+                  name: step.name!,
+                  data: {
+                    labels: labels.map(label => label + 'ms'),
+                    datasets: firstChartConfig.datasets.concat(secondChartConfig.datasets)
+                  }
                 });
                 console.log("got chart " + step.id)
                 this.loadedSteps++;
               });
             });
-
-            console.log("did step " + step.id)
           })
         })
       )
@@ -146,7 +160,7 @@ export class CompareComponent implements OnInit {
     }
 
     let labels: number[] = [];
-    for (let labelTime = this.from; labelTime < this.to; labelTime += this.interval) {
+    for (let labelTime = this.from; labelTime <= this.to; labelTime += this.interval) {
       labels.push(labelTime);
     }
     return {offsetFirstPlanRun, offsetSecondPlanRun, fromLocal, labels};
