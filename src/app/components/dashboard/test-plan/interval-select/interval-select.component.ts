@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {IntervalSelectMode} from "../../../../models/interval-select-mode";
+import {ToastrService} from "ngx-toastr";
+import {from} from "rxjs";
 
 @Component({
   selector: 'app-interval-select',
@@ -17,7 +19,8 @@ export class IntervalSelectComponent implements OnInit {
   @Input() interval: number = 0;
   @Input() mode: IntervalSelectMode = IntervalSelectMode.DATE_TIME;
 
-  constructor() { }
+  constructor(private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
   }
@@ -25,19 +28,25 @@ export class IntervalSelectComponent implements OnInit {
   setFromDate(fromD: string) {
     const fromDate = new Date(fromD).getTime();
 
-    if (fromDate) {
-      this.fromDate = Math.floor(fromDate);
-      this.fromDateChange.emit(this.toDate);
+    if (!fromDate || this.checkOffsets(fromDate, this.toDate)) {
+      this.toastr.error("Invalid start date!");
+      return;
     }
+
+    this.fromDate = Math.floor(fromDate);
+    this.fromDateChange.emit(this.fromDate);
   }
 
   setToDate(toD: string) {
     const toDate = new Date(toD).getTime();
 
-    if (toDate) {
-      this.toDate = Math.floor(toDate);
-      this.toDateChange.emit(this.toDate);
+    if (!toDate || this.checkOffsets(toDate, this.toDate)) {
+      this.toastr.error("Invalid end date!");
+      return;
     }
+
+    this.toDate = Math.floor(toDate);
+    this.toDateChange.emit(this.toDate);
   }
 
   onSubmit(filterForm: NgForm) {
@@ -49,19 +58,36 @@ export class IntervalSelectComponent implements OnInit {
   }
 
   setInterval($event: any) {
-    if($event >= 100) {
-      this.interval = $event;
-      this.intervalChange.emit(this.interval);
+    if ($event < 100) {
+      this.toastr.error("Interval has to be greater than 100");
+      return;
     }
+
+    this.interval = $event;
+    this.intervalChange.emit(this.interval);
   }
 
   setFromOffset($event: any) {
+    if (this.checkOffsets($event, this.toDate)) {
+      this.toastr.error("Invalid offset!");
+      return;
+    }
+
     this.fromDate = $event;
     this.fromDateChange.emit(this.fromDate);
   }
 
   setToOffset($event: any) {
+    if (this.checkOffsets(this.fromDate, $event)) {
+      this.toastr.error("Invalid offset!");
+      return;
+    }
+
     this.toDate = $event;
     this.toDateChange.emit(this.toDate);
+  }
+
+  checkOffsets(fromDate: number, toDate: number): boolean {
+    return fromDate < toDate && fromDate > 0 && toDate > 0;
   }
 }

@@ -14,6 +14,7 @@ import {id} from "@swimlane/ngx-graph/lib/utils/id";
 import {lastValueFrom, Observable, of} from "rxjs";
 import {data} from "autoprefixer";
 import {ChartServiceService} from "../../../../services/chart-service.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-stats',
@@ -50,7 +51,8 @@ export class StatsComponent implements OnInit {
               private dataPointService: DataPointResourceService,
               private stepService: HttpStepResourceService,
               private testRunService: PlanRunResourceService,
-              private chartService: ChartServiceService) {
+              private chartService: ChartServiceService,
+              private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -87,11 +89,15 @@ export class StatsComponent implements OnInit {
   updateGraphs() {
     const locLinedata: ChartConfiguration<'line'>['data'][] = [];
     const labels: number[] = [];
+
+
+
     for (let labelTime = this.fromDate; labelTime < this.toDate; labelTime += this.interval) {
       labels.push(labelTime);
     }
 
     if (labels.length == 0) {
+      this.toastr.error("Wrong start and end time!")
       return;
     }
 
