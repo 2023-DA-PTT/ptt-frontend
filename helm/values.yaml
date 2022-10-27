@@ -1,4 +1,4 @@
 image:
   repository: ghcr.io/2023-da-ptt/ptt-frontend
-  pullPolicy: IfNotPresent
-  tag: ""
+  pullPolicy: Always
+  tag: latest
