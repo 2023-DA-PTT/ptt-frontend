@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -40,6 +40,21 @@ import {
 } from './components/dashboard/overview/test-run-step-data-card/test-run-step-data-card.component';
 import {CompareComponent} from './components/dashboard/test-plan/compare/compare.component';
 import {IntervalSelectComponent} from './components/dashboard/test-plan/interval-select/interval-select.component';
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://auth.perftest.tech',
+        realm: 'master',
+        clientId: 'backend-service'
+      },
+      initOptions: {
+        flow: "implicit"
+      }
+    });
+}
 
 @NgModule({
   declarations: [
@@ -67,6 +82,7 @@ import {IntervalSelectComponent} from './components/dashboard/test-plan/interval
     IntervalSelectComponent
   ],
     imports: [
+      KeycloakAngularModule,
         FormsModule,
         ApiModule,
         HttpClientModule,
@@ -82,7 +98,13 @@ import {IntervalSelectComponent} from './components/dashboard/test-plan/interval
         ReactiveFormsModule,
         NgxGraphModule
     ],
-  providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}],
+  providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH},
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

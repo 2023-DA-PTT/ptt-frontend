@@ -10,6 +10,7 @@ import {TestPlanComponent} from "./components/dashboard/test-plan/test-plan.comp
 import {StepComponent} from "./components/dashboard/test-plan/step/step.component";
 import {StatsComponent} from "./components/dashboard/test-plan/stats/stats.component";
 import {CompareComponent} from "./components/dashboard/test-plan/compare/compare.component";
+import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
   { path: '', component: WebpageComponent, children: [
@@ -25,7 +26,7 @@ const routes: Routes = [
       { path: 'test-plan/:test-id/step', pathMatch: 'full', redirectTo:'test-plan/:test-id' },
       { path: 'test-plan/:test-id/step/:step-id', component: StepComponent },
       { path: 'test-plan/:test-id/stats/:run-id', component: StatsComponent },
-    ] },
+    ] , canActivate: [AuthGuard]},
 ];
 
 @NgModule({
