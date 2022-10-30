@@ -1,6 +1,6 @@
 <form #filterForm="ngForm" (ngSubmit)="onSubmit(filterForm)">
   <div class="flex items-center col-span-3 mb-10">
-    <div class="relative ml-4">
+    <div class="relative">
       <!-- Datetime mode -->
       <input *ngIf="mode == 0" (ngModelChange)="setFromDate($event)" [ngModel]="fromDate |date:'yyyy-MM-ddTHH:mm:ss'"
              name="start"

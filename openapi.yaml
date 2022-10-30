@@ -18,6 +18,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DataPointDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/datapoint-aggr/planrun/{planRunId}/step/{stepId}/avg:
     get:
       tags:
@@ -39,6 +45,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/datapoint-aggr/planrun/{planRunId}/step/{stepId}/compare:
     get:
       tags:
@@ -65,6 +77,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/datapoint/planrun/{planRunId}:
     get:
       tags:
@@ -86,6 +104,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DataPointDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/datapoint/planrun/{planRunId}/step/{stepId}:
     get:
       tags:
@@ -126,6 +150,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/node/locations:
     get:
       tags:
@@ -141,11 +171,17 @@ paths:
                 type: array
                 items:
                   type: string
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan:
     get:
       tags:
       - Plan Resource
-      operationId: getAllPlans
+      operationId: getAllPlansForUser
       responses:
         "200":
           description: OK
@@ -155,6 +191,30 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PlanDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
+    post:
+      tags:
+      - Plan Resource
+      operationId: createPlanForUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanDto'
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/export/{id}:
     get:
       tags:
@@ -167,6 +227,10 @@ paths:
         schema:
           format: int64
           type: integer
+      - name: token
+        in: query
+        schema:
+          type: string
       responses:
         "200":
           description: OK
@@ -183,27 +247,12 @@ paths:
       responses:
         "200":
           description: OK
-  /api/plan/user/{userId}:
-    get:
-      tags:
-      - Plan Resource
-      operationId: getAllPlansForUser
-      parameters:
-      - name: userId
-        in: path
-        required: true
-        schema:
-          format: int64
-          type: integer
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PlanDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{id}:
     get:
       tags:
@@ -223,6 +272,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlanDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step:
     get:
       tags:
@@ -244,6 +299,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/StepWithNextsDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step/http:
     get:
       tags:
@@ -265,6 +326,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/HttpStepDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
     post:
       tags:
       - Http Step Resource
@@ -284,6 +351,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step/script:
     get:
       tags:
@@ -305,6 +378,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ScriptStepDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
     post:
       tags:
       - Script Step Resource
@@ -324,6 +403,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step/{stepId}:
     get:
       tags:
@@ -349,6 +434,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StepDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
     delete:
       tags:
       - Step Resource
@@ -369,6 +460,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step/{stepId}/http:
     get:
       tags:
@@ -390,6 +487,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
     put:
       tags:
       - Http Step Resource
@@ -415,6 +518,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step/{stepId}/inputArgument:
     get:
       tags:
@@ -442,6 +551,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/InputArgumentDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
     post:
       tags:
       - Input Argument Resource
@@ -467,6 +582,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step/{stepId}/inputArgument/{inArgId}:
     get:
       tags:
@@ -498,6 +619,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InputArgumentDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
     put:
       tags:
       - Input Argument Resource
@@ -529,6 +656,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
     delete:
       tags:
       - Input Argument Resource
@@ -555,6 +688,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step/{stepId}/nexts:
     get:
       tags:
@@ -582,6 +721,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/NextStepWithParameterRelationDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
     post:
       tags:
       - Step Resource
@@ -609,6 +754,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step/{stepId}/outputArgument:
     get:
       tags:
@@ -636,6 +787,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/OutputArgumentDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
     post:
       tags:
       - Output Argument Resource
@@ -661,6 +818,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step/{stepId}/outputArgument/{outArgId}:
     get:
       tags:
@@ -692,6 +855,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OutputArgumentDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
     put:
       tags:
       - Output Argument Resource
@@ -723,6 +892,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
     delete:
       tags:
       - Output Argument Resource
@@ -749,6 +924,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step/{stepId}/parameterRelation:
     post:
       tags:
@@ -775,6 +956,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step/{stepId}/parameterRelation/from:
     get:
       tags:
@@ -802,6 +989,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/StepParameterRelationDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step/{stepId}/parameterRelation/to:
     get:
       tags:
@@ -829,6 +1022,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/StepParameterRelationDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/plan/{planId}/step/{stepId}/script:
     get:
       tags:
@@ -850,6 +1049,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
     put:
       tags:
       - Script Step Resource
@@ -875,26 +1080,12 @@ paths:
       responses:
         "200":
           description: OK
-  /api/plan/{userId}:
-    post:
-      tags:
-      - Plan Resource
-      operationId: createPlanForUser
-      parameters:
-      - name: userId
-        in: path
-        required: true
-        schema:
-          format: int64
-          type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PlanDto'
-      responses:
-        "200":
-          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/planrun:
     get:
       tags:
@@ -909,6 +1100,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PlanRunDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
     post:
       tags:
       - Plan Run Resource
@@ -921,6 +1118,12 @@ paths:
       responses:
         "200":
           description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/planrun/plan/{planId}:
     get:
       tags:
@@ -942,6 +1145,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PlanRunDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/planrun/{planrunid}:
     get:
       tags:
@@ -954,6 +1163,10 @@ paths:
         schema:
           format: int64
           type: integer
+      - name: token
+        in: query
+        schema:
+          type: string
       responses:
         "200":
           description: OK
@@ -1217,3 +1430,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SimpleNextStepDto'
+  securitySchemes:
+    SecurityScheme:
+      type: openIdConnect
+      description: Authentication
+      openIdConnectUrl: https://auth.perftest.tech/realms/master

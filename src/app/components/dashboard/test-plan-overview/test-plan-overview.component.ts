@@ -32,7 +32,7 @@ export class TestPlanOverviewComponent implements OnInit {
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.testPlanService.getAllPlans().subscribe(testPlans => {
+    this.testPlanService.getAllPlansForUser().subscribe(testPlans => {
       this.testPlans = testPlans;
     });
   }
@@ -50,7 +50,7 @@ export class TestPlanOverviewComponent implements OnInit {
         next: d=> {
           this.toastr.success("Created Testplan from JSON", "Testplan");
           this.createNewPlanFromJsonModal = false;
-          this.testPlanService.getAllPlans().subscribe(testPlans => {
+          this.testPlanService.getAllPlansForUser().subscribe(testPlans => {
             this.testPlans = testPlans;
           });
         },
@@ -65,10 +65,10 @@ export class TestPlanOverviewComponent implements OnInit {
       return;
     }
 
-    this.testPlanService.createPlanForUser(1, this.actTestPlan).subscribe({
+    this.testPlanService.createPlanForUser(this.actTestPlan).subscribe({
       next: () => {
         this.toastr.success("Success!");
-        this.testPlanService.getAllPlans().subscribe(testPlans => {
+        this.testPlanService.getAllPlansForUser().subscribe(testPlans => {
           this.testPlans = testPlans;
         });
         this.createNewPlanModal = false;

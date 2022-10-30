@@ -7,13 +7,13 @@
     <p class="text-xl">Select Test Runs</p>
   </div>
   <div class="col-span-3 mt-2 flex flex-row">
-    <select name="test-run-comparation" (ngModelChange)="compareTestRun($event, secondTestRun, false)" [(ngModel)]="firstTestRun" id="test-run-comparation-first" class="border max-w-fit border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <select name="test-run-comparation" (ngModelChange)="compareTestRun($event, secondTestRun, false)" [(ngModel)]="firstTestRun" id="test-run-comparation-first" class="border min-w-fit border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-56 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
       <option value="-1">Select first test run</option>
-      <option *ngFor="let testRun of testRuns" value="{{testRun.id}}">{{testRun.name}} ({{(testRun.startTime!*1000) | date: 'dd.MM.yyyy HH:mm:ss'}})</option>
+      <option *ngFor="let testRun of testRuns" value="{{testRun.id}}">{{testRun.name}} ({{(testRun.startTime!*1000) | date: 'dd.MM.yyyy HH:mm:ss'}})  </option>
     </select>
-    <select name="test-run-comparation" (ngModelChange)="compareTestRun(firstTestRun, $event, false)" [(ngModel)]="secondTestRun" id="test-run-comparation-second" class="ml-10 border max-w-fit border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <select name="test-run-comparation" (ngModelChange)="compareTestRun(firstTestRun, $event, false)" [(ngModel)]="secondTestRun" id="test-run-comparation-second" class="ml-10 border min-w-fit border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-56 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
       <option value="-1">Select second test run</option>
-      <option *ngFor="let testRun of testRuns" value="{{testRun.id}}">{{testRun.name}} ({{(testRun.startTime!*1000) | date: 'dd.MM.yyyy HH:mm:ss'}})</option>
+      <option *ngFor="let testRun of testRuns" value="{{testRun.id}}">{{testRun.name}} ({{(testRun.startTime!*1000) | date: 'dd.MM.yyyy HH:mm:ss'}})  </option>
     </select>
     <button *ngIf="largeView"
             (click)="largeView = !largeView"

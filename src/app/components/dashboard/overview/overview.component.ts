@@ -21,7 +21,7 @@ export class OverviewComponent implements OnInit {
               private dataPointAggrService: DataPointAggregationResourceService) { }
 
   ngOnInit(): void {
-    this.planService.getAllPlans().subscribe(plans => {
+    this.planService.getAllPlansForUser().subscribe(plans => {
       plans.forEach(plan => {
         const planData: PlanData = {plan: plan, steps: [], runs: []};
         this.testPlanData.push(planData);

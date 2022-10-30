@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
               private runsService: PlanRunResourceService) { }
 
   ngOnInit(): void {
-    this.testPlanService.getAllPlans().subscribe(testPlans => {
+    this.testPlanService.getAllPlansForUser().subscribe(testPlans => {
       testPlans.forEach(testPlan => {
         const testPlanData: PlanData = {plan: testPlan, runs: [], steps: []}
         this.testPlansData.push(testPlanData);
