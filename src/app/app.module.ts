@@ -46,7 +46,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'http://auth.perftest.tech',
+        url: 'https://auth.perftest.tech',
         realm: 'master',
         clientId: 'backend-service'
       },
