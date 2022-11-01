@@ -156,6 +156,148 @@ paths:
           description: Not Allowed
       security:
       - SecurityScheme: []
+  /api/metrics/avg-test-runs:
+    get:
+      tags:
+      - Metrics Resource
+      operationId: getAverageRunsPerTestPlan
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int64
+                type: integer
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
+  /api/metrics/plan-last-test-run-id:
+    get:
+      tags:
+      - Metrics Resource
+      operationId: getLastTestRunId
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
+  /api/metrics/test-plans:
+    get:
+      tags:
+      - Metrics Resource
+      operationId: getAmountTestPlans
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int64
+                type: integer
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
+  /api/metrics/test-run/{testRunId}/duration:
+    get:
+      tags:
+      - Metrics Resource
+      operationId: getPlanRunDuration
+      parameters:
+      - name: testRunId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int64
+                type: integer
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
+  /api/metrics/test-run/{testRunId}/virtual-users:
+    get:
+      tags:
+      - Metrics Resource
+      operationId: getAmountVirtualUsersForTestRun
+      parameters:
+      - name: testRunId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int64
+                type: integer
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
+  /api/metrics/test-runs:
+    get:
+      tags:
+      - Metrics Resource
+      operationId: getTestRunsOfUser
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int64
+                type: integer
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
+  /api/metrics/virtual-users-sum:
+    get:
+      tags:
+      - Metrics Resource
+      operationId: getAmountVirtualUsers
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int64
+                type: integer
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/node/locations:
     get:
       tags:

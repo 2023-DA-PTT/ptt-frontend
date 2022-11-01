@@ -1,5 +1,80 @@
-<div class="flex flex-col">
-  <div *ngFor="let testData of testPlanData" class="">
+<div class="flex flex-row">
+  <div
+    class="mr-5 block py-6 px-12 max-w bg-white flex-col flex items-center justify-center rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+         class="w-6 h-6 mb-4">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"/>
+    </svg>
+    <h5 class="mb-2 text-xl font-bold tracking-tight dark:text-white">{{testPlans}}</h5>
+    <p class="text-md">Created Test Plans</p>
+  </div>
+
+  <div
+    class="mr-5 block py-6 px-12 max-w bg-white flex-col flex items-center justify-center rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+         class="w-6 h-6 mb-4">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"/>
+    </svg>
+    <h5 class="mb-2 text-xl font-bold tracking-tight dark:text-white">{{amountTestRuns}}</h5>
+    <p class="text-md dark:text-gray-400">Total Test Runs</p>
+  </div>
+
+  <div
+    class="mr-5 block py-6 px-12 max-w bg-white flex-col flex items-center justify-center rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+         class="w-6 h-6 mb-4">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+    </svg>
+    <h5 class="mb-2 text-xl font-bold tracking-tight dark:text-white">{{avgRunsPerTestPlan}}</h5>
+    <p class="text-md">Avg. Test Runs per Test Plan</p>
+  </div>
+
+  <div
+    class="mr-5 block py-6 px-12 max-w bg-white flex-col flex items-center justify-center rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+         class="w-6 h-6 mb-4">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+    </svg>
+    <h5 class="mb-2 text-xl font-bold tracking-tight dark:text-white">{{virtualisedUsers}}</h5>
+    <p class="text-md">Total Virtual Users</p>
+  </div>
+</div>
+
+<div class="flex flex-col rounded-lg border border-gray-200 mt-7 p-9 max-w-fit" *ngIf="lastTestRunId >= 0">
+  <div class="flex-row">
+    <p class="text-4xl mb-7">Latest Test Run</p>
+  </div>
+
+  <div class="flex flex-row">
+    <div
+      class="mr-5 block py-6 px-12 max-w bg-white flex-col flex items-center justify-center rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+           class="w-6 h-6 mb-4">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+      </svg>
+      <h5 class="mb-2 text-xl font-bold tracking-tight dark:text-white">{{virtualisedUsersLastTestRun}}</h5>
+      <p class="text-md">Virtual Users</p>
+    </div>
+
+    <div
+      class="mr-5 block py-6 px-12 max-w bg-white flex-col flex items-center justify-center rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+           class="w-6 h-6 mb-4">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <h5 class="mb-2 text-xl font-bold tracking-tight dark:text-white">{{durationLastTestRun}}s</h5>
+      <p class="text-md">Duration</p>
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-col mb-7 mr-12">
+  <div *ngFor="let testData of testPlanData" class="rounded-lg border border-gray-200 mt-7 p-9">
     <p class="text-4xl mb-7">{{testData.plan.name}} Test Plan</p>
     <div class="grid grid-cols-4 mt-5">
       <ng-container *ngIf="testData.runs.length > 1">
@@ -15,15 +90,15 @@
         </ng-container>
       </ng-container>
     </div>
-    <app-plan-node-view [planId]="testData.plan.id!" class="mb-10"></app-plan-node-view>
+    <!--<app-plan-node-view [planId]="testData.plan.id!" class="mb-10"></app-plan-node-view>-->
     <div class="grid grid-cols-4 mt-5">
       <ng-container *ngIf="testData.runs.length > 0">
         <ng-container *ngFor="let stepData of testData.steps">
-          <app-test-run-step-data-card  *ngIf="stepData.step.type == 'http' && stepData.avgDuration > 0"
-                                        [stepName]="stepData.step.name!"
-                                        [duration]="stepData.avgDuration!"
-                                        [placeholder]="'Average duration of request in last run'"
-                                        [textColor]="{'text-red-500': stepData.avgDuration>4000,
+          <app-test-run-step-data-card *ngIf="stepData.step.type == 'http' && stepData.avgDuration > 0"
+                                       [stepName]="stepData.step.name!"
+                                       [duration]="stepData.avgDuration!"
+                                       [placeholder]="'Average duration of request in last run'"
+                                       [textColor]="{'text-red-500': stepData.avgDuration>4000,
                                         'text-yellow-500':stepData.avgDuration>1000&&stepData.avgDuration<=4000,
                                         'text-green-500': stepData.avgDuration <= 1000}">
           </app-test-run-step-data-card>

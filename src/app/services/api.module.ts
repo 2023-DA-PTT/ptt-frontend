@@ -6,6 +6,7 @@ import { DataPointAggregationResourceService } from './api/dataPointAggregationR
 import { DataPointResourceService } from './api/dataPointResource.service';
 import { HttpStepResourceService } from './api/httpStepResource.service';
 import { InputArgumentResourceService } from './api/inputArgumentResource.service';
+import { MetricsResourceService } from './api/metricsResource.service';
 import { NodeResourceService } from './api/nodeResource.service';
 import { OutputArgumentResourceService } from './api/outputArgumentResource.service';
 import { PlanResourceService } from './api/planResource.service';
