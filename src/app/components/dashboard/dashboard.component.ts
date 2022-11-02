@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {KeycloakService} from "keycloak-angular";
+import {KeycloakProfile} from "keycloak-js";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,10 +10,17 @@ import {Router} from "@angular/router";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  profile: KeycloakProfile = {}
 
-  constructor(public router: Router) { }
+  constructor(public router: Router,
+              private keycloakService: KeycloakService,
+              private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
+    this.keycloakService.loadUserProfile().then(profile => {
+      this.profile = profile;
+    });
   }
 
   formatUrlPath(urlPath: string) {
@@ -32,5 +42,15 @@ export class DashboardComponent implements OnInit {
     }
 
     return urlPath;
+  }
+
+  logOut() {
+    this.keycloakService.logout(location.origin).then(
+      () => {
+
+      }, () => {
+        this.toastr.error("Could not log out!");
+      }
+    );
   }
 }
