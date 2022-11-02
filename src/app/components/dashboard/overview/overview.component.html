@@ -73,7 +73,7 @@
   </div>
 </div>
 
-<div class="flex flex-col mb-7 mr-12">
+<div class="flex flex-col mb-7 mr-12" *ngIf="lastTestRunId >= 0">
   <div *ngFor="let testData of testPlanData" class="rounded-lg border border-gray-200 mt-7 p-9">
     <p class="text-4xl mb-7">{{testData.plan.name}} Test Plan</p>
     <div class="grid grid-cols-4 mt-5">
@@ -106,4 +106,16 @@
       </ng-container>
     </div>
   </div>
+</div>
+
+<div *ngIf="testPlanData.length == 0 || testPlanData.length > 0 && lastTestRunId < 0"
+  class="mt-10 max-w-fit block py-6 px-12 max-w bg-white flex-row flex items-center justify-center rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800">
+  <div class="flex-col">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 mr-5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+    </svg>
+
+  </div>
+  <p class="text-md" *ngIf="testPlanData.length == 0">Oops! It looks like you don't have any Test Plans. Create one!</p>
+  <p class="text-md" *ngIf="testPlanData.length > 0 && lastTestRunId < 0">In order to see some results, you should start a load test!</p>
 </div>
