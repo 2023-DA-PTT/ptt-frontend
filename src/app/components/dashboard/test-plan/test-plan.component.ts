@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {
-  HttpStepResourceService,
+  HttpStepResourceService, MetricsResourceService,
   PlanResourceService,
   PlanRunDto,
   PlanRunResourceService,
@@ -14,6 +14,7 @@ import {formatDate} from "@angular/common";
 import {NgForm} from '@angular/forms';
 import {NodeResourceService} from 'src/app/services/api/nodeResource.service';
 import {ToastrService} from 'ngx-toastr';
+import {PlanRunWithTime} from "../../../models/plan-run-with-time";
 
 
 @Component({
@@ -27,7 +28,7 @@ export class TestPlanComponent implements OnInit {
   createNewStepModal = false;
   createNewPlanRunModal = false;
   actTestPlanRun: PlanRunDto = {runOnce:true,startTime: 0, duration: 0, planRunInstructions: [], name: ''};
-  testRuns: PlanRunDto[] = [];
+  testRuns: PlanRunWithTime[] = [];
   nodeLocations: string[] = [];
 
   constructor(private activeRoute: ActivatedRoute,
@@ -39,7 +40,8 @@ export class TestPlanComponent implements OnInit {
               private testRunService: PlanRunResourceService,
               private nodeService: NodeResourceService,
               private planService: PlanResourceService,
-              private relationService: StepParameterRelationResourceService) {
+              private relationService: StepParameterRelationResourceService,
+              private metricsService: MetricsResourceService) {
   }
 
   clearActPlanRun() {
@@ -60,7 +62,14 @@ export class TestPlanComponent implements OnInit {
     });
 
     this.testRunService.getPlanRunsForPlan(this.id).subscribe(runs => {
-      this.testRuns = runs;
+      runs.forEach(run => {
+        const runWithTime = {planRun: run, time: ""}
+        this.metricsService.getPlanRunDuration(run.id!).subscribe(duration => {
+          console.log(this.formatTestRunDuration(duration))
+          runWithTime.time = this.formatTestRunDuration(duration);
+        });
+        this.testRuns.push(runWithTime);
+      })
     })
 
     this.nodeService.getAllNodeLocations().subscribe(locations => {
@@ -93,17 +102,17 @@ export class TestPlanComponent implements OnInit {
     return formatDate(new Date(testRun.startTime!), 'MMM d y, h:mm:ss a', navigator.language);
   }
 
-  formatTestRunDuration(testRun: PlanRunDto) {
-    const d = new Date(testRun.duration!*1000);
+  formatTestRunDuration(duration: number) {
+    const d = new Date(duration!);
     const seconds = d.getUTCSeconds();
     const minutes = d.getUTCMinutes();
     const hours = d.getUTCHours();
     const days = d.getDate()-1;
     let str = "";
-    if(days != 0) str += days + " days";
-    if(hours != 0) str += hours + " h";
-    if(minutes != 0) str += minutes + " min";
-    if(seconds != 0) str += seconds + " s";
+    if(days != 0) str += days + " days ";
+    if(hours != 0) str += hours + "h ";
+    if(minutes != 0) str += minutes + "m ";
+    if(seconds != 0) str += seconds + "s ";
     return str;
   }
 
