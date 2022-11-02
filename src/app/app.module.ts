@@ -94,7 +94,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
         NgxEchartsModule.forRoot({
             echarts: () => import('echarts')
         }),
-        CodeEditorModule.forRoot(),
+        CodeEditorModule.forRoot({
+          baseUrl: 'assets/monaco',
+          typingsWorkerUrl: 'assets/workers/typings-worker.js'
+        }),
         ReactiveFormsModule,
         NgxGraphModule
     ],

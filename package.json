@@ -27,6 +27,7 @@
     "flowbite": "^1.5.1",
     "keycloak-angular": "^12.1.0",
     "keycloak-js": "^19.0.3",
+    "monaco-editor": "^0.34.1",
     "ng2-charts": "^4.0.0",
     "ngx-echarts": "^14.0.0",
     "ngx-toastr": "^15.0.0",
