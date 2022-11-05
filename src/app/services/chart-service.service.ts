@@ -62,7 +62,7 @@ export class ChartServiceService {
         let starttime = offset ? dp.start!+offset : dp.start!;
 
         if(startTimeOffset) {
-          starttime = (starttime - startTimeOffset) / 1000;
+          starttime = Math.abs(startTimeOffset - starttime);
         }
 
         while (labels[cnt] <= starttime) {

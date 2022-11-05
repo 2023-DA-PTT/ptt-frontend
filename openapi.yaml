@@ -234,6 +234,32 @@ paths:
           description: Not Allowed
       security:
       - SecurityScheme: []
+  /api/metrics/test-run/{testRunId}/first-datapoint:
+    get:
+      tags:
+      - Metrics Resource
+      operationId: getFirstDataPointOfPlanRun
+      parameters:
+      - name: testRunId
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                format: int64
+                type: integer
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme: []
   /api/metrics/test-run/{testRunId}/virtual-users:
     get:
       tags:
