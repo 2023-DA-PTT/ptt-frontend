@@ -36,7 +36,7 @@
       <ng-container *ngIf="testRun.planRun.name">{{testRun.planRun.name}}</ng-container>
       <ng-container *ngIf="!testRun.planRun.name">{{(testRun.planRun.startTime! * 1000) | date: 'dd.MM.yyyy hh:mm:ss'}}</ng-container>
     </h5>
-    <p class="font-normal text-gray-700 dark:text-gray-400">Duration: {{testRun.time}}</p>
+    <p class="font-normal text-gray-700 dark:text-gray-400">Duration: {{testRun.time || "0s"}}</p>
   </a>
 
   <button (click)="createNewPlanRunModal = true"
