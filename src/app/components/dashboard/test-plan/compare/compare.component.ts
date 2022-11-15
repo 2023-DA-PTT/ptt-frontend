@@ -88,12 +88,16 @@ export class CompareComponent implements OnInit {
     });
   }
 
+  isLoadingData(): boolean {
+    return this.totalSteps > this.loadedSteps;
+  }
+
   compareTestRun() {
     if (this.firstPlanRunWithDPTime.firstDatapointTime <= 0 || this.secondPlanRunWithDPTime.firstDatapointTime <= 0
       || this.httpSteps.length <= 0) {
       this.toastr.error("One of the test runs didn't start yet!")
       return;
-    } else if (this.totalSteps > this.loadedSteps) {
+    } else if (this.isLoadingData()) {
       this.toastr.error("Data is already loading . . .")
       return;
     }

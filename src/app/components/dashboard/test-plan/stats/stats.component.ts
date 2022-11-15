@@ -4,12 +4,14 @@ import {
   DataPointResourceService,
   HttpStepResourceService,
   PlanRunDto,
-  PlanRunResourceService
+  PlanRunResourceService,
+  StepDto
 } from "../../../../services";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ChartConfiguration, ChartOptions} from "chart.js";
 import {ChartServiceService} from "../../../../services/chart-service.service";
 import {ToastrService} from "ngx-toastr";
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-stats',
@@ -30,6 +32,7 @@ export class StatsComponent implements OnInit {
   testRuns: PlanRunDto[] = [];
   testRunCompareId: number = -1;
   compareTestChartData: ChartConfiguration<'line'>['data'][] = [];
+  steps: StepDto[] = [];
 
   lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
@@ -50,6 +53,11 @@ export class StatsComponent implements OnInit {
     }
   };
   largeView: boolean = false;
+  loadedSteps: number = 0;
+
+  isLoadingData(): boolean {
+    return this.steps.length > this.loadedSteps;
+  }
 
   constructor(private activeRoute: ActivatedRoute,
               private router: Router,
@@ -73,7 +81,7 @@ export class StatsComponent implements OnInit {
       this.testId = parseInt(params['test-id']!);
       this.runId = parseInt(params['run-id']!);
 
-      this.testRunService.getPlanRunById(this.runId).subscribe(testRun => {
+      lastValueFrom(this.testRunService.getPlanRunById(this.runId)).then(testRun => {
         this.testDate = Math.floor(testRun.startTime! * 1000);
         this.fromDate = Math.floor(testRun.startTime! * 1000) - 60000; // one min before test start
         if (testRun.runOnce) {
@@ -81,8 +89,12 @@ export class StatsComponent implements OnInit {
         } else {
           this.toDate = Math.floor((testRun.startTime * 1000) + (testRun.duration / 1000) + 600000) // one min after test end
         }
+      }).then(() => 
+      lastValueFrom(this.stepService.getAllHttpStepsForPlan(this.testId)).then(steps => {
+        this.steps = steps;
+        this.loadedSteps = steps.length;
         this.updateGraphs();
-      });
+      }));
 
       this.testRunService.getPlanRunsForPlan(this.testId).subscribe(runs => {
         this.testRuns = runs;
@@ -95,7 +107,7 @@ export class StatsComponent implements OnInit {
     const locLinedata: ChartConfiguration<'line'>['data'][] = [];
     const labels: number[] = [];
 
-
+    this.loadedSteps = 0;
 
     for (let labelTime = this.fromDate; labelTime < this.toDate; labelTime += this.interval) {
       labels.push(labelTime);
@@ -106,13 +118,12 @@ export class StatsComponent implements OnInit {
       return;
     }
 
-    this.stepService.getAllHttpStepsForPlan(this.testId).subscribe(steps => {
-      steps.forEach((step, idx) => {
-        this.chartService.getChartDataForPlanAndStep(this.runId, step, labels, this.fromDate, this.toDate, this.interval).then(chartConfig => {
-          locLinedata.push(chartConfig);
-        });
+    this.steps.forEach((step, idx) => {
+      this.chartService.getChartDataForPlanAndStep(this.runId, step, labels, this.fromDate, this.toDate, this.interval).then(chartConfig => {
+        locLinedata.push(chartConfig);
+        this.loadedSteps++;
       });
-      this.lineChartData = locLinedata;
     });
+    this.lineChartData = locLinedata;
   }
 }
