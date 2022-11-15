@@ -6,7 +6,6 @@ import {
   StepResourceService
 } from "../../../services";
 import {PlanData} from "../../../models/plan-data";
-import {last} from "rxjs";
 
 @Component({
   selector: 'app-overview',

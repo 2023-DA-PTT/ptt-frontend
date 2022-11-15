@@ -7,7 +7,10 @@ import {ToastrService} from "ngx-toastr";
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  host: {
+    class:'w-full'
+  }
 })
 export class DashboardComponent implements OnInit {
   profile: KeycloakProfile = {}

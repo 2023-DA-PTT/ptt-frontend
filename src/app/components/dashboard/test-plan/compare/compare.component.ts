@@ -20,7 +20,10 @@ import {PlanRunWithTime} from "../../../../models/plan-run-with-time";
 @Component({
   selector: 'app-compare',
   templateUrl: './compare.component.html',
-  styleUrls: ['./compare.component.scss']
+  styleUrls: ['./compare.component.scss'],
+  host: {
+    class:'w-full'
+  }
 })
 export class CompareComponent implements OnInit {
   lineChartOptions: ChartOptions<'line'> = {
